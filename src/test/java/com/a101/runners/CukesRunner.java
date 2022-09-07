@@ -15,6 +15,8 @@ import org.junit.runner.RunWith;
         plugin = {
                 //HTML raporu olusturur. / Creates HTML report.
                 "html:target/cucumber-report.html",
+
+                "me.jvt.cucumber.report.PrettyReports:target/cucumber",
         },
         //Features dosyasinin yerini tanitir. // Identifies the location of the Features file.
         features = "src/test/resources/features",
