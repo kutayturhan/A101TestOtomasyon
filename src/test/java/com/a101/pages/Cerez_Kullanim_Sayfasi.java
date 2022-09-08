@@ -5,9 +5,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class Pop_up_Banner_Alert_Page {
+public class Cerez_Kullanim_Sayfasi {
 
-    public Pop_up_Banner_Alert_Page(){
+    public Cerez_Kullanim_Sayfasi(){
         PageFactory.initElements(Driver.getDriver(),this);
     }
 

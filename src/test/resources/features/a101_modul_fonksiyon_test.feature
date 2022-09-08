@@ -22,6 +22,15 @@ Feature: A101 Web Sitesi | Modullerin Islevselligi ve Fonksiyonelligi
   Background: Kullanici A101 web sitesinin anasayfasina gider
     Given Kullanici "https://www.a101.com.tr" alan adindaki web sitesine giris yapar
 
-    Scenario: Kullanici cerez kullanimini kabul eder ve anasayfaya ulasir
-      When Kullanici cerez kullanimini kabul eder
-      Then Kullanici basarili bir sekilde anasayfaya ulasir
+  Scenario: Kullanici cerez kullanimini kabul eder ve anasayfaya ulasir
+    When Kullanici cerez kullanimini kabul eder
+    Then Kullanici basarili bir sekilde anasayfaya ulasir
+
+    @wip
+  Scenario: Kullanici Giyim & Aksesuar modulunun uzerine mouse imlecini goturdukten sonra
+            Kadin Ic Giyim kategorisine tiklar ve alt kategorilerden
+            Dizalti Corap alt kategorisine tiklayarak Dizalti Corap modellerini goruntuler
+    When Kullanici mouse imlecini Giyim ve Aksesuar modulu uzerinde bekletir
+    And Kadin Ic Giyim kategorisine tiklar
+    And Dizalti Corap kategorisine tiklar
+    Then Kullanici Dizalti Corap modellerini goruntuler
