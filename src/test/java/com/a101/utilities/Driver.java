@@ -3,6 +3,7 @@ package com.a101.utilities;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.util.concurrent.TimeUnit;
 
@@ -33,15 +34,21 @@ public class Driver {
             //According to the browser type to be read from the configuration.properties file,
             //the switch statement will determine the state and open the matching browser.
             switch(browserType){
+
                 case "chrome":
 
                     //Tarayici surucusunu olusturan web driver managerin ayarlanmasi.
                     //Setting up the web driver manager which means creating browser driver.
                     WebDriverManager.chromedriver().setup();
 
+                    //Chrome bildirimlerini devre disi birakir.
+                    //Disables Chrome notifications.
+                    ChromeOptions options = new ChromeOptions();
+                    options.addArguments("--disable-notifications");
+
                     //Chrome surucusunu olusturur. Bos bir tarayici acan satir budur.
                     //Create chrome driver. This is the line opening an empty browser.
-                    WebDriver driver = new ChromeDriver();
+                    driver = new ChromeDriver(options);
 
                     //Bu satir tarayici boyutunu maksimize eder.
                     //This line will maximize the broswer size
@@ -63,10 +70,11 @@ public class Driver {
     //Create a re-usable utility method.
     //This method will will terminate the existing session.
     public static void closeDriver(){
+
         if (driver != null){
             driver.quit(); //Oturumu sonlandiran satir bu satirdir. / This is the line will terminate the session.
             driver = null;
+
         }
     }
-
 }

@@ -16,6 +16,7 @@ import org.junit.runner.RunWith;
                 //HTML raporu olusturur. / Creates HTML report.
                 "html:target/cucumber-report.html",
 
+                //Cucumber raporu olusturur. / Creates Cucumber report.
                 "me.jvt.cucumber.report.PrettyReports:target/cucumber",
         },
         //Features dosyasinin yerini tanitir. // Identifies the location of the Features file.
