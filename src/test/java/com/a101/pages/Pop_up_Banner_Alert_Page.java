@@ -14,7 +14,7 @@ public class Pop_up_Banner_Alert_Page {
     @FindBy(xpath = "//button[@id='CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll']")
     public WebElement cerezBannerKabulEtButonu;
 
-    @FindBy(xpath = "//button[normalize-space()='ARA']")
+    @FindBy(xpath = "(//button[@type='submit'])[1]")
     public WebElement aramaButonu;
 
 }

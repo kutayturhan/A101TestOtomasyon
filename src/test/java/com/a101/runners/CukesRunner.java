@@ -13,26 +13,24 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
 
         plugin = {
-                //HTML raporu olusturur. / Creates HTML report.
+                //HTML raporu olusturur.
                 "html:target/cucumber-report.html",
 
-                //Cucumber raporu olusturur. / Creates Cucumber report.
+                //Cucumber raporu olusturur.
                 "me.jvt.cucumber.report.PrettyReports:target/cucumber",
         },
-        //Features dosyasinin yerini tanitir. // Identifies the location of the Features file.
+        //Features dosyasinin yerini tanitir.
         features = "src/test/resources/features",
 
-        //Step Definitions dosyasinin yerini tanitir. // Identifies the location of the Step Definitions file.
+        //Step Definitions dosyasinin yerini tanitir.
         glue = "com/a101/step_definitions",
 
-        //False olarak ayarlanirsa,kodumuzun gercek implementasyonunu calistirmayacaktir.
-        //Sadece features dosyasi adımlarini step definitions'a gore kontrol edecektir.
-        //If it set to false, will not run the actual implementation of our code.
-        //It will just check the feature file steps against step definitions.
+        //True degeri verilirse, kodumuzun gercek uygulamasini calistirmayacaktir.
+        //Sadece ozellik dosyasi adimlarini step definitions tanimlarina gore kontrol edecektir.
+        //False degeri verilirse kodumuzu calistiracaktir.
         dryRun = false,
 
         //Features dosyamizda spesifik olarak etiketledigimiz senaryoyu calistirmamizi saglar.
-        //It allows us to run the scenario we have specifically labelled in our Features file.
         tags = ""
 
 )

@@ -16,7 +16,7 @@
 
     <dependencies>
 
-        <!-- Selenium version 3.141.59 // Stable Version -->
+        <!-- Selenium - Java // Stabil Surum 3.141.59 -->
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
@@ -24,14 +24,14 @@
             <version>3.141.59</version>
         </dependency>
 
-        <!-- Apache Maven Bonigarcia WebDriverManager // Latest version 5.3.0 -->
+        <!-- Apache Maven Bonigarcia WebDriverManager // En Son Surum 5.3.0 -->
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
             <version>5.3.0</version>
         </dependency>
 
-        <!-- Java Faker // Latest version 1.0.2 -->
+        <!-- Java Faker // En Son Surum 1.0.2 -->
         <!-- https://mvnrepository.com/artifact/com.github.javafaker/javafaker -->
         <dependency>
             <groupId>com.github.javafaker</groupId>
@@ -39,9 +39,7 @@
             <version>1.0.2</version>
         </dependency>
 
-        <!-- 7.3.4 versiyonunu tercih ettim, cunku cucumber reports pluginini destekleyen en son cucumber java versiyonu bu versiyon. -->
-        <!-- Cucumber JVM: Java // Version 7.3.4: This version is preffered because I want to use cucumber reports. -->
-        <!-- This is the latest version that supports cucumber reports. -->
+        <!-- 7.3.4 surumunu tercih ettim, cunku cucumber reports pluginini destekleyen en son cucumber java surumu bu versiyondu. -->
         <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
         <dependency>
             <groupId>io.cucumber</groupId>
@@ -49,7 +47,7 @@
             <version>7.3.4</version>
         </dependency>
 
-        <!-- Cucumber JVM: JUnit // Latest version 7.6.0 -->
+        <!-- Cucumber JVM: JUnit // En Son Surum 7.6.0 -->
         <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-junit -->
         <dependency>
             <groupId>io.cucumber</groupId>
@@ -58,12 +56,15 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- Cucumber Report // En Son Surum 7.3.0 -->
         <dependency>
             <groupId>me.jvt.cucumber</groupId>
             <artifactId>reporting-plugin</artifactId>
             <version>7.3.0</version>
         </dependency>
 
+        <!-- Konsoldaki "SLF4J failed to load" mesajini ortadan kaldirmak istenirse kullanilir -->
+        <!-- SLF4J - Simple // En son surum 2.0.0 -->
         <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -71,7 +72,6 @@
             <version>2.0.0</version>
             <scope>test</scope>
         </dependency>
-
 
     </dependencies>
 
