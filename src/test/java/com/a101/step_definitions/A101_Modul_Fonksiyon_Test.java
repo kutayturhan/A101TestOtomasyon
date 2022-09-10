@@ -1,9 +1,6 @@
 package com.a101.step_definitions;
 
-import com.a101.pages.Anasayfa_Arayuz_1;
-import com.a101.pages.Anasayfa_Arayuz_2;
-import com.a101.pages.Cerez_Kullanim_Sayfasi;
-import com.a101.pages.Kadin_Ic_Giyim_Sayfasi;
+import com.a101.pages.*;
 import com.a101.utilities.Driver;
 import com.a101.utilities.SleepMethod;
 import io.cucumber.java.en.Given;
@@ -31,6 +28,14 @@ public class A101_Modul_Fonksiyon_Test {
     //Olusturulan "Kadin_Ic_Giyim_Sayfasi" java classindan bir degisken tanimlamasi yapar.
     //Bu degiskene "kadinIcGiyimSayfasi" ismini vererek nesne olusturur.
     Kadin_Ic_Giyim_Sayfasi kadinIcGiyimSayfasi = new Kadin_Ic_Giyim_Sayfasi();
+
+    //Olusturulan "Kadin_Ic_Giyim_Sayfasi" java classindan bir degisken tanimlamasi yapar.
+    //Bu degiskene "kadinIcGiyimSayfasi" ismini vererek nesne olusturur.
+    Siyah_Corap_Urun_Sayfasi siyahCorapUrunSayfasi = new Siyah_Corap_Urun_Sayfasi();
+
+    Sepetim_Sayfasi sepetimSayfasi = new Sepetim_Sayfasi();
+
+    Odeme_ve_Uyelik_Bilgi_Sayfasi odemeVeUyelikBilgiSayfasi = new Odeme_ve_Uyelik_Bilgi_Sayfasi();
 
     //Selenium kutuphanesinden gelen WebDriverWait classi ile degisken tanimlamasi yaparak nesne olusturur.
     //Web Surucusune belirli kosullari beklemesini soylemek icin kullanilir.
@@ -76,7 +81,12 @@ public class A101_Modul_Fonksiyon_Test {
     public void kullanici_mouse_imlecini_giyim_ve_aksesuar_modulu_uzerinde_bekletir() {
 
 
-                actions.moveToElement(anasayfaArayuz1.giyimVeAksesuarModulu).perform();
+        actions.moveToElement(anasayfaArayuz1.giyimVeAksesuarModulu).perform();
+
+        if (!(anasayfaArayuz1.giyimVeAksesuarModulu.isDisplayed())) {
+            Driver.getDriver().navigate().refresh();
+            actions.moveToElement(anasayfaArayuz1.giyimVeAksesuarModulu).perform();
+        }
 
 
 
@@ -104,7 +114,13 @@ public class A101_Modul_Fonksiyon_Test {
     @When("Kullanici Kadin Ic Giyim kategorisine tiklar")
     public void kullanici_kadin_ic_giyim_kategorisine_tiklar() {
 
-        anasayfaArayuz1.kadinIcGiyimKategorisi.click();
+        try {
+            anasayfaArayuz1.kadinIcGiyimKategorisi.click();
+
+        } catch (ElementNotInteractableException e) {
+            Driver.getDriver().navigate().refresh();
+            anasayfaArayuz1.kadinIcGiyimKategorisi.click();
+        }
 /* ONEMLI
         if (anasayfaArayuz1.altMenu.isDisplayed()){
             anasayfaArayuz1.kadinIcGiyimKategorisi.click();
@@ -179,9 +195,9 @@ public class A101_Modul_Fonksiyon_Test {
     @When("Kullanici siyah renk isaret kutucuguna tiklar")
     public void kullanici_siyah_renk_isaret_kutucuguna_tiklar() {
 
-        try{
+        try {
             kadinIcGiyimSayfasi.siyahRenkCheckbox.click();
-        } catch (StaleElementReferenceException e){
+        } catch (StaleElementReferenceException e) {
             Driver.getDriver().navigate().refresh();
             kadinIcGiyimSayfasi.siyahRenkCheckbox.click();
         }
@@ -191,62 +207,104 @@ public class A101_Modul_Fonksiyon_Test {
     @Then("Acilan urunun siyah renk oldugu dogrulanir")
     public void acilan_urunun_siyah_renk_oldugu_dogrulanir() {
 
-        try{
+        try {
             Assert.assertTrue(kadinIcGiyimSayfasi.siyahRenkCheckbox.isSelected());
-        } catch (AssertionError | StaleElementReferenceException e){
+        } catch (AssertionError | StaleElementReferenceException e) {
             Driver.getDriver().navigate().refresh();
-            if (kadinIcGiyimSayfasi.siyahRenkCheckbox.isSelected()){
+            if (kadinIcGiyimSayfasi.siyahRenkCheckbox.isSelected()) {
                 Assert.assertTrue(kadinIcGiyimSayfasi.siyahRenkCheckbox.isSelected());
             } else {
                 kadinIcGiyimSayfasi.siyahRenkCheckbox.click();
                 Assert.assertTrue(kadinIcGiyimSayfasi.siyahRenkCheckbox.isSelected());
             }
             //kadinIcGiyimSayfasi.siyahRenkCheckbox.click();
-          //  Assert.assertTrue(kadinIcGiyimSayfasi.siyahRenkCheckbox.isSelected());
+            //  Assert.assertTrue(kadinIcGiyimSayfasi.siyahRenkCheckbox.isSelected());
         }
 
     }
+
     // -------------------------------------------------------------------------------------------------------WWWWWWWWWW
     @When("Kullanici Dizalti Corap sayfasinda Siyah Dizalti Corabini sepete eklemek icin sepete ekle butonuna tiklar")
     public void kullanici_dizalti_corap_sayfasinda_siyah_dizalti_corabini_sepete_eklemek_icin_sepete_ekle_butonuna_tiklar() {
 
         //Sepete ekle butonuna cift tiklama (double click) yapar. Bunun sebebini hazirladigim README dosyasinda detayli olarak acikladim
-       // actions.doubleClick(kadinIcGiyimSayfasi.sepeteEkleButonu).perform();
+        // actions.doubleClick(kadinIcGiyimSayfasi.sepeteEkleButonu).perform();
 
         //Sepete ekle butonuna tiklar
-        try{
+        try {
             kadinIcGiyimSayfasi.sepeteEkleButonu.click();
-        }catch (StaleElementReferenceException | ElementClickInterceptedException e){
-            try{
+        } catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+            try {
                 Driver.getDriver().navigate().refresh();
                 kadinIcGiyimSayfasi.sepeteEkleButonu.click();
-            } catch (StaleElementReferenceException | ElementClickInterceptedException ignored){
+            } catch (StaleElementReferenceException | ElementClickInterceptedException ignored) {
                 Driver.getDriver().navigate().refresh();
                 actions.doubleClick(kadinIcGiyimSayfasi.sepeteEkleButonu).perform();
             }
         }
     }
-    /*
-//
-//    @When("Kullanici Siyah Dizalti Corabi urun sayfasina ulasir ve sepete eklemek icin sepete ekle butonuna tiklar")
-//    public void kullanici_siyah_dizalti_corabi_urun_sayfasina_ulasir_ve_sepete_eklemek_icin_sepete_ekle_butonuna_tiklar() {
-//
-//    }
-//
-//    @When("Kullanici eklemis oldugu urun bilgisini acilir menude kontrol eder ve sepeti goruntule baglantisina tiklar")
-//    public void kullanici_eklemis_oldugu_urun_bilgisini_acilir_menude_kontrol_eder_ve_sepeti_goruntule_baglantisina_tiklar() {
-//
-//    }
-//
-//    @When("Kullanici Sepetim sayfasinda sepete eklenen urun bilgisine ulasir ve sepeti onaylamak icin Sepeti Onayla butonuna tiklar")
-//    public void kullanici_sepetim_sayfasinda_sepete_eklenen_urun_bilgisine_ulasir_ve_sepeti_onaylamak_icin_sepeti_onayla_butonuna_tiklar() {
-//
-//    }
-//
-//    @Then("Kullanici odeme adimina gecmek icin gerekli olan uye giris bilgisi sayfasina ulasir")
-//    public void kullanici_odeme_adimina_gecmek_icin_gerekli_olan_uye_giris_bilgisi_sayfasina_ulasir() {
-//
-//    }
-//
-// */
+
+
+    @When("Kullanici Siyah Dizalti Corabi urun sayfasina ulasir ve sepete eklemek icin sepete ekle butonuna tiklar")
+    public void kullanici_siyah_dizalti_corabi_urun_sayfasina_ulasir_ve_sepete_eklemek_icin_sepete_ekle_butonuna_tiklar() {
+
+        siyahCorapUrunSayfasi.sepeteEkleButonu.click();
+
+    }
+
+    @When("Kullanici eklemis oldugu urun bilgisini acilir menude kontrol eder ve sepeti goruntule baglantisina tiklar")
+    public void kullanici_eklemis_oldugu_urun_bilgisini_acilir_menude_kontrol_eder_ve_sepeti_goruntule_baglantisina_tiklar() {
+
+        siyahCorapUrunSayfasi.sepetiGoruntuleButonu.click();
+
+    }
+
+    @When("Kullanici Sepetim sayfasinda sepete eklenen urun bilgisine ulasir ve sepeti onaylamak icin Sepeti Onayla butonuna tiklar")
+    public void kullanici_sepetim_sayfasinda_sepete_eklenen_urun_bilgisine_ulasir_ve_sepeti_onaylamak_icin_sepeti_onayla_butonuna_tiklar() {
+
+        try{
+            wait.until(ExpectedConditions.elementToBeClickable(sepetimSayfasi.sepetiOnaylaButonu));
+            sepetimSayfasi.sepetiOnaylaButonu.click();
+
+        } catch (ElementNotInteractableException e){
+
+            Driver.getDriver().navigate().refresh();
+            wait.until(ExpectedConditions.elementToBeClickable(sepetimSayfasi.sepetiOnaylaButonu));
+            sepetimSayfasi.sepetiOnaylaButonu.click();
+        }
+
+        /*
+        try {
+
+            sepetimSayfasi.sepetiOnaylaButonu.click();
+        } catch (ElementNotInteractableException e) {
+            try {
+                Driver.getDriver().navigate().refresh();
+                sepetimSayfasi.sepetiOnaylaButonu.click();
+            } catch (StaleElementReferenceException | ElementClickInterceptedException ignored) {
+                Driver.getDriver().navigate().refresh();
+                sepetimSayfasi.sepetiOnaylaButonu.click();
+                if (!(odemeVeUyelikBilgiSayfasi.uyeOlmadanDevamEtButonu.isDisplayed())){
+                    Driver.getDriver().navigate().refresh();
+                    actions.doubleClick(sepetimSayfasi.sepetiOnaylaButonu).perform();
+                }
+            }
+        }
+
+
+         */
+    }
+
+    @Then("Kullanici odeme adimina gecmek icin gerekli olan uye giris bilgisi sayfasina ulasir")
+    public void kullanici_odeme_adimina_gecmek_icin_gerekli_olan_uye_giris_bilgisi_sayfasina_ulasir() {
+
+        String sepetiOnaylaButonunaTiklandiktanSonrakiURL = Driver.getDriver().getCurrentUrl();
+        Assert.assertTrue(sepetiOnaylaButonunaTiklandiktanSonrakiURL.contains("checkout"));
+
+        Assert.assertTrue(odemeVeUyelikBilgiSayfasi.uyeOlmadanDevamEtButonu.isDisplayed());
+
+
+    }
+
+
 }

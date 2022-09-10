@@ -35,12 +35,11 @@ Feature: A101 Web Sitesi | Modullerin Islevselligi ve Fonksiyonelligi
   Scenario: Kullanici siyah renk isaret kutucuguna tiklar ve acilan urunun siyah oldugu dogrulanir
     When Kullanici siyah renk isaret kutucuguna tiklar
     Then Acilan urunun siyah renk oldugu dogrulanir
-    #########################################################################################################################
 
   Scenario: Kullanici siyah dizalti corabini sepete ekler, sepeti goruntuler ve sepeti onaylar
     When Kullanici Dizalti Corap sayfasinda Siyah Dizalti Corabini sepete eklemek icin sepete ekle butonuna tiklar
- #   And Kullanici Siyah Dizalti Corabi urun sayfasina ulasir ve sepete eklemek icin sepete ekle butonuna tiklar
- #   And Kullanici eklemis oldugu urun bilgisini acilir menude kontrol eder ve sepeti goruntule baglantisina tiklar
- #   And Kullanici Sepetim sayfasinda sepete eklenen urun bilgisine ulasir ve sepeti onaylamak icin Sepeti Onayla butonuna tiklar
- #   Then Kullanici odeme adimina gecmek icin gerekli olan uye giris bilgisi sayfasina ulasir
- #
+    And Kullanici Siyah Dizalti Corabi urun sayfasina ulasir ve sepete eklemek icin sepete ekle butonuna tiklar
+    And Kullanici eklemis oldugu urun bilgisini acilir menude kontrol eder ve sepeti goruntule baglantisina tiklar
+    And Kullanici Sepetim sayfasinda sepete eklenen urun bilgisine ulasir ve sepeti onaylamak icin Sepeti Onayla butonuna tiklar
+    Then Kullanici odeme adimina gecmek icin gerekli olan uye giris bilgisi sayfasina ulasir
+

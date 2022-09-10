@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 public class Driver {
@@ -36,8 +37,6 @@ public class Driver {
                     //Chrome bildirimlerini devre disi birakir.
                     ChromeOptions options = new ChromeOptions();
                     options.addArguments("--disable-notifications");
-
-                    options.addArguments("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36");
 
                     //Chrome surucusunu olusturur. Bos bir tarayici acan satir budur.
                     driver = new ChromeDriver(options);
