@@ -15,22 +15,32 @@
 Feature: A101 Web Sitesi | Modullerin Islevselligi ve Fonksiyonelligi
 
   Urun seciminden odeme adimina kadar kullanilan ve etkilesim icinde bulunulan,
-  Fonksiyonlarin ve Modullerin,
+  Fonksiyonlarin ve Modullerin
   Islevselligi, fonksiyonelligi ve calisilabilirliligi,
   Uctan Uca Testi
 
   Background: Kullanici A101 web sitesinin anasayfasina gider
-    Given Kullanici "https://www.a101.com.tr" alan adindaki web sitesine giris yapar
 
   Scenario: Kullanici cerez kullanimini kabul eder ve anasayfaya ulasir
+    Given Kullanici "https://www.a101.com.tr" alan adindaki web sitesine giris yapar
     When Kullanici cerez kullanimini kabul eder
     Then Kullanici basarili bir sekilde anasayfaya ulasir
 
-    @wip
-  Scenario: Kullanici Giyim & Aksesuar modulunun uzerine mouse imlecini goturdukten sonra
-            Kadin Ic Giyim kategorisine tiklar ve alt kategorilerden
-            Dizalti Corap alt kategorisine tiklayarak Dizalti Corap modellerini goruntuler
+  Scenario: Kullanici Dizalti Corap kategorisine ait urun modellerini goruntuler
     When Kullanici mouse imlecini Giyim ve Aksesuar modulu uzerinde bekletir
-    And Kadin Ic Giyim kategorisine tiklar
-    And Dizalti Corap kategorisine tiklar
+    And Kullanici Kadin Ic Giyim kategorisine tiklar
+    And Kullanici Dizalti Corap kategorisine tiklar
     Then Kullanici Dizalti Corap modellerini goruntuler
+
+  Scenario: Kullanici siyah renk isaret kutucuguna tiklar ve acilan urunun siyah oldugu dogrulanir
+    When Kullanici siyah renk isaret kutucuguna tiklar
+    Then Acilan urunun siyah renk oldugu dogrulanir
+    #########################################################################################################################
+
+  Scenario: Kullanici siyah dizalti corabini sepete ekler, sepeti goruntuler ve sepeti onaylar
+    When Kullanici Dizalti Corap sayfasinda Siyah Dizalti Corabini sepete eklemek icin sepete ekle butonuna tiklar
+ #   And Kullanici Siyah Dizalti Corabi urun sayfasina ulasir ve sepete eklemek icin sepete ekle butonuna tiklar
+ #   And Kullanici eklemis oldugu urun bilgisini acilir menude kontrol eder ve sepeti goruntule baglantisina tiklar
+ #   And Kullanici Sepetim sayfasinda sepete eklenen urun bilgisine ulasir ve sepeti onaylamak icin Sepeti Onayla butonuna tiklar
+ #   Then Kullanici odeme adimina gecmek icin gerekli olan uye giris bilgisi sayfasina ulasir
+ #

@@ -1,9 +1,7 @@
 package com.a101.runners;
 
 //Runner sinifimiza istedigimiz ismi verebiliriz.
-//CukesRunner ismi orijinal cucumber sunumundan gelmektedir. Bu yuzden CukesRunner ismini tercih edebiliriz.
-//We can give any name we want to our runner class.
-//CukesRunner name comes from the original cucumber introduction. That's why we might prefer the name CukesRunner.
+//CukesRunner ismi orijinal cucumber dokumantasyonundan gelmektedir. Bu yuzden CukesRunner ismini tercih edebiliriz.
 
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
