@@ -17,4 +17,7 @@ public class Anasayfa_Arayuz_1 {
     @FindBy(xpath = "//a[normalize-space()='Kadın İç Giyim']")
     public WebElement kadinIcGiyimKategorisi;
 
+    @FindBy(xpath = "(//div[@class='col-sm-10 submenu-items'])[1]")
+    public WebElement altMenu;
+
 }

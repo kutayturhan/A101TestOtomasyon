@@ -75,27 +75,10 @@ public class A101_Modul_Fonksiyon_Test {
     @When("Kullanici mouse imlecini Giyim ve Aksesuar modulu uzerinde bekletir")
     public void kullanici_mouse_imlecini_giyim_ve_aksesuar_modulu_uzerinde_bekletir() {
 
-        try {
-            actions.moveToElement(anasayfaArayuz1.giyimVeAksesuarModulu).perform();
-        } catch (ElementNotInteractableException e) {
-            try{
-                actions.moveToElement(anasayfaArayuz2.kategorilerDropdown).perform();
-                actions.moveToElement(anasayfaArayuz2.giyimVeAksesuarKategorisi).perform();
-            } catch (ElementNotInteractableException ignored){
-                try{
-                    Driver.getDriver().navigate().refresh();
-                    actions.moveToElement(anasayfaArayuz2.kategorilerDropdown).perform();
-                    actions.moveToElement(anasayfaArayuz2.giyimVeAksesuarKategorisi).perform();
-                } catch (ElementNotInteractableException ignored2){
-                    Driver.getDriver().navigate().refresh();
-                    SleepMethod.sleep(3);
-                    actions.moveToElement(anasayfaArayuz2.kategorilerDropdown).perform();
-                    actions.moveToElement(anasayfaArayuz2.giyimVeAksesuarKategorisi).perform();
-                }
 
-            }
+                actions.moveToElement(anasayfaArayuz1.giyimVeAksesuarModulu).perform();
 
-        }
+
 
 
 
@@ -121,8 +104,26 @@ public class A101_Modul_Fonksiyon_Test {
     @When("Kullanici Kadin Ic Giyim kategorisine tiklar")
     public void kullanici_kadin_ic_giyim_kategorisine_tiklar() {
 
-
         anasayfaArayuz1.kadinIcGiyimKategorisi.click();
+/* ONEMLI
+        if (anasayfaArayuz1.altMenu.isDisplayed()){
+            anasayfaArayuz1.kadinIcGiyimKategorisi.click();
+        } else {
+                Driver.getDriver().navigate().refresh();
+                actions.moveToElement(anasayfaArayuz1.giyimVeAksesuarModulu).perform();
+                anasayfaArayuz1.kadinIcGiyimKategorisi.click();
+        }
+
+ */
+/*
+        try {
+            anasayfaArayuz1.kadinIcGiyimKategorisi.click();
+        } catch (ElementNotInteractableException e){
+            wait.until(ExpectedConditions.visibilityOf(anasayfaArayuz1.altMenu));
+            anasayfaArayuz1.kadinIcGiyimKategorisi.click();
+        }
+
+ */
 
 
         //   wait.until(ExpectedConditions.elementToBeClickable(anasayfaArayuz1.kadinIcGiyimKategorisi));
@@ -215,15 +216,15 @@ public class A101_Modul_Fonksiyon_Test {
         //Sepete ekle butonuna tiklar
         try{
             kadinIcGiyimSayfasi.sepeteEkleButonu.click();
-        }catch (StaleElementReferenceException e){
+        }catch (StaleElementReferenceException | ElementClickInterceptedException e){
             try{
-                actions.doubleClick(kadinIcGiyimSayfasi.sepeteEkleButonu).perform();
-            } catch (ElementClickInterceptedException ignored){
+                Driver.getDriver().navigate().refresh();
+                kadinIcGiyimSayfasi.sepeteEkleButonu.click();
+            } catch (StaleElementReferenceException | ElementClickInterceptedException ignored){
                 Driver.getDriver().navigate().refresh();
                 actions.doubleClick(kadinIcGiyimSayfasi.sepeteEkleButonu).perform();
             }
         }
-
     }
     /*
 //
