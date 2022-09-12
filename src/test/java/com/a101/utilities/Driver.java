@@ -19,6 +19,11 @@ public class Driver {
     //Yeniden kullanilabilir bir method olusturulur.
     public static WebDriver getDriver(){
 
+        /*
+        Singleton design pattern
+        if driver null --> yenisini olustur
+        if driver doluysa --> devam et
+         */
         if (driver == null){
 
             //Tarayici tipini configuration.properties dosyasindan taniyarak okur.

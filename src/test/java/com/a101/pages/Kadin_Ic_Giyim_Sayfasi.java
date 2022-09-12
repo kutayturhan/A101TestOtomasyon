@@ -11,25 +11,20 @@ public class Kadin_Ic_Giyim_Sayfasi {
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
- /*   @FindBy(xpath = "//a[normalize-space()='Kadın İç Giyim']")
-    public WebElement kadinIcGiyimKategorisi;
-
-  */
-
     @FindBy(xpath = "(//a[normalize-space()='Dizaltı Çorap'])[2]")
     public WebElement dizaltiCorapAltKategorisi;
 
-    @FindBy(xpath = "//div[@class='products-list']")
-    public WebElement dizaltiCorapUrunModelListesi;
+    @FindBy(xpath = "(//a[normalize-space()='Dizaltı Çorap'])[3]")
+    public WebElement sadeceDizaltiCorapAltKategorisiSecildiktenSonraGorunenLocator;
 
     @FindBy(xpath = "//input[@id='attributes_integration_colourSİYAH']")
     public WebElement siyahRenkCheckbox;
 
-   // @FindBy(xpath = "//span[contains(text(),'SİYAH')]")
-    //public WebElement aktifFiltre;
-
     @FindBy(xpath = "(//a[@href='/giyim-aksesuar/penti-kadin-50-denye-pantolon-corabi-siyah/'])[8]")
     public WebElement sepeteEkleButonu;
+
+    @FindBy(xpath = "(//a[@href='/giyim-aksesuar/doremi-kadin-diz-alti-corap-micro-bronz/'])[8]")
+    public WebElement sepeteEkleUrunuReferans;
 
 
 }

@@ -7,6 +7,12 @@ import org.openqa.selenium.support.PageFactory;
 
 public class Anasayfa_Arayuz_1 {
 
+    //
+
+    //Driver'a sayfayi tanitir. StaleElementExp
+    /*
+    page'i her cağırgdıgımızda driverla web elementleri ilişkilendirebileceği bir constructur. StaleElementExp engellenir
+     */
     public Anasayfa_Arayuz_1(){
         PageFactory.initElements(Driver.getDriver(), this);
     }
