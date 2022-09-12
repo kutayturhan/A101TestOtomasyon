@@ -39,6 +39,9 @@ public class A101_Modul_Fonksiyon_Test {
     //Web Surucusune belirli kosullari beklemesini soylemek icin kullanilir.
     WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
 
+    JavascriptExecutor javascriptExecutor = (JavascriptExecutor) Driver.getDriver();
+
+
     Faker faker = new Faker(new Locale("en-US"));
 
     //Actions classindan degisken tanimlamasi yaparak actions nesnesini olusturur.
@@ -100,25 +103,24 @@ public class A101_Modul_Fonksiyon_Test {
     @When("Kullanici Kadin Ic Giyim kategorisine tiklar")
     public void kullanici_kadin_ic_giyim_kategorisine_tiklar() {
 
-        anasayfaArayuz1.kadinIcGiyimKategorisi.click();
+        //   anasayfaArayuz1.kadinIcGiyimKategorisi.click();
 
         // giyim aksesuar kategorisi görünmedigi icin exception veriyordu.
-        try{
-            anasayfaArayuz1.kadinIcGiyimKategorisi.click();
-        } catch (ElementNotInteractableException | NoSuchElementException e){
-
-        }
-        //Bu kodu denemeden önce commit alıyorum.
+        // tekrar o yolu izlemesi icin command verdim
+        //alternatif arayuz olma olasiligini da ekledim.
         try {
-            if (anasayfaArayuz2.kategorilerDropdown.isDisplayed()) {
-                actions.moveToElement(anasayfaArayuz2.kategorilerDropdown).perform();
-                actions.moveToElement(anasayfaArayuz2.giyimVeAksesuarKategorisi).perform();
+            anasayfaArayuz1.kadinIcGiyimKategorisi.click();
+        } catch (ElementNotInteractableException | NoSuchElementException e) {
+            try {
+                if (anasayfaArayuz2.kategorilerDropdown.isDisplayed()) {
+                    actions.moveToElement(anasayfaArayuz2.kategorilerDropdown).perform();
+                    actions.moveToElement(anasayfaArayuz2.giyimVeAksesuarKategorisi).perform();
+                }
+            } catch (ElementNotInteractableException ignored) {
+                ignored.printStackTrace();
             }
-        } catch (ElementNotInteractableException ignored) {
-            ignored.printStackTrace();
+            actions.moveToElement(anasayfaArayuz1.giyimVeAksesuarModulu).perform();
         }
-        actions.moveToElement(anasayfaArayuz1.giyimVeAksesuarModulu).perform();
-
 
 
     }
@@ -144,14 +146,14 @@ public class A101_Modul_Fonksiyon_Test {
     @Then("Kullanici Dizalti Corap modellerini goruntuler")
     public void kullanici_dizalti_corap_modellerini_goruntuler() {
 
-        try{
+        try {
             //Dizalti Corap kategorisi secildikten sonraki URL'nin icerigini dogrular
             String dizaltiCorapSecimindenSonraURL = Driver.getDriver().getCurrentUrl();
             Assert.assertTrue(dizaltiCorapSecimindenSonraURL.contains("dizalti-corap"));
 
             //Bu locator sadece dizalti corap menusu secildikten sonra html kodunda gorunuyor.
             Assert.assertTrue(kadinIcGiyimSayfasi.sadeceDizaltiCorapAltKategorisiSecildiktenSonraGorunenLocator.isDisplayed());
-        } catch (ElementNotInteractableException | NoSuchElementException e){
+        } catch (ElementNotInteractableException | NoSuchElementException e) {
 
             try {
                 if (kadinIcGiyimSayfasi2.alternatifArayuzSadeceDizaltiCorapAltKategorisiSecildiktenSonraGorunenLocator.isDisplayed()) {
@@ -165,68 +167,40 @@ public class A101_Modul_Fonksiyon_Test {
         }
 
     }
-//
-//    @When("Kullanici siyah renk isaret kutucuguna tiklar")
-//    public void kullanici_siyah_renk_isaret_kutucuguna_tiklar() {
-//
-//        try {
-//            kadinIcGiyimSayfasi.siyahRenkCheckbox.click();
-//            //      if (kadinIcGiyimSayfasi.sepeteEkleUrunuReferans.isDisplayed()) {
-//            //        Driver.getDriver().navigate().refresh();
-//            //}
-//        } catch (StaleElementReferenceException e) {
-//            Driver.getDriver().navigate().refresh();
-//            kadinIcGiyimSayfasi.siyahRenkCheckbox.click();
-//            //    if (kadinIcGiyimSayfasi.sepeteEkleUrunuReferans.isDisplayed()) {
-//            //      Driver.getDriver().navigate().refresh();
-//            // }
-//        }
-//
-//
-//    }
-//
-//    @Then("Acilan urunun siyah renk oldugu dogrulanir")
-//    public void acilan_urunun_siyah_renk_oldugu_dogrulanir() {
-//
-//        try {
-//            Assert.assertTrue(kadinIcGiyimSayfasi.siyahRenkCheckbox.isSelected());
-//        } catch (AssertionError | StaleElementReferenceException e) {
-//            Driver.getDriver().navigate().refresh();
-//            if (kadinIcGiyimSayfasi.siyahRenkCheckbox.isSelected()) {
-//                Assert.assertTrue(kadinIcGiyimSayfasi.siyahRenkCheckbox.isSelected());
-//            } else {
-//                kadinIcGiyimSayfasi.siyahRenkCheckbox.click();
-//                Assert.assertTrue(kadinIcGiyimSayfasi.siyahRenkCheckbox.isSelected());
-//            }
-//            //kadinIcGiyimSayfasi.siyahRenkCheckbox.click();
-//            //  Assert.assertTrue(kadinIcGiyimSayfasi.siyahRenkCheckbox.isSelected());
-//        }
-//
-//
-//    }
-//
-//    // -------------------------------------------------------------------------------------------------------WWWWWWWWWW
-//    @When("Kullanici Siyah Dizalti Corabini sepete eklemek icin sepete ekle butonuna tiklar")
-//    public void kullanici_siyah_dizalti_corabini_sepete_eklemek_icin_sepete_ekle_butonuna_tiklar() {
-//
-//        //Sepete ekle butonuna cift tiklama (double click) yapar. Bunun sebebini hazirladigim README dosyasinda detayli olarak acikladim
-//        // actions.doubleClick(kadinIcGiyimSayfasi.sepeteEkleButonu).perform();
-//
-//        //Sepete ekle butonuna tiklar
-//        try {
-//            kadinIcGiyimSayfasi.sepeteEkleButonu.click();
-//        } catch (StaleElementReferenceException | ElementClickInterceptedException e) {
-//            try {
-//                Driver.getDriver().navigate().refresh();
-//                kadinIcGiyimSayfasi.sepeteEkleButonu.click();
-//            } catch (StaleElementReferenceException | ElementClickInterceptedException ignored) {
-//                Driver.getDriver().navigate().refresh();
-//                actions.doubleClick(kadinIcGiyimSayfasi.sepeteEkleButonu).perform();
-//            }
-//        }
-//
-//    }
-//
+
+    @When("Kullanici siyah renk isaret kutucuguna tiklar")
+    public void kullanici_siyah_renk_isaret_kutucuguna_tiklar() {
+
+        try {
+            kadinIcGiyimSayfasi.siyahRenkCheckbox.click();
+        } catch (ElementClickInterceptedException e) {
+            javascriptExecutor.executeScript("arguments[0].click();", kadinIcGiyimSayfasi.siyahRenkCheckbox);
+            boolean condition = !(kadinIcGiyimSayfasi.siyahRenkCheckbox.isSelected());
+            System.out.println(condition);
+            if (!(kadinIcGiyimSayfasi.siyahRenkCheckbox.isSelected())) {
+                actions.moveToElement(kadinIcGiyimSayfasi.siyahRenkCheckbox).click(kadinIcGiyimSayfasi.siyahRenkCheckbox).perform();
+            }
+        }
+
+    }
+
+
+    @Then("Acilan urunun siyah renk oldugu dogrulanir")
+    public void acilan_urunun_siyah_renk_oldugu_dogrulanir() {
+
+
+        Assert.assertTrue(kadinIcGiyimSayfasi.siyahRenkCheckbox.isSelected());
+
+
+    }
+
+    @When("Kullanici Siyah Dizalti Corabini sepete eklemek icin sepete ekle butonuna tiklar")
+    public void kullanici_siyah_dizalti_corabini_sepete_eklemek_icin_sepete_ekle_butonuna_tiklar() {
+
+        kadinIcGiyimSayfasi.sepeteEkleButonu.click();
+
+    }
+
 //
 //    @When("Kullanici Siyah Dizalti Corabi urun sayfasina ulasir ve sepete eklemek icin sepete ekle butonuna tiklar")
 //    public void kullanici_siyah_dizalti_corabi_urun_sayfasina_ulasir_ve_sepete_eklemek_icin_sepete_ekle_butonuna_tiklar() {

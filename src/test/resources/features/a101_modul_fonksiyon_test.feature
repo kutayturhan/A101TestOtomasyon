@@ -31,13 +31,13 @@ Feature: A101 Web Sitesi | Modullerin Islevselligi ve Fonksiyonelligi
     And Kullanici Kadin Ic Giyim kategorisine tiklar
     And Kullanici Dizalti Corap kategorisine tiklar
     Then Kullanici Dizalti Corap modellerini goruntuler
-#
-#  Scenario: Kullanici siyah renk isaret kutucuguna tiklar ve acilan urunun siyah oldugu dogrulanir
-#    When Kullanici siyah renk isaret kutucuguna tiklar
-#    Then Acilan urunun siyah renk oldugu dogrulanir
-#
-#  Scenario: Kullanici siyah dizalti corabini sepete ekler, sepeti goruntuler ve sepeti onaylar
-#    When Kullanici Siyah Dizalti Corabini sepete eklemek icin sepete ekle butonuna tiklar
+
+  Scenario: Kullanici siyah renk isaret kutucuguna tiklar ve acilan urunun siyah oldugu dogrulanir
+    When Kullanici siyah renk isaret kutucuguna tiklar
+    Then Acilan urunun siyah renk oldugu dogrulanir
+
+  Scenario: Kullanici siyah dizalti corabini sepete ekler, sepeti goruntuler ve sepeti onaylar
+    When Kullanici Siyah Dizalti Corabini sepete eklemek icin sepete ekle butonuna tiklar
 #    And Kullanici Siyah Dizalti Corabi urun sayfasina ulasir ve sepete eklemek icin sepete ekle butonuna tiklar
 #    And Kullanici eklemis oldugu urun bilgisini acilir menude kontrol eder ve sepeti goruntule baglantisina tiklar
 #    And Kullanici Sepetim sayfasinda sepete eklenen urun bilgisine ulasir ve sepeti onaylamak icin Sepeti Onayla butonuna tiklar
