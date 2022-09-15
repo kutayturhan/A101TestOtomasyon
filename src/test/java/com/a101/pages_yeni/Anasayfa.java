@@ -24,6 +24,10 @@ public class Anasayfa {
 
 
     //ALTERNATIF ARAYUZ
+
+    @FindBy(xpath = "//button[normalize-space()='ARA']")
+    public WebElement alternatifArayuz_AraButonu;
+
     @FindBy(xpath = "(//div[normalize-space()='Kategoriler'])[1]")
     public WebElement alternatifArayuz_Kategoriler_Dropdown_AsagiAcilirListe;
 
@@ -33,8 +37,6 @@ public class Anasayfa {
     @FindBy(xpath = "(//a[normalize-space()='Kadın İç Giyim'])[1]")
     public WebElement alternatifArayuz_KadinIcGiyim_Kategorisi;
 
-    @FindBy(xpath = "//div[@class='col-md-12 hype-header']")
-    public WebElement alternatifArayuz_Header;
 
     //ORTAK ELEMENT
     @FindBy(xpath = "//a[normalize-space()='Kadın İç Giyim']")

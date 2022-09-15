@@ -13,16 +13,12 @@ public class Kadin_Ic_Giyim_Sayfasi {
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
+    //1. arayuz
     @FindBy(xpath = "(//a[normalize-space()='Dizaltı Çorap'])[2]")
     public WebElement dizaltiCorap_AltKategorisi;
 
     @FindBy(xpath = "(//a[normalize-space()='Dizaltı Çorap'])[3]")
     public WebElement sadeceDizaltiCorapAltKategorisiSecildiktenSonraGorunen_WebElement;
-
-
-
-
-
 
 
     //ALTERNATIF ARAYUZ
@@ -32,12 +28,12 @@ public class Kadin_Ic_Giyim_Sayfasi {
     @FindBy(xpath = "(//a[normalize-space()='Dizaltı Çorap'])[4]")
     public WebElement alternatifArayuz_SadeceDizaltiCorapAltKategorisiSecildiktenSonraGorunen_WebElement;
 
-
     @FindBy(xpath = "//input[@id='attributes_integration_colourSİYAH']")
     public WebElement siyahRenk_Checkbox_IsaretKutucugu;
 
-    @FindBy(xpath = "(//li[@class='checkbox'])[5]")
-    public List<WebElement> siyahRenk_Checkbox_IsaretKutucugu_Liste;
+    //ortak element
+    @FindBy(xpath = "(//a[@href='/giyim-aksesuar/penti-kadin-50-denye-pantolon-corabi-siyah/'])[8]")
+    public WebElement sepeteEkleButonu;
 
 
 }
