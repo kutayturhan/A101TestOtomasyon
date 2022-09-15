@@ -11,11 +11,8 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
 
         plugin = {
-                //HTML raporu olusturur.
+                //HTML raporu olusturur. Yeterli buluyorum. Cucumber rapor falan da var ama bu ok ya.
                 "html:target/cucumber-report.html",
-
-                //Cucumber raporu olusturur.
-                "me.jvt.cucumber.report.PrettyReports:target/cucumber",
         },
         //Features dosyasinin yerini tanitir.
         features = "src/test/resources/features",

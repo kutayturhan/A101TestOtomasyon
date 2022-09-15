@@ -1,21 +1,13 @@
-package com.a101.step_definitions;
+package com.a101.hehehe;
 
-import com.a101.pages.*;
+import com.a101.pages_eski.*;
 import com.a101.utilities.Driver;
-import com.a101.utilities.SleepMethod;
 import com.github.javafaker.Faker;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.java.mk_latn.No;
 import org.junit.Assert;
-import org.openqa.selenium.ElementClickInterceptedException;
-import org.openqa.selenium.ElementNotInteractableException;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Locale;
@@ -26,9 +18,7 @@ public class A101_Modul_Fonksiyon_Test {
     //Olusturulan "Cerez_Kullanim_Sayfasi" java classindan bir degisken tanimlamasi yapar.
     //Bu degiskene "cerezKullanimSayfasi" ismini vererek nesne olusturur.
     Cerez_Kullanim_Sayfasi cerezKullanimSayfasi = new Cerez_Kullanim_Sayfasi();
-    Anasayfa_Arayuz_1 anasayfaArayuz1 = new Anasayfa_Arayuz_1();
-    Anasayfa_Arayuz_2 anasayfaArayuz2 = new Anasayfa_Arayuz_2();
-    Kadin_Ic_Giyim_Sayfasi kadinIcGiyimSayfasi = new Kadin_Ic_Giyim_Sayfasi();
+    Kadin_Ic_Giyim_Sayfasi_eski kadinIcGiyimSayfasi = new Kadin_Ic_Giyim_Sayfasi_eski();
     Kadin_Ic_Giyim_Sayfasi_2 kadinIcGiyimSayfasi2 = new Kadin_Ic_Giyim_Sayfasi_2();
     Siyah_Corap_Urun_Sayfasi siyahCorapUrunSayfasi = new Siyah_Corap_Urun_Sayfasi();
     Teslimat_Adresi_Bilgi_Formu teslimatAdresiBilgiFormu = new Teslimat_Adresi_Bilgi_Formu();
@@ -48,149 +38,107 @@ public class A101_Modul_Fonksiyon_Test {
     //Actions sinifi, Selenium tarafindan klavye ve fare hareketlerini islemek icin saglanan bir ozellik sinifidir.
     Actions actions = new Actions(Driver.getDriver());
 
-    @Given("Kullanici {string} alan adindaki web sitesine giris yapar")
-    public void kullanici_alan_adindaki_web_sitesine_giris_yapar(String domain) {
+ //  @When("Kullanici Kadin Ic Giyim kategorisine tiklar")
+ //  public void kullanici_kadin_ic_giyim_kategorisine_tiklar() {
 
-        //Kullanici www.a101.com.tr adresindeki web sayfasina giris yapar
-        Driver.getDriver().get(domain);
+ //      //   anasayfaArayuz1.kadinIcGiyimKategorisi.click();
 
-
-    }
-
-    @When("Kullanici cerez kullanimini kabul eder")
-    public void kullanici_cerez_kullanimini_kabul_eder() {
-
-        //Class seviyesinde olusturulan nesneyi degisken ismi ile cagirir. Tespit ettigimiz web ogesine tiklar.
-        cerezKullanimSayfasi.cerezBannerKabulEtButonu.click();
-
-
-    }
-
-    @Then("Kullanici basarili bir sekilde anasayfaya ulasir")
-    public void kullanici_basarili_bir_sekilde_anasayfaya_ulasir() {
-
-        //Cerez kabul edildikten sonra gorulmesi beklenen url ile mevcut olarak bulunulan url'i karsilastirir.
-        //Karsilastirma sonucu birbirine esit olursa, test dogrulanmis olur.
-        String gorunmesiBeklenenURL = "https://www.a101.com.tr/";
-        Assert.assertEquals(gorunmesiBeklenenURL, Driver.getDriver().getCurrentUrl());
-
-        //Daha da emin olmak icin cerezi kabul ettikten sonra anasayfaya basarili bir sekilde
-        //ulasabilip ulasamadigini gormek icin cerezi kabul ettikten sonra
-        //anasayfada tiklanabilir ve gorunebilir olan bir web ogesini tespit edip
-        //tiklanabilirligini, aktifligini ve gorunurlugunu kontrol ettim.
-        Assert.assertTrue(cerezKullanimSayfasi.aramaButonu.isEnabled() && cerezKullanimSayfasi.aramaButonu.isDisplayed());
+ //      // giyim aksesuar kategorisi görünmedigi icin exception veriyordu.
+ //      // tekrar o yolu izlemesi icin command verdim
+ //      //alternatif arayuz olma olasiligini da ekledim.
+ //      try {
+ //          anasayfaArayuz1.kadinIcGiyimKategorisi.click();
+ //      } catch (ElementNotInteractableException e) {
+ //          try {
+ //              if (anasayfaArayuz2.kategorilerDropdown.isDisplayed()) {
+ //                  actions.moveToElement(anasayfaArayuz2.kategorilerDropdown).perform();
+ //                  actions.moveToElement(anasayfaArayuz2.giyimVeAksesuarKategorisi).perform();
+ //              }
+ //          } catch (ElementNotInteractableException ignored) {
+ //              ignored.printStackTrace();
+ //          }
+ //          actions.moveToElement(anasayfaArayuz1.giyimVeAksesuarModulu).perform();
+ //      }
 
 
-    }
+  //  }
 
-    @When("Kullanici mouse imlecini Giyim ve Aksesuar modulu uzerinde bekletir")
-    public void kullanici_mouse_imlecini_giyim_ve_aksesuar_modulu_uzerinde_bekletir() {
+//    @When("Kullanici Dizalti Corap kategorisine tiklar")
+//    public void kullanici_dizalti_corap_kategorisine_tiklar() {
+//
+//        try {
+//            kadinIcGiyimSayfasi.dizaltiCorapAltKategorisi.click();
+//        } catch (ElementNotInteractableException e) {
+//            try {
+//                if (kadinIcGiyimSayfasi2.alternatifArayuzDizaltiCorapAltKategorisi.isDisplayed()) {
+//                    kadinIcGiyimSayfasi2.alternatifArayuzDizaltiCorapAltKategorisi.click();
+//                }
+//            } catch (ElementNotInteractableException ignored) {
+//                ignored.printStackTrace();
+//            }
+//        }
+//
+//
+//    }
 
-        try {
-            if (anasayfaArayuz2.kategorilerDropdown.isDisplayed()) {
-                actions.moveToElement(anasayfaArayuz2.kategorilerDropdown).perform();
-                actions.moveToElement(anasayfaArayuz2.giyimVeAksesuarKategorisi).perform();
-            }
-        } catch (ElementNotInteractableException e) {
-            e.printStackTrace();
-        }
+//    @Then("Kullanici Dizalti Corap modellerini goruntuler")
+//    public void kullanici_dizalti_corap_modellerini_goruntuler() {
+//
+//        try {
+//            //Dizalti Corap kategorisi secildikten sonraki URL'nin icerigini dogrular
+//            String dizaltiCorapSecimindenSonraURL = Driver.getDriver().getCurrentUrl();
+//            Assert.assertTrue(dizaltiCorapSecimindenSonraURL.contains("dizalti-corap"));
+//
+//            //Bu locator sadece dizalti corap menusu secildikten sonra html kodunda gorunuyor.
+//            Assert.assertTrue(kadinIcGiyimSayfasi.sadeceDizaltiCorapAltKategorisiSecildiktenSonraGorunenLocator.isDisplayed());
+//        } catch (ElementNotInteractableException | NoSuchElementException e) {
+//
+//            try {
+//                if (kadinIcGiyimSayfasi2.alternatifArayuzSadeceDizaltiCorapAltKategorisiSecildiktenSonraGorunenLocator.isDisplayed()) {
+//                    String alternatifArayuzDizaltiCorapSecimindenSonraURL = Driver.getDriver().getCurrentUrl();
+//                    Assert.assertTrue(alternatifArayuzDizaltiCorapSecimindenSonraURL.contains("dizalti-corap"));
+//                    Assert.assertTrue(kadinIcGiyimSayfasi2.alternatifArayuzSadeceDizaltiCorapAltKategorisiSecildiktenSonraGorunenLocator.isDisplayed());
+//                }
+//            } catch (ElementNotInteractableException | NoSuchElementException ignored) {
+//                ignored.printStackTrace();
+//            }
+//        }
 
-        actions.moveToElement(anasayfaArayuz1.giyimVeAksesuarModulu).perform();
+//    }
 
-    }
-
-
-    @When("Kullanici Kadin Ic Giyim kategorisine tiklar")
-    public void kullanici_kadin_ic_giyim_kategorisine_tiklar() {
-
-        //   anasayfaArayuz1.kadinIcGiyimKategorisi.click();
-
-        // giyim aksesuar kategorisi görünmedigi icin exception veriyordu.
-        // tekrar o yolu izlemesi icin command verdim
-        //alternatif arayuz olma olasiligini da ekledim.
-        try {
-            anasayfaArayuz1.kadinIcGiyimKategorisi.click();
-        } catch (ElementNotInteractableException | NoSuchElementException e) {
-            try {
-                if (anasayfaArayuz2.kategorilerDropdown.isDisplayed()) {
-                    actions.moveToElement(anasayfaArayuz2.kategorilerDropdown).perform();
-                    actions.moveToElement(anasayfaArayuz2.giyimVeAksesuarKategorisi).perform();
-                }
-            } catch (ElementNotInteractableException ignored) {
-                ignored.printStackTrace();
-            }
-            actions.moveToElement(anasayfaArayuz1.giyimVeAksesuarModulu).perform();
-        }
-
-
-    }
-
-    @When("Kullanici Dizalti Corap kategorisine tiklar")
-    public void kullanici_dizalti_corap_kategorisine_tiklar() {
-
-        try {
-            kadinIcGiyimSayfasi.dizaltiCorapAltKategorisi.click();
-        } catch (ElementNotInteractableException | NoSuchElementException e) {
-            try {
-                if (kadinIcGiyimSayfasi2.alternatifArayuzDizaltiCorapAltKategorisi.isDisplayed()) {
-                    kadinIcGiyimSayfasi2.alternatifArayuzDizaltiCorapAltKategorisi.click();
-                }
-            } catch (ElementNotInteractableException | NoSuchElementException ignored) {
-                ignored.printStackTrace();
-            }
-        }
-
-
-    }
-
-    @Then("Kullanici Dizalti Corap modellerini goruntuler")
-    public void kullanici_dizalti_corap_modellerini_goruntuler() {
-
-        try {
-            //Dizalti Corap kategorisi secildikten sonraki URL'nin icerigini dogrular
-            String dizaltiCorapSecimindenSonraURL = Driver.getDriver().getCurrentUrl();
-            Assert.assertTrue(dizaltiCorapSecimindenSonraURL.contains("dizalti-corap"));
-
-            //Bu locator sadece dizalti corap menusu secildikten sonra html kodunda gorunuyor.
-            Assert.assertTrue(kadinIcGiyimSayfasi.sadeceDizaltiCorapAltKategorisiSecildiktenSonraGorunenLocator.isDisplayed());
-        } catch (ElementNotInteractableException | NoSuchElementException e) {
-
-            try {
-                if (kadinIcGiyimSayfasi2.alternatifArayuzSadeceDizaltiCorapAltKategorisiSecildiktenSonraGorunenLocator.isDisplayed()) {
-                    String alternatifArayuzDizaltiCorapSecimindenSonraURL = Driver.getDriver().getCurrentUrl();
-                    Assert.assertTrue(alternatifArayuzDizaltiCorapSecimindenSonraURL.contains("dizalti-corap"));
-                    Assert.assertTrue(kadinIcGiyimSayfasi2.alternatifArayuzSadeceDizaltiCorapAltKategorisiSecildiktenSonraGorunenLocator.isDisplayed());
-                }
-            } catch (ElementNotInteractableException | NoSuchElementException ignored) {
-                ignored.printStackTrace();
-            }
-        }
-
-    }
-
-    @When("Kullanici siyah renk isaret kutucuguna tiklar")
-    public void kullanici_siyah_renk_isaret_kutucuguna_tiklar() {
-
-        try {
-            kadinIcGiyimSayfasi.siyahRenkCheckbox.click();
-        } catch (ElementClickInterceptedException e) {
-            javascriptExecutor.executeScript("arguments[0].click();", kadinIcGiyimSayfasi.siyahRenkCheckbox);
-            boolean condition = !(kadinIcGiyimSayfasi.siyahRenkCheckbox.isSelected());
-            System.out.println(condition);
-            if (!(kadinIcGiyimSayfasi.siyahRenkCheckbox.isSelected())) {
-                actions.moveToElement(kadinIcGiyimSayfasi.siyahRenkCheckbox).click(kadinIcGiyimSayfasi.siyahRenkCheckbox).perform();
-            }
-        }
-
-    }
+//    @When("Kullanici siyah renk isaret kutucuguna tiklar")
+//    public void kullanici_siyah_renk_isaret_kutucuguna_tiklar() {
+//
+//        try {
+//            kadinIcGiyimSayfasi.siyahRenkCheckbox.click();
+//        } catch (ElementClickInterceptedException e) {
+//            javascriptExecutor.executeScript("arguments[0].click();", kadinIcGiyimSayfasi.siyahRenkCheckbox);
+//            if (!(kadinIcGiyimSayfasi.siyahRenkCheckbox.isSelected())) {
+//                actions.moveToElement(kadinIcGiyimSayfasi.siyahRenkCheckbox).click(kadinIcGiyimSayfasi.siyahRenkCheckbox).perform();
+//            }
+//        }
+//
+//    }
 
 
     @Then("Acilan urunun siyah renk oldugu dogrulanir")
     public void acilan_urunun_siyah_renk_oldugu_dogrulanir() {
 
 
-        Assert.assertTrue(kadinIcGiyimSayfasi.siyahRenkCheckbox.isSelected());
+       // Assert.assertTrue(kadinIcGiyimSayfasi.siyahRenkCheckbox.isSelected());
 
+        try{
+            Assert.assertTrue(kadinIcGiyimSayfasi.siyahRenkCheckbox.isSelected());
+        } catch (AssertionError e){
+            try {
+                kadinIcGiyimSayfasi.siyahRenkCheckbox.click();
+            } catch (ElementClickInterceptedException exception) {
+                javascriptExecutor.executeScript("arguments[0].click();", kadinIcGiyimSayfasi.siyahRenkCheckbox);
+                if (!(kadinIcGiyimSayfasi.siyahRenkCheckbox.isSelected())) {
+                    actions.moveToElement(kadinIcGiyimSayfasi.siyahRenkCheckbox).click(kadinIcGiyimSayfasi.siyahRenkCheckbox).perform();
+                }
+            }
+        }
 
     }
 
