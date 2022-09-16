@@ -1,4 +1,4 @@
-package com.a101.pages_eski;
+package com.a101.pages_yeni;
 
 import com.a101.utilities.Driver;
 import org.openqa.selenium.WebElement;
@@ -29,13 +29,13 @@ public class Teslimat_Adresi_Bilgi_Formu {
     @FindBy(xpath = "//select[@name='township']")
     public WebElement ilceSecimKutucugu;
 
-    @FindBy(xpath = "//option[normalize-space()='KADIKÖY']")
+    @FindBy(xpath = "//select[@name='township']//option")
     public WebElement ilceSecimKutucuguGorunurluk;
 
     @FindBy(xpath = "//select[@name='district']")
     public WebElement mahalleSecimKutucugu;
 
-    @FindBy(xpath = "//option[normalize-space()='CADDEBOSTAN MAH']")
+    @FindBy(xpath = "//select[@name='district']//option")
     public WebElement mahalleSecimKutucuguGorunurluk;
 
     @FindBy(xpath = "//textarea[@class='js-address-textarea']")

@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class Anasayfa {
 
-    public Anasayfa(){
+    public Anasayfa() {
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
@@ -16,30 +16,20 @@ public class Anasayfa {
     @FindBy(xpath = "//button[@id='CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll']")
     public WebElement cerezKullanimi_KabulEtButonu;
 
-    @FindBy(xpath = "//a[normalize-space()='Giyim & aksesuar']")
+    @FindBy(xpath = "(//a[@title='GİYİM & AKSESUAR'])[1]")
     public WebElement giyimVeAksesuar_Dropdown_AsagiAcilirListe;
-
-
-
 
 
     //ALTERNATIF ARAYUZ
 
-    @FindBy(xpath = "//button[normalize-space()='ARA']")
-    public WebElement alternatifArayuz_AraButonu;
-
-    @FindBy(xpath = "(//div[normalize-space()='Kategoriler'])[1]")
+    @FindBy(xpath = "//div[@class='hype-link hype-dropdown hype-categories-link']")
     public WebElement alternatifArayuz_Kategoriler_Dropdown_AsagiAcilirListe;
 
-    @FindBy(xpath = "(//a[normalize-space()='Giyim & aksesuar'])[1]")
+    //Aslında ortak eleman ama anlasılması icin farklı tanımlamayla tuttum
+    @FindBy(xpath = "(//a[@title='GİYİM & AKSESUAR'])[1]")
     public WebElement alternatifArayuz_giyimVeAksesuar_Kategorisi;
 
-    @FindBy(xpath = "(//a[normalize-space()='Kadın İç Giyim'])[1]")
-    public WebElement alternatifArayuz_KadinIcGiyim_Kategorisi;
 
 
-    //ORTAK ELEMENT
-    @FindBy(xpath = "//a[normalize-space()='Kadın İç Giyim']")
-    public WebElement kadinIcGiyim_Kategorisi;
 
 }

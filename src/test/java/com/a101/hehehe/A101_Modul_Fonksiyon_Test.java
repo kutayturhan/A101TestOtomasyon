@@ -21,7 +21,7 @@ public class A101_Modul_Fonksiyon_Test {
     Kadin_Ic_Giyim_Sayfasi_eski kadinIcGiyimSayfasi = new Kadin_Ic_Giyim_Sayfasi_eski();
     Kadin_Ic_Giyim_Sayfasi_2 kadinIcGiyimSayfasi2 = new Kadin_Ic_Giyim_Sayfasi_2();
     Siyah_Corap_Urun_Sayfasi siyahCorapUrunSayfasi = new Siyah_Corap_Urun_Sayfasi();
-    Teslimat_Adresi_Bilgi_Formu teslimatAdresiBilgiFormu = new Teslimat_Adresi_Bilgi_Formu();
+    //Teslimat_Adresi_Bilgi_Formu teslimatAdresiBilgiFormu = new Teslimat_Adresi_Bilgi_Formu();
     Odeme_ve_Uye_Bilgi_Sayfasi odemeVeUyelikBilgiSayfasi = new Odeme_ve_Uye_Bilgi_Sayfasi();
     Sepetim_Sayfasi sepetimSayfasi = new Sepetim_Sayfasi();
 
