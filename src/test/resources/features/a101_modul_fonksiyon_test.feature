@@ -26,7 +26,7 @@ Feature: A101 Web Sitesi | Modullerin Islevselligi ve Fonksiyonelligi
     When Kullanici cerez kullanimini kabul eder
     Then Kullanici basarili bir sekilde anasayfaya ulasir
 
-  Scenario: Kullanici Giyim ve Aksesuar Dizalti Corap kategorisine ait urun modellerini goruntuler
+  Scenario: Kullanici Giyim ve Aksesuar acilir menu listesinden Kadin Ic Giyim kategorisine tiklar ve Dizalti Corap alt kategorisine tiklayarak Dizalti Corap urun modellerini goruntuler
     When Kullanici mouse imlecini Giyim ve Aksesuar modulu uzerine goturur
     And Kullanici Kadin Ic Giyim kategorisine tiklar
     And Kullanici Dizalti Corap kategorisine tiklar
@@ -42,16 +42,16 @@ Feature: A101 Web Sitesi | Modullerin Islevselligi ve Fonksiyonelligi
     And Kullanici eklemis oldugu urun bilgisini acilir menude kontrol eder ve sepeti goruntule baglantisina tiklar
     And Kullanici Sepetim sayfasinda sepete eklenen urun bilgisine ulasir ve sepeti onaylamak icin Sepeti Onayla butonuna tiklar
     Then Kullanici odeme adimina gecmek icin gerekli olan uye giris bilgisi sayfasina ulasir
-##
-##  Scenario: Kullanici odeme adimina uye olmadan devam eder ve e mail adresini girdikten sonra gonderi teslimat adresini belirtip kargo firmasi tercihi yaparak odeme sayfasina ulasir
-##    When Kullanici UYE OLMADAN DEVAM ET butonuna tiklar
-##    And Kullanici E mail adresini girer
-##    And Kullanici DEVAM ET butonuna tiklar
-##    And Kullanici yeni adres olustur butonuna tiklar
-##    And Kullanici kisi ve teslimat adres bilgilerini adres guncelleme formuna girer
-##    And Kullanici teslimat adresi bilgi formundaki kaydet butonuna tiklar
-##    And Kullanici kargo firmasi secimi yapar
-#    And Kullanici Kaydet ve Devam Et butonuna tiklar
+
+  Scenario: Kullanici odeme adimina uye olmadan devam eder ve e mail adresini girdikten sonra gonderi teslimat adresini belirtip kargo firmasi tercihi yaparak odeme sayfasina ulasir
+    When Kullanici UYE OLMADAN DEVAM ET butonuna tiklar
+    And Kullanici E mail adresini girer
+    And Kullanici DEVAM ET butonuna tiklar
+    And Kullanici yeni adres olustur butonuna tiklar
+    And Kullanici kisi ve teslimat adres bilgilerini adres guncelleme formuna girer
+    And Kullanici teslimat adresi bilgi formundaki kaydet butonuna tiklar
+    And Kullanici kargo firmasi secimi yapar
+    And Kullanici Kaydet ve Devam Et butonuna tiklar
 #    And Kullanici kredi kart bilgilerini girer
 #    And Kullanici On Bilgilendirme Kosullari'ni ve Uzaktan Satis Sozlemesi'ni okudum ve kabul ediyorum kutucugunu isaretler
 #    And Kullanici Siparisi Tamamla butonuna tiklar

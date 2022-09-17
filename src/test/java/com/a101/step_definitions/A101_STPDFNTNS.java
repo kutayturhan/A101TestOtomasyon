@@ -74,8 +74,12 @@ public class A101_STPDFNTNS {
         try {
             actions.moveToElement(anasayfa.giyimVeAksesuar_Dropdown_AsagiAcilirListe).perform();
         } catch (ElementNotInteractableException exception) {
-            actions.moveToElement(anasayfa.alternatifArayuz_Kategoriler_Dropdown_AsagiAcilirListe).perform();
-            actions.moveToElement(anasayfa.alternatifArayuz_giyimVeAksesuar_Kategorisi).perform();
+            try {
+                actions.moveToElement(anasayfa.alternatifArayuz_Kategoriler_Dropdown_AsagiAcilirListe).perform();
+                actions.moveToElement(anasayfa.alternatifArayuz_giyimVeAksesuar_Kategorisi).perform();
+            } catch (Exception exception_2) {
+                exception_2.printStackTrace();
+            }
         }
 
     }
@@ -86,8 +90,9 @@ public class A101_STPDFNTNS {
         try {
 
             anasayfa.kadinIcGiyim_Kategorisi.click();
+            wait.until(ExpectedConditions.elementToBeClickable(kadin_ic_giyim_sayfasi.dizaltiCorap_AltKategorisi));
         } catch (ElementNotInteractableException exception) {
-
+            wait.until(ExpectedConditions.elementToBeClickable(kadin_ic_giyim_sayfasi.dizaltiCorap_AltKategorisi));
             anasayfa.alternatifArayuz_kadinIcGiyim_Kategorisi.click();
 
 
@@ -114,7 +119,6 @@ public class A101_STPDFNTNS {
         dizalti_corap_sayfasi.gezintiMenusu_DizaltiCorap.isDisplayed();
 
 
-
     }
 
     @When("Kullanici siyah renk isaret kutucuguna tiklar")
@@ -134,12 +138,12 @@ public class A101_STPDFNTNS {
 
         //SORABİLİTE wait.until(ExpectedConditions.visibilityOfAllElements(dizalti_corap_sayfasi.getSiyahRenk_Checkbox_IsaretKutucugu_SecimSonrasiUrunGorunurluk));
 
-    //    try {
+        try {
             Assert.assertTrue(dizalti_corap_sayfasi.siyahRenk_Checkbox_IsaretKutucugu.isSelected());
-    //    } catch (AssertionError error) {
-    //        Driver.getDriver().navigate().refresh();
-    //        kullanici_siyah_renk_isaret_kutucuguna_tiklar();
-    //    }
+        } catch (AssertionError error) {
+            Driver.getDriver().navigate().refresh();
+            kullanici_siyah_renk_isaret_kutucuguna_tiklar();
+        }
 
     }
 
@@ -176,12 +180,12 @@ public class A101_STPDFNTNS {
         wait.until(ExpectedConditions.elementToBeClickable(sepetim_sayfasi.eklenenUrunBilgisi));
         Assert.assertTrue(sepetim_sayfasi.eklenenUrunBilgisi.isDisplayed());
 
-      //  try {
-            sepetim_sayfasi.sepetiOnayla_Butonu.click();
-      //  } catch (ElementNotInteractableException exception) {
-      //      javascriptExecutor.executeScript("arguments[0].click()", sepetim_sayfasi.sepetiOnayla_Butonu);
+        //  try {
+        sepetim_sayfasi.sepetiOnayla_Butonu.click();
+        //  } catch (ElementNotInteractableException exception) {
+        //      javascriptExecutor.executeScript("arguments[0].click()", sepetim_sayfasi.sepetiOnayla_Butonu);
 
-      //  }
+        //  }
 
     }
 
@@ -192,7 +196,6 @@ public class A101_STPDFNTNS {
         Assert.assertTrue(gecerliURL.contains("checkout"));
 
 
-
         Assert.assertTrue(odeme_ve_uye_bilgi_sayfasi.uyeGirisi_BaslikYazisi.isDisplayed());
     }
 
@@ -200,14 +203,14 @@ public class A101_STPDFNTNS {
     @When("Kullanici UYE OLMADAN DEVAM ET butonuna tiklar")
     public void kullanici_uye_olmadan_devam_et_butonuna_tiklar() {
 
-        odeme_ve_uye_bilgi_sayfasi.uyeOlmadanDevamEtButonu.click();
+        odeme_ve_uye_bilgi_sayfasi.uyeOlmadanDevamEt_Butonu.click();
 
     }
 
     @When("Kullanici E mail adresini girer")
     public void kullanici_e_mail_adresini_girer() {
 
-        odeme_ve_uye_bilgi_sayfasi.emailVeriGirisSatiri.sendKeys(faker.internet().emailAddress());
+        odeme_ve_uye_bilgi_sayfasi.email_VeriGirisSatiri.sendKeys(faker.internet().emailAddress());
 
 
     }
@@ -215,14 +218,14 @@ public class A101_STPDFNTNS {
     @When("Kullanici DEVAM ET butonuna tiklar")
     public void kullanici_devam_et_butonuna_tiklar() {
 
-        odeme_ve_uye_bilgi_sayfasi.emailVeriGirisiDEVAMETbutonu.click();
+        odeme_ve_uye_bilgi_sayfasi.emailVeriGirisi_DevamEt_Butonu.click();
 
     }
 
     @When("Kullanici yeni adres olustur butonuna tiklar")
     public void kullanici_yeni_adres_olustur_butonuna_tiklar() {
 
-        odeme_ve_uye_bilgi_sayfasi.yeniAdresOlusturButonu.click();
+        odeme_ve_uye_bilgi_sayfasi.yeniAdresOlustur_Butonu.click();
 
     }
 
@@ -234,58 +237,79 @@ public class A101_STPDFNTNS {
         String soyad = faker.name().lastName();
 
 
-        teslimat_adresi_bilgi_formu.adresBasligi.sendKeys("Ev Adresim");
-        teslimat_adresi_bilgi_formu.adVeriGirisKutucugu.sendKeys(ad);
-        teslimat_adresi_bilgi_formu.soyadVeriGirisKutucugu.sendKeys(soyad);
-        teslimat_adresi_bilgi_formu.cepTelefonuNoVeriGirisKutucugu.sendKeys(faker.numerify("555#######"));
+        teslimat_adresi_bilgi_formu.adresBasligi_VeriGirisKutucugu.sendKeys("Ev Adresim");
+        teslimat_adresi_bilgi_formu.ad_VeriGirisKutucugu.sendKeys(ad);
+        teslimat_adresi_bilgi_formu.soyad_VeriGirisKutucugu.sendKeys(soyad);
+        teslimat_adresi_bilgi_formu.cepTelefonuNo_VeriGirisKutucugu.sendKeys(faker.numerify("554#######"));
 
-        Select selectSehir = new Select(teslimat_adresi_bilgi_formu.sehirSecimKutucugu);
+        Select selectSehir = new Select(teslimat_adresi_bilgi_formu.sehir_SecimKutucugu);
         selectSehir.selectByVisibleText("İSTANBUL");
 
 
-        Select selectIlce = new Select(teslimat_adresi_bilgi_formu.ilceSecimKutucugu);
+        Select selectIlce = new Select(teslimat_adresi_bilgi_formu.ilce_SecimKutucugu);
         selectIlce.selectByVisibleText("KADIKÖY");
-        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//select[@name='district']")));
-        //wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//select[@name='district']//option[normalize-space()='Seçiniz']")));
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//select[@name='township']//option")));
+        // wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//select[@name='district']//option")));
 
-        Select selectMahalle = new Select(teslimat_adresi_bilgi_formu.mahalleSecimKutucugu);
-        //teslimat_adresi_bilgi_formu.mahalleSecimKutucugu.click();
-        //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//option[normalize-space()='CADDEBOSTAN MAH']")));
+
+        Select selectMahalle = new Select(teslimat_adresi_bilgi_formu.mahalle_SecimKutucugu);
+
         selectMahalle.selectByIndex(3);
 
-        teslimat_adresi_bilgi_formu.adresVeriGirisKutusu.sendKeys(
+        teslimat_adresi_bilgi_formu.adres_VeriGirisKutusu.sendKeys(
                 ad + " " + soyad + " \n" +
                         "Caddebostan Mahallesi\n" +
                         "A101 Harca Harca Bitmez Sokak\n" +
-                        "No: " + faker.number().numberBetween(1, 101) + "\n" +
+                        "No:" + faker.number().numberBetween(1, 101) + "\n" +
                         "Daire: " + faker.number().numberBetween(1, 101) + "\n" +
-                        "Posta Kodu: " + postaKodu + " Kadıköy İSTANBUL"
+                        "Posta Kodu:" + postaKodu + " Kadıköy İSTANBUL"
         );
 
-        teslimat_adresi_bilgi_formu.postaKoduVeriGirisKutucugu.sendKeys(postaKodu);
+        teslimat_adresi_bilgi_formu.postaKodu_VeriGirisKutucugu.sendKeys(postaKodu);
+
         System.out.println(ad + " " + soyad + " \n" +
                 "Caddebostan Mahallesi\n" +
                 "A101 Harca Harca Bitmez Sokak\n" +
-                "No: " + faker.number().numberBetween(1, 101) + "\n" +
-                "Daire: " + faker.number().numberBetween(1, 101) + "\n" +
-                "Posta Kodu: " + postaKodu + " Kadıköy İSTANBUL");
+                "No:" + faker.number().numberBetween(1, 101) + "\n" +
+                "Daire:" + faker.number().numberBetween(1, 101) + "\n" +
+                "Posta Kodu:" + postaKodu + " Kadıköy İSTANBUL");
 
     }
 
     @When("Kullanici teslimat adresi bilgi formundaki kaydet butonuna tiklar")
     public void kullanici_teslimat_adresi_bilgi_formundaki_kaydet_butonuna_tiklar() {
 
-        teslimat_adresi_bilgi_formu.formuKAYDETbutonu.click();
+        teslimat_adresi_bilgi_formu.formuKaydet_Butonu.click();
 
     }
 
     @When("Kullanici kargo firmasi secimi yapar")
     public void kullanici_kargo_firmasi_secimi_yapar() {
 
+        odeme_ve_uye_bilgi_sayfasi.kargoFirmaButonlari_Liste.get(faker.number().numberBetween
+                (0, odeme_ve_uye_bilgi_sayfasi.kargoFirmaButonlari_Liste.size() - 1)).click();
 
-        odeme_ve_uye_bilgi_sayfasi.kargoFirmaButonlari_List.get(faker.number().numberBetween(0, odeme_ve_uye_bilgi_sayfasi.kargoFirmaButonlari_List.size() - 1));
-        odeme_ve_uye_bilgi_sayfasi.kargoFirmasiSecim.click();
+        //BURADA KALDIM BURAYA Bİ WAIT LAZIM
+    }
 
+    @When("Kullanici Kaydet ve Devam Et butonuna tiklar")
+    public void kullanici_kaydet_ve_devam_et_butonuna_tiklar() {
+
+        //BURADA KALDIM BURAYA Bİ WAIT LAZIM
+        wait.until(ExpectedConditions.elementToBeClickable(odeme_ve_uye_bilgi_sayfasi.adresVeKargoBilgieri_KaydetVeDevamEt_Butonu));
+        odeme_ve_uye_bilgi_sayfasi.adresVeKargoBilgieri_KaydetVeDevamEt_Butonu.click();
+
+    }
+
+    @When("Kullanici kredi kart bilgilerini girer")
+    public void kullanici_kredi_kart_bilgilerini_girer() {
+
+        odeme_ve_uye_bilgi_sayfasi.krediKarti_AdSoyad_VeriGirisKutucugu.sendKeys(faker.name().fullName());
+        odeme_ve_uye_bilgi_sayfasi.krediKartNumarasi_VeriGirisKutucugu.sendKeys("6011000990139424");
+        Select select_Ay = new Select(odeme_ve_uye_bilgi_sayfasi.krediKarti_AySecimKutucugu);
+        select_Ay.selectByIndex(0);
+        Select select_Yil = new Select(odeme_ve_uye_bilgi_sayfasi.krediKart_YilSecimKutucugu);
+        select_Yil.selectByIndex(11);
 
     }
 

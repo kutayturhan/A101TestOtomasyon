@@ -12,32 +12,32 @@ public class Teslimat_Adresi_Bilgi_Formu {
     }
 
     @FindBy(xpath = "//input[@name='title']")
-    public WebElement adresBasligi;
+    public WebElement adresBasligi_VeriGirisKutucugu;
 
     @FindBy(xpath = "//input[@name='first_name']")
-    public WebElement adVeriGirisKutucugu;
+    public WebElement ad_VeriGirisKutucugu;
 
     @FindBy(xpath = "//input[@name='last_name']")
-    public WebElement soyadVeriGirisKutucugu;
+    public WebElement soyad_VeriGirisKutucugu;
 
     @FindBy(xpath = "//input[@name='phone_number']")
-    public WebElement cepTelefonuNoVeriGirisKutucugu;
+    public WebElement cepTelefonuNo_VeriGirisKutucugu;
 
     @FindBy(xpath = "//select[@name='city']")
-    public WebElement sehirSecimKutucugu;
+    public WebElement sehir_SecimKutucugu;
 
     @FindBy(xpath = "//select[@name='township']")
-    public WebElement ilceSecimKutucugu;
+    public WebElement ilce_SecimKutucugu;
 
     @FindBy(xpath = "//select[@name='district']")
-    public WebElement mahalleSecimKutucugu;
+    public WebElement mahalle_SecimKutucugu;
 
     @FindBy(xpath = "//textarea[@class='js-address-textarea']")
-    public WebElement adresVeriGirisKutusu;
+    public WebElement adres_VeriGirisKutusu;
 
     @FindBy(xpath = "//input[@name='postcode']")
-    public WebElement postaKoduVeriGirisKutucugu;
+    public WebElement postaKodu_VeriGirisKutucugu;
 
-    @FindBy(xpath = "//button[normalize-space()='KAYDET']")
-    public WebElement formuKAYDETbutonu;
+    @FindBy(xpath = "//button[@class='button green js-set-country js-prevent-emoji']")
+    public WebElement formuKaydet_Butonu;
 }
