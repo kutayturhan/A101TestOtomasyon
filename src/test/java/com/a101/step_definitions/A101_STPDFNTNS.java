@@ -2,7 +2,6 @@ package com.a101.step_definitions;
 
 import com.a101.pages_yeni.*;
 import com.a101.utilities.Driver;
-import com.a101.utilities.SleepMethod;
 import com.github.javafaker.Faker;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -19,7 +18,7 @@ import java.util.Locale;
 public class A101_STPDFNTNS {
 
     Anasayfa anasayfa = new Anasayfa();
-    Giyim_ve_Aksesuar_Sayfasi giyim_ve_aksesuar_sayfasi = new Giyim_ve_Aksesuar_Sayfasi();
+
     Kadin_Ic_Giyim_Sayfasi kadin_ic_giyim_sayfasi = new Kadin_Ic_Giyim_Sayfasi();
     Dizalti_Corap_Sayfasi dizalti_corap_sayfasi = new Dizalti_Corap_Sayfasi();
     Siyah_Corap_Urun_Sayfasi siyah_corap_urun_sayfasi = new Siyah_Corap_Urun_Sayfasi();
@@ -33,9 +32,9 @@ public class A101_STPDFNTNS {
     JavascriptExecutor javascriptExecutor = (JavascriptExecutor) Driver.getDriver();
 
     //String emailAdres = faker.internet().emailAddress();
-   // int[] indeks_Sayilar = {0, emailAdres.indexOf("."), emailAdres.lastIndexOf("@" + 1)};
-   // String ad = emailAdres.substring(indeks_Sayilar[0], indeks_Sayilar[1]);
-   // String soyad = emailAdres.substring(indeks_Sayilar[1], indeks_Sayilar[2]);
+    // int[] indeks_Sayilar = {0, emailAdres.indexOf("."), emailAdres.lastIndexOf("@" + 1)};
+    // String ad = emailAdres.substring(indeks_Sayilar[0], indeks_Sayilar[1]);
+    // String soyad = emailAdres.substring(indeks_Sayilar[1], indeks_Sayilar[2]);
 
     @Given("Kullanici {string} alan adindaki web sitesine giris yapar")
     public void kullanici_alan_adindaki_web_sitesine_giris_yapar(String domain) {
@@ -50,10 +49,12 @@ public class A101_STPDFNTNS {
     @When("Kullanici cerez kullanimini kabul eder")
     public void kullanici_cerez_kullanimini_kabul_eder() {
 
+        //Sayfa çerez kullanımı gelmeden yükleniyordu
         wait.until(ExpectedConditions.elementToBeClickable(anasayfa.cerezKullanimi_KabulEtButonu));
 
         //Class seviyesinde olusturulan nesneyi degisken ismi ile cagirir. Tespit ettigimiz web ogesine tiklar.
         anasayfa.cerezKullanimi_KabulEtButonu.click();
+        //cerezleri kabul ettikten sonra olusan web öğesi
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@style='display: none; opacity: 0;']")));
 
     }
@@ -67,44 +68,15 @@ public class A101_STPDFNTNS {
 
     }
 
-    @When("Kullanici mouse imlecini Giyim ve Aksesuar modulu uzerine goturur ve module tiklar")
-    public void kullanici_mouse_imlecini_giyim_ve_aksesuar_modulu_uzerine_goturur_ve_module_tiklar() {
+    @When("Kullanici mouse imlecini Giyim ve Aksesuar modulu uzerine goturur")
+    public void kullanici_mouse_imlecini_giyim_ve_aksesuar_modulu_uzerine_goturur() {
 
         try {
             actions.moveToElement(anasayfa.giyimVeAksesuar_Dropdown_AsagiAcilirListe).perform();
-            anasayfa.giyimVeAksesuar_Dropdown_AsagiAcilirListe.click();
-
         } catch (ElementNotInteractableException exception) {
-            try {
-                actions.moveToElement(anasayfa.alternatifArayuz_Kategoriler_Dropdown_AsagiAcilirListe).perform();
-                actions.moveToElement(anasayfa.alternatifArayuz_giyimVeAksesuar_Kategorisi).perform();
-                anasayfa.alternatifArayuz_giyimVeAksesuar_Kategorisi.click();
-
-
-            } catch (Exception exception_2) {
-                exception_2.printStackTrace();
-            }
+            actions.moveToElement(anasayfa.alternatifArayuz_Kategoriler_Dropdown_AsagiAcilirListe).perform();
+            actions.moveToElement(anasayfa.alternatifArayuz_giyimVeAksesuar_Kategorisi).perform();
         }
-
-
-        //    try {
-        //        actions.moveToElement(anasayfa.giyimVeAksesuar_Dropdown_AsagiAcilirListe).perform();
-        //    } catch (ElementNotInteractableException exception) {
-        //        try {
-        //            if (anasayfa.alternatifArayuz_Kategoriler_Dropdown_AsagiAcilirListe.isDisplayed()) {
-        //                actions.moveToElement(anasayfa.alternatifArayuz_Kategoriler_Dropdown_AsagiAcilirListe).perform();
-        //                actions.moveToElement(anasayfa.alternatifArayuz_giyimVeAksesuar_Kategorisi).perform();
-        //            }
-        //        } catch (NoSuchElementException exception_2) {
-        //            exception_2.printStackTrace();
-        //            //    actions.moveToElement(anasayfa.giyimVeAksesuar_Dropdown_AsagiAcilirListe).
-        //            //            click(anasayfa.giyimVeAksesuar_Dropdown_AsagiAcilirListe).perform();
-        //            //    actions.moveToElement(anasayfa.giyimVeAksesuar_Dropdown_AsagiAcilirListe).perform();
-
-        //        }
-
-
-        //    }
 
     }
 
@@ -113,11 +85,10 @@ public class A101_STPDFNTNS {
 
         try {
 
-
-            giyim_ve_aksesuar_sayfasi.kadinIcGiyim_Kategorisi.click();
+            anasayfa.kadinIcGiyim_Kategorisi.click();
         } catch (ElementNotInteractableException exception) {
 
-            giyim_ve_aksesuar_sayfasi.alternatifArayuz_kadinIcGiyim_Kategorisi.click();
+            anasayfa.alternatifArayuz_kadinIcGiyim_Kategorisi.click();
 
 
         }
@@ -128,14 +99,8 @@ public class A101_STPDFNTNS {
     public void kullanici_dizalti_corap_kategorisine_tiklar() {
 
 
-        try {
+        kadin_ic_giyim_sayfasi.dizaltiCorap_AltKategorisi.click();
 
-            kadin_ic_giyim_sayfasi.dizaltiCorap_AltKategorisi.click();
-
-        } catch (ElementNotInteractableException exception) {
-
-            kadin_ic_giyim_sayfasi.alternatifArayuz_DizaltiCorap_AltKategorisi.click();
-        }
 
     }
 
@@ -143,19 +108,11 @@ public class A101_STPDFNTNS {
     public void kullanici_dizalti_corap_modellerini_goruntuler() {
 
         //BASITCE URL CONTAINS YAZIP GEÇEBİLİRDİM AMA YAPMADIM ONU AÇIKLA İŞTE
+        String gecerliURL = Driver.getDriver().getCurrentUrl();
+        Assert.assertTrue(gecerliURL.contains("dizalti-corap"));
+        //breadcrumb görünürlük ekle
+        dizalti_corap_sayfasi.gezintiMenusu_DizaltiCorap.isDisplayed();
 
-        try {
-            //Dizalti Corap kategorisi secildikten sonraki URL'nin icerigini dogrular
-            String gecerliURL = Driver.getDriver().getCurrentUrl();
-            Assert.assertTrue(gecerliURL.contains("dizalti-corap"));
-            Assert.assertTrue(dizalti_corap_sayfasi.sadeceDizaltiCorapAltKategorisiSecildiktenSonraGorunen_WebElement.isDisplayed());
-            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//a[@title='Dizaltı Çorap'])[3]")));
-        } catch (ElementNotInteractableException exception) {
-            String gecerliURL = Driver.getDriver().getCurrentUrl();
-            Assert.assertTrue(gecerliURL.contains("dizalti-corap"));
-            Assert.assertTrue(dizalti_corap_sayfasi.alternatifArayuz_SadeceDizaltiCorapAltKategorisiSecildiktenSonraGorunen_WebElement.isDisplayed());
-            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//a[@title='Dizaltı Çorap'])[4]")));
-        }
 
 
     }
@@ -177,24 +134,19 @@ public class A101_STPDFNTNS {
 
         //SORABİLİTE wait.until(ExpectedConditions.visibilityOfAllElements(dizalti_corap_sayfasi.getSiyahRenk_Checkbox_IsaretKutucugu_SecimSonrasiUrunGorunurluk));
 
-        try {
+    //    try {
             Assert.assertTrue(dizalti_corap_sayfasi.siyahRenk_Checkbox_IsaretKutucugu.isSelected());
-        } catch (AssertionError error) {
-            Driver.getDriver().navigate().refresh();
-            kullanici_siyah_renk_isaret_kutucuguna_tiklar();
-            //  try {
-            //  dizalti_corap_sayfasi.siyahRenk_Checkbox_IsaretKutucugu.click();
-            //} catch (ElementClickInterceptedException exception) {
-            //  javascriptExecutor.executeScript("arguments[0].click()", dizalti_corap_sayfasi.siyahRenk_Checkbox_IsaretKutucugu);
-            //     }
-        }
+    //    } catch (AssertionError error) {
+    //        Driver.getDriver().navigate().refresh();
+    //        kullanici_siyah_renk_isaret_kutucuguna_tiklar();
+    //    }
 
     }
 
-    @When("Kullanici Siyah Dizalti Corabini sepete eklemek icin sepete ekle butonuna tiklar")
-    public void kullanici_siyah_dizalti_corabini_sepete_eklemek_icin_sepete_ekle_butonuna_tiklar() {
+    @When("Kullanici Siyah Dizalti Corabi sepete eklemek icin sepete ekle butonuna tiklar")
+    public void kullanici_siyah_dizalti_corabi_sepete_eklemek_icin_sepete_ekle_butonuna_tiklar() {
 
-        dizalti_corap_sayfasi.sepeteEkleButonu.click();
+        dizalti_corap_sayfasi.sepeteEkle_Butonu.click();
 
     }
 
@@ -204,7 +156,7 @@ public class A101_STPDFNTNS {
         //Urun secildikten sonra gezinti menüsünde oluşan web elementi
         Assert.assertTrue(siyah_corap_urun_sayfasi.gezintiMenusu_PentiKadin50DenyePantalonCorabiSiyah.isDisplayed());
 
-        siyah_corap_urun_sayfasi.sepeteEkleButonu.click();
+        siyah_corap_urun_sayfasi.sepeteEkle_Butonu.click();
 
 
     }
@@ -214,16 +166,22 @@ public class A101_STPDFNTNS {
 
         wait.until(ExpectedConditions.elementToBeClickable(siyah_corap_urun_sayfasi.alisveriseDevamEt_AcilirPencere_EklenenUrunBilgisi));
         Assert.assertTrue(siyah_corap_urun_sayfasi.alisveriseDevamEt_AcilirPencere_EklenenUrunBilgisi.isDisplayed());
-        siyah_corap_urun_sayfasi.sepetiGoruntuleButonu.click();
+        siyah_corap_urun_sayfasi.sepetiGoruntule_Butonu.click();
 
     }
 
     @When("Kullanici Sepetim sayfasinda sepete eklenen urun bilgisine ulasir ve sepeti onaylamak icin Sepeti Onayla butonuna tiklar")
-    public void kullanici_sepetim_sayfasinda_sepete_eklenen_urun_bilgisine_ulasir_ve_sepeti_onaylamak_icin_sepeti_onayla_butonuna_tiklar
-            () {
+    public void kullanici_sepetim_sayfasinda_sepete_eklenen_urun_bilgisine_ulasir_ve_sepeti_onaylamak_icin_sepeti_onayla_butonuna_tiklar() {
 
-        Assert.assertTrue(sepetim_sayfasi.sepetim_EklenenUrunBilgisi.isDisplayed());
-        sepetim_sayfasi.sepetiOnaylaButonu.click();
+        wait.until(ExpectedConditions.elementToBeClickable(sepetim_sayfasi.eklenenUrunBilgisi));
+        Assert.assertTrue(sepetim_sayfasi.eklenenUrunBilgisi.isDisplayed());
+
+      //  try {
+            sepetim_sayfasi.sepetiOnayla_Butonu.click();
+      //  } catch (ElementNotInteractableException exception) {
+      //      javascriptExecutor.executeScript("arguments[0].click()", sepetim_sayfasi.sepetiOnayla_Butonu);
+
+      //  }
 
     }
 
@@ -233,7 +191,9 @@ public class A101_STPDFNTNS {
         String gecerliURL = Driver.getDriver().getCurrentUrl();
         Assert.assertTrue(gecerliURL.contains("checkout"));
 
-        Assert.assertTrue(odeme_ve_uye_bilgi_sayfasi.uyeOlmadanDevamEtButonu.isDisplayed());
+
+
+        Assert.assertTrue(odeme_ve_uye_bilgi_sayfasi.uyeGirisi_BaslikYazisi.isDisplayed());
     }
 
 
@@ -280,23 +240,18 @@ public class A101_STPDFNTNS {
         teslimat_adresi_bilgi_formu.cepTelefonuNoVeriGirisKutucugu.sendKeys(faker.numerify("555#######"));
 
         Select selectSehir = new Select(teslimat_adresi_bilgi_formu.sehirSecimKutucugu);
-        //teslimat_adresi_bilgi_formu.sehirSecimKutucugu.click();
-        //SleepMethod.sleep(2);
         selectSehir.selectByVisibleText("İSTANBUL");
 
 
         Select selectIlce = new Select(teslimat_adresi_bilgi_formu.ilceSecimKutucugu);
-        //teslimat_adresi_bilgi_formu.sehirSecimKutucugu.click();
-        //SleepMethod.sleep(2);
-        //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//option[normalize-space()='KADIKÖY']")));
         selectIlce.selectByVisibleText("KADIKÖY");
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//select[@name='district']")));
+        //wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//select[@name='district']//option[normalize-space()='Seçiniz']")));
 
         Select selectMahalle = new Select(teslimat_adresi_bilgi_formu.mahalleSecimKutucugu);
-    //    teslimat_adresi_bilgi_formu.sehirSecimKutucugu.click();
-        teslimat_adresi_bilgi_formu.mahalleSecimKutucugu.click();
-        //SleepMethod.sleep(2);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//option[normalize-space()='CADDEBOSTAN MAH']")));
-        selectMahalle.selectByVisibleText("CADDEBOSTAN MAH");
+        //teslimat_adresi_bilgi_formu.mahalleSecimKutucugu.click();
+        //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//option[normalize-space()='CADDEBOSTAN MAH']")));
+        selectMahalle.selectByIndex(3);
 
         teslimat_adresi_bilgi_formu.adresVeriGirisKutusu.sendKeys(
                 ad + " " + soyad + " \n" +
@@ -308,6 +263,12 @@ public class A101_STPDFNTNS {
         );
 
         teslimat_adresi_bilgi_formu.postaKoduVeriGirisKutucugu.sendKeys(postaKodu);
+        System.out.println(ad + " " + soyad + " \n" +
+                "Caddebostan Mahallesi\n" +
+                "A101 Harca Harca Bitmez Sokak\n" +
+                "No: " + faker.number().numberBetween(1, 101) + "\n" +
+                "Daire: " + faker.number().numberBetween(1, 101) + "\n" +
+                "Posta Kodu: " + postaKodu + " Kadıköy İSTANBUL");
 
     }
 
@@ -322,7 +283,7 @@ public class A101_STPDFNTNS {
     public void kullanici_kargo_firmasi_secimi_yapar() {
 
 
-        odeme_ve_uye_bilgi_sayfasi.kargoFirmaButonlari_List.get(faker.number().numberBetween(0,odeme_ve_uye_bilgi_sayfasi.kargoFirmaButonlari_List.size() -1 ));
+        odeme_ve_uye_bilgi_sayfasi.kargoFirmaButonlari_List.get(faker.number().numberBetween(0, odeme_ve_uye_bilgi_sayfasi.kargoFirmaButonlari_List.size() - 1));
         odeme_ve_uye_bilgi_sayfasi.kargoFirmasiSecim.click();
 
 

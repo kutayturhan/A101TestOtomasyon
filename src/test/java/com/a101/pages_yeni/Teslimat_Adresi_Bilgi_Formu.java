@@ -29,14 +29,8 @@ public class Teslimat_Adresi_Bilgi_Formu {
     @FindBy(xpath = "//select[@name='township']")
     public WebElement ilceSecimKutucugu;
 
-    @FindBy(xpath = "//select[@name='township']//option")
-    public WebElement ilceSecimKutucuguGorunurluk;
-
     @FindBy(xpath = "//select[@name='district']")
     public WebElement mahalleSecimKutucugu;
-
-    @FindBy(xpath = "//select[@name='district']//option")
-    public WebElement mahalleSecimKutucuguGorunurluk;
 
     @FindBy(xpath = "//textarea[@class='js-address-textarea']")
     public WebElement adresVeriGirisKutusu;

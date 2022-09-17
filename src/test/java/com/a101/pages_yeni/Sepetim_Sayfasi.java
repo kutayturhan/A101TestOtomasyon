@@ -12,10 +12,10 @@ public class Sepetim_Sayfasi {
     }
 
     @FindBy(xpath = "//a[@href='/orders/checkout/'][@title='Sepeti Onayla']")
-    public WebElement sepetiOnaylaButonu;
+    public WebElement sepetiOnayla_Butonu;
 
-    @FindBy(xpath = "(//a[@title='Penti Kadın 50 Denye Pantolon Çorabı Siyah'])[3]")
-    public WebElement sepetim_EklenenUrunBilgisi;
+    @FindBy(xpath = "(//a[@class='title'])[1]")
+    public WebElement eklenenUrunBilgisi;
 
 
 }

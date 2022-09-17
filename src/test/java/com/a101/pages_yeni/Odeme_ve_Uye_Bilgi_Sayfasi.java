@@ -13,6 +13,9 @@ public class Odeme_ve_Uye_Bilgi_Sayfasi {
         PageFactory.initElements(Driver.getDriver(),this);
     }
 
+    @FindBy(xpath = "//div[@class='title login-title']")
+    public WebElement uyeGirisi_BaslikYazisi;
+
     @FindBy(xpath = "//a[normalize-space()='ÜYE OLMADAN DEVAM ET']")
     public WebElement uyeOlmadanDevamEtButonu;
 
