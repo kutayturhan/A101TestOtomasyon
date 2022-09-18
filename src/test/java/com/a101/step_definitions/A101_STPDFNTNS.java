@@ -2,6 +2,7 @@ package com.a101.step_definitions;
 
 import com.a101.pages_yeni.*;
 import com.a101.utilities.Driver;
+import com.a101.utilities.SleepMethod;
 import com.github.javafaker.Faker;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -71,6 +72,8 @@ public class A101_STPDFNTNS {
     @When("Kullanici mouse imlecini Giyim ve Aksesuar modulu uzerine goturur")
     public void kullanici_mouse_imlecini_giyim_ve_aksesuar_modulu_uzerine_goturur() {
 
+        //BURDA WAITLER DENIYORUM
+
         try {
             actions.moveToElement(anasayfa.giyimVeAksesuar_Dropdown_AsagiAcilirListe).perform();
         } catch (ElementNotInteractableException exception) {
@@ -87,33 +90,40 @@ public class A101_STPDFNTNS {
     @When("Kullanici Kadin Ic Giyim kategorisine tiklar")
     public void kullanici_kadin_ic_giyim_kategorisine_tiklar() {
 
+
+
         try {
-
             anasayfa.kadinIcGiyim_Kategorisi.click();
-            wait.until(ExpectedConditions.elementToBeClickable(kadin_ic_giyim_sayfasi.dizaltiCorap_AltKategorisi));
         } catch (ElementNotInteractableException exception) {
-            wait.until(ExpectedConditions.elementToBeClickable(kadin_ic_giyim_sayfasi.dizaltiCorap_AltKategorisi));
             anasayfa.alternatifArayuz_kadinIcGiyim_Kategorisi.click();
-
-
         }
+
+
+
+
 
     }
 
     @When("Kullanici Dizalti Corap kategorisine tiklar")
     public void kullanici_dizalti_corap_kategorisine_tiklar() {
 
+            kadin_ic_giyim_sayfasi.dizaltiCorap_AltKategorisi.click();
 
-        kadin_ic_giyim_sayfasi.dizaltiCorap_AltKategorisi.click();
+
+        }
 
 
-    }
+
+
+
+
 
     @Then("Kullanici Dizalti Corap modellerini goruntuler")
     public void kullanici_dizalti_corap_modellerini_goruntuler() {
 
         //BASITCE URL CONTAINS YAZIP GEÇEBİLİRDİM AMA YAPMADIM ONU AÇIKLA İŞTE
         String gecerliURL = Driver.getDriver().getCurrentUrl();
+
         Assert.assertTrue(gecerliURL.contains("dizalti-corap"));
         //breadcrumb görünürlük ekle
         dizalti_corap_sayfasi.gezintiMenusu_DizaltiCorap.isDisplayed();
@@ -150,6 +160,7 @@ public class A101_STPDFNTNS {
     @When("Kullanici Siyah Dizalti Corabi sepete eklemek icin sepete ekle butonuna tiklar")
     public void kullanici_siyah_dizalti_corabi_sepete_eklemek_icin_sepete_ekle_butonuna_tiklar() {
 
+
         dizalti_corap_sayfasi.sepeteEkle_Butonu.click();
 
     }
@@ -180,12 +191,12 @@ public class A101_STPDFNTNS {
         wait.until(ExpectedConditions.elementToBeClickable(sepetim_sayfasi.eklenenUrunBilgisi));
         Assert.assertTrue(sepetim_sayfasi.eklenenUrunBilgisi.isDisplayed());
 
-        //  try {
-        sepetim_sayfasi.sepetiOnayla_Butonu.click();
-        //  } catch (ElementNotInteractableException exception) {
-        //      javascriptExecutor.executeScript("arguments[0].click()", sepetim_sayfasi.sepetiOnayla_Butonu);
+        try {
+            sepetim_sayfasi.sepetiOnayla_Butonu.click();
+        } catch (ElementNotInteractableException exception) {
+            javascriptExecutor.executeScript("arguments[0].click()", sepetim_sayfasi.sepetiOnayla_Butonu);
 
-        //  }
+        }
 
     }
 
@@ -248,13 +259,12 @@ public class A101_STPDFNTNS {
 
         Select selectIlce = new Select(teslimat_adresi_bilgi_formu.ilce_SecimKutucugu);
         selectIlce.selectByVisibleText("KADIKÖY");
+
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//select[@name='township']//option")));
-        // wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//select[@name='district']//option")));
 
 
         Select selectMahalle = new Select(teslimat_adresi_bilgi_formu.mahalle_SecimKutucugu);
-
-        selectMahalle.selectByIndex(3);
+        selectMahalle.selectByVisibleText("CADDEBOSTAN MAH");
 
         teslimat_adresi_bilgi_formu.adres_VeriGirisKutusu.sendKeys(
                 ad + " " + soyad + " \n" +
@@ -266,13 +276,6 @@ public class A101_STPDFNTNS {
         );
 
         teslimat_adresi_bilgi_formu.postaKodu_VeriGirisKutucugu.sendKeys(postaKodu);
-
-        System.out.println(ad + " " + soyad + " \n" +
-                "Caddebostan Mahallesi\n" +
-                "A101 Harca Harca Bitmez Sokak\n" +
-                "No:" + faker.number().numberBetween(1, 101) + "\n" +
-                "Daire:" + faker.number().numberBetween(1, 101) + "\n" +
-                "Posta Kodu:" + postaKodu + " Kadıköy İSTANBUL");
 
     }
 
@@ -286,8 +289,14 @@ public class A101_STPDFNTNS {
     @When("Kullanici kargo firmasi secimi yapar")
     public void kullanici_kargo_firmasi_secimi_yapar() {
 
-        odeme_ve_uye_bilgi_sayfasi.kargoFirmaButonlari_Liste.get(faker.number().numberBetween
-                (0, odeme_ve_uye_bilgi_sayfasi.kargoFirmaButonlari_Liste.size() - 1)).click();
+        WebElement kargoFirmaButonlari = odeme_ve_uye_bilgi_sayfasi.kargoFirmaButonlari_Liste.get(faker.number().numberBetween
+                (0, odeme_ve_uye_bilgi_sayfasi.kargoFirmaButonlari_Liste.size() - 1));
+        try {
+            kargoFirmaButonlari.click();
+        } catch (StaleElementReferenceException exception) {
+            javascriptExecutor.executeScript("arguments[0].click();", kargoFirmaButonlari);
+        }
+
 
         //BURADA KALDIM BURAYA Bİ WAIT LAZIM
     }
@@ -296,22 +305,49 @@ public class A101_STPDFNTNS {
     public void kullanici_kaydet_ve_devam_et_butonuna_tiklar() {
 
         //BURADA KALDIM BURAYA Bİ WAIT LAZIM
-        wait.until(ExpectedConditions.elementToBeClickable(odeme_ve_uye_bilgi_sayfasi.adresVeKargoBilgieri_KaydetVeDevamEt_Butonu));
+        //wait.until(ExpectedConditions.elementToBeClickable(odeme_ve_uye_bilgi_sayfasi.adresVeKargoBilgieri_KaydetVeDevamEt_Butonu));
         odeme_ve_uye_bilgi_sayfasi.adresVeKargoBilgieri_KaydetVeDevamEt_Butonu.click();
 
     }
 
-    @When("Kullanici kredi kart bilgilerini girer")
-    public void kullanici_kredi_kart_bilgilerini_girer() {
+    @When("Kullanici kredi karti bilgilerini girer")
+    public void kullanici_kredi_karti_bilgilerini_girer() {
 
         odeme_ve_uye_bilgi_sayfasi.krediKarti_AdSoyad_VeriGirisKutucugu.sendKeys(faker.name().fullName());
         odeme_ve_uye_bilgi_sayfasi.krediKartNumarasi_VeriGirisKutucugu.sendKeys("6011000990139424");
         Select select_Ay = new Select(odeme_ve_uye_bilgi_sayfasi.krediKarti_AySecimKutucugu);
-        select_Ay.selectByIndex(0);
+        select_Ay.selectByIndex(faker.number().numberBetween(0, odeme_ve_uye_bilgi_sayfasi.krediKarti_AySecimKutucugu_Liste.size() - 1));
         Select select_Yil = new Select(odeme_ve_uye_bilgi_sayfasi.krediKart_YilSecimKutucugu);
-        select_Yil.selectByIndex(11);
+        select_Yil.selectByIndex(faker.number().numberBetween(0, odeme_ve_uye_bilgi_sayfasi.krediKart_YilSecimKutucugu_Liste.size() - 1));
+        String cvv_No = Integer.toString(faker.number().numberBetween(100, 999));
+        odeme_ve_uye_bilgi_sayfasi.krediKart_CVV_VeriGirisKutucugu.sendKeys(faker.numerify(cvv_No));
 
     }
 
+    @When("Kullanici On Bilgilendirme Kosullari'ni ve Uzaktan Satis Sozlemesi'ni okudum ve kabul ediyorum kutucugunu isaretler")
+    public void kullanici_on_bilgilendirme_kosullari_ni_ve_uzaktan_satis_sozlemesi_ni_okudum_ve_kabul_ediyorum_kutucugunu_isaretler() {
 
+        javascriptExecutor.executeScript("arguments[0].click();", odeme_ve_uye_bilgi_sayfasi.kosulVeSozlesme_KabulEtKutucugu);
+
+    }
+
+    @When("Kullanici Siparisi Tamamla butonuna tiklar")
+    public void kullanici_siparisi_tamamla_butonuna_tiklar() {
+
+        odeme_ve_uye_bilgi_sayfasi.siparisiTamamla_Butonu.click();
+    }
+
+
+    @Then("Kullanici guvenli odeme yapmak icin dogrulama kodunu girecegi ekrana ulasir")
+    public void kullanici_guvenli_odeme_yapmak_icin_dogrulama_kodunu_girecegi_ekrana_ulasir() {
+
+        wait.until(ExpectedConditions.urlContains("responseCode"));
+        javascriptExecutor.executeScript("alert('Ürün seçiminden ödeme adımına kadar kullanılan ve etkileşim " +
+                "içinde bulunulan fonksiyonların ve modüllerin işlevselliğinin, fonksiyonelliğinin ve çalışabilirliliğinin " +
+                "Uçtan Uca Testi, test otomasyonu ile başarıyla tamamlandı. Tarayıcı kendini birazdan kapatacaktır.');");
+        SleepMethod.sleepDecimalNumber(750);
+        Driver.getDriver().switchTo().alert().accept();
+        Driver.closeDriver();
+
+    }
 }

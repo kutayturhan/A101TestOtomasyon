@@ -52,7 +52,7 @@ Feature: A101 Web Sitesi | Modullerin Islevselligi ve Fonksiyonelligi
     And Kullanici teslimat adresi bilgi formundaki kaydet butonuna tiklar
     And Kullanici kargo firmasi secimi yapar
     And Kullanici Kaydet ve Devam Et butonuna tiklar
-#    And Kullanici kredi kart bilgilerini girer
-#    And Kullanici On Bilgilendirme Kosullari'ni ve Uzaktan Satis Sozlemesi'ni okudum ve kabul ediyorum kutucugunu isaretler
-#    And Kullanici Siparisi Tamamla butonuna tiklar
-#    Then Kullanici guvenli odeme yapmak icin dogrulama kodunu girecegi ekrana ulasir
+    And Kullanici kredi karti bilgilerini girer
+    And Kullanici On Bilgilendirme Kosullari'ni ve Uzaktan Satis Sozlemesi'ni okudum ve kabul ediyorum kutucugunu isaretler
+    And Kullanici Siparisi Tamamla butonuna tiklar
+    Then Kullanici guvenli odeme yapmak icin dogrulama kodunu girecegi ekrana ulasir

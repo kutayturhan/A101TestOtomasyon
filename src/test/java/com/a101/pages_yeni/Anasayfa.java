@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 public class Anasayfa {
 
     public Anasayfa() {
@@ -21,6 +23,9 @@ public class Anasayfa {
 
     @FindBy(xpath = "//div[@class='submenu-dropdown']//a[@title='Kadın İç Giyim']")
     public WebElement kadinIcGiyim_Kategorisi;
+
+    @FindBy(xpath = "//div[@class='submenu-dropdown']//a[@title='Kadın İç Giyim']")
+    public WebElement kadinIcGiyim_Kategorisi_GezintiMenusu;
 
 
 

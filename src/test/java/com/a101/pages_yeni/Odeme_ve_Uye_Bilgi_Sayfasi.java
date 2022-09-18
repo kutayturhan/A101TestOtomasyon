@@ -31,7 +31,7 @@ public class Odeme_ve_Uye_Bilgi_Sayfasi {
     @FindBy(xpath = "//div[@class='cargo-list']//div[@class='check']")
     public List<WebElement> kargoFirmaButonlari_Liste;
 
-    @FindBy(xpath = "button[@class='button block green js-proceed-button']")
+    @FindBy(xpath = "//button[@class='button block green js-proceed-button']")
     public WebElement adresVeKargoBilgieri_KaydetVeDevamEt_Butonu;
 
     @FindBy(xpath = "//div[@class='form-area js-new-creditcard-area']//input[@name='name']")
@@ -43,8 +43,14 @@ public class Odeme_ve_Uye_Bilgi_Sayfasi {
     @FindBy(xpath = "//div[@class='form-area js-new-creditcard-area']//select[@name='card_month']")
     public WebElement krediKarti_AySecimKutucugu;
 
+    @FindBy(xpath = "//div[@class='form-area js-new-creditcard-area']//select[@name='card_month']//option")
+    public List<WebElement> krediKarti_AySecimKutucugu_Liste;
+
     @FindBy(xpath = "//div[@class='form-area js-new-creditcard-area']//select[@name='card_year']")
     public WebElement krediKart_YilSecimKutucugu;
+
+    @FindBy(xpath = "//div[@class='form-area js-new-creditcard-area']//select[@name='card_year']//option")
+    public List<WebElement> krediKart_YilSecimKutucugu_Liste;
 
     @FindBy(xpath = "//div[@class='form-area js-new-creditcard-area']//input[@name='card_cvv']")
     public WebElement krediKart_CVV_VeriGirisKutucugu;
