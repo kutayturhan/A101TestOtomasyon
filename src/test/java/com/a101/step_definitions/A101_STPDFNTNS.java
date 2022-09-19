@@ -19,7 +19,6 @@ import java.util.Locale;
 public class A101_STPDFNTNS {
 
     Anasayfa anasayfa = new Anasayfa();
-
     Kadin_Ic_Giyim_Sayfasi kadin_ic_giyim_sayfasi = new Kadin_Ic_Giyim_Sayfasi();
     Dizalti_Corap_Sayfasi dizalti_corap_sayfasi = new Dizalti_Corap_Sayfasi();
     Siyah_Corap_Urun_Sayfasi siyah_corap_urun_sayfasi = new Siyah_Corap_Urun_Sayfasi();
@@ -32,18 +31,11 @@ public class A101_STPDFNTNS {
     Faker faker = new Faker(new Locale("en-US"));
     JavascriptExecutor javascriptExecutor = (JavascriptExecutor) Driver.getDriver();
 
-    //String emailAdres = faker.internet().emailAddress();
-    // int[] indeks_Sayilar = {0, emailAdres.indexOf("."), emailAdres.lastIndexOf("@" + 1)};
-    // String ad = emailAdres.substring(indeks_Sayilar[0], indeks_Sayilar[1]);
-    // String soyad = emailAdres.substring(indeks_Sayilar[1], indeks_Sayilar[2]);
-
     @Given("Kullanici {string} alan adindaki web sitesine giris yapar")
     public void kullanici_alan_adindaki_web_sitesine_giris_yapar(String domain) {
 
         //Kullanici www.a101.com.tr adresindeki web sayfasina giris yapar
         Driver.getDriver().get(domain);
-
-
     }
 
 
@@ -91,7 +83,6 @@ public class A101_STPDFNTNS {
     public void kullanici_kadin_ic_giyim_kategorisine_tiklar() {
 
 
-
         try {
             anasayfa.kadinIcGiyim_Kategorisi.click();
         } catch (ElementNotInteractableException exception) {
@@ -99,23 +90,29 @@ public class A101_STPDFNTNS {
         }
 
 
-
-
-
     }
 
     @When("Kullanici Dizalti Corap kategorisine tiklar")
     public void kullanici_dizalti_corap_kategorisine_tiklar() {
 
-            kadin_ic_giyim_sayfasi.dizaltiCorap_AltKategorisi.click();
 
+        kadin_ic_giyim_sayfasi.dizaltiCorap_AltKategorisi.click();
+
+        if (!dizalti_corap_sayfasi.gezintiMenusu_DizaltiCorap.isDisplayed()) {
+            try{
+                do {
+                    Driver.getDriver().navigate().refresh();
+                    kadin_ic_giyim_sayfasi.dizaltiCorap_AltKategorisi.click();
+                } while (!dizalti_corap_sayfasi.gezintiMenusu_DizaltiCorap.isDisplayed());
+
+            } catch (Exception exception){
+                exception.printStackTrace();
+            }
 
         }
 
 
-
-
-
+    }
 
 
     @Then("Kullanici Dizalti Corap modellerini goruntuler")
@@ -275,7 +272,7 @@ public class A101_STPDFNTNS {
                         "Posta Kodu:" + postaKodu + " Kadıköy İSTANBUL"
         );
 
-        teslimat_adresi_bilgi_formu.postaKodu_VeriGirisKutucugu.sendKeys(postaKodu);
+        //   teslimat_adresi_bilgi_formu.postaKodu_VeriGirisKutucugu.sendKeys(postaKodu);
 
     }
 
@@ -289,13 +286,12 @@ public class A101_STPDFNTNS {
     @When("Kullanici kargo firmasi secimi yapar")
     public void kullanici_kargo_firmasi_secimi_yapar() {
 
-        WebElement kargoFirmaButonlari = odeme_ve_uye_bilgi_sayfasi.kargoFirmaButonlari_Liste.get(faker.number().numberBetween
-                (0, odeme_ve_uye_bilgi_sayfasi.kargoFirmaButonlari_Liste.size() - 1));
-        try {
-            kargoFirmaButonlari.click();
-        } catch (StaleElementReferenceException exception) {
-            javascriptExecutor.executeScript("arguments[0].click();", kargoFirmaButonlari);
-        }
+        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//span[normalize-space()='SEÇTİĞİNİZ ADRES']")));
+        odeme_ve_uye_bilgi_sayfasi.kargoFirmaButonlari_Liste.get(faker.number().numberBetween
+                (0, odeme_ve_uye_bilgi_sayfasi.kargoFirmaButonlari_Liste.size() - 1)).click();
+
+        // SleepMethod.sleep(3);
+        //wait.until(ExpectedConditions.elementToBeSelected(kargoFirmaButonlari));
 
 
         //BURADA KALDIM BURAYA Bİ WAIT LAZIM
@@ -306,6 +302,7 @@ public class A101_STPDFNTNS {
 
         //BURADA KALDIM BURAYA Bİ WAIT LAZIM
         //wait.until(ExpectedConditions.elementToBeClickable(odeme_ve_uye_bilgi_sayfasi.adresVeKargoBilgieri_KaydetVeDevamEt_Butonu));
+
         odeme_ve_uye_bilgi_sayfasi.adresVeKargoBilgieri_KaydetVeDevamEt_Butonu.click();
 
     }
@@ -341,11 +338,11 @@ public class A101_STPDFNTNS {
     @Then("Kullanici guvenli odeme yapmak icin dogrulama kodunu girecegi ekrana ulasir")
     public void kullanici_guvenli_odeme_yapmak_icin_dogrulama_kodunu_girecegi_ekrana_ulasir() {
 
-        wait.until(ExpectedConditions.urlContains("responseCode"));
+        wait.until(ExpectedConditions.urlContains("ThreeDSecure"));
         javascriptExecutor.executeScript("alert('Ürün seçiminden ödeme adımına kadar kullanılan ve etkileşim " +
                 "içinde bulunulan fonksiyonların ve modüllerin işlevselliğinin, fonksiyonelliğinin ve çalışabilirliliğinin " +
-                "Uçtan Uca Testi, test otomasyonu ile başarıyla tamamlandı. Tarayıcı kendini birazdan kapatacaktır.');");
-        SleepMethod.sleepDecimalNumber(750);
+                "Uçtan Uca Testi, test otomasyonu ile başarıyla tamamlandı. Tarayıcı birazdan kendini kapatacaktır.');");
+        SleepMethod.sleep(10);
         Driver.getDriver().switchTo().alert().accept();
         Driver.closeDriver();
 
