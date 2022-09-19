@@ -1,4 +1,4 @@
-package com.a101.pages_yeni;
+package com.a101.pages;
 
 import com.a101.utilities.Driver;
 import org.openqa.selenium.WebElement;

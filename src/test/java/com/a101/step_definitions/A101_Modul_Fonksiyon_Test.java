@@ -1,6 +1,6 @@
 package com.a101.step_definitions;
 
-import com.a101.pages_yeni.*;
+import com.a101.pages.*;
 import com.a101.utilities.Driver;
 import com.a101.utilities.SleepMethod;
 import com.github.javafaker.Faker;
@@ -16,7 +16,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Locale;
 
-public class A101_STPDFNTNS {
+public class A101_Modul_Fonksiyon_Test {
 
     Anasayfa anasayfa = new Anasayfa();
     Kadin_Ic_Giyim_Sayfasi kadin_ic_giyim_sayfasi = new Kadin_Ic_Giyim_Sayfasi();
@@ -64,18 +64,30 @@ public class A101_STPDFNTNS {
     @When("Kullanici mouse imlecini Giyim ve Aksesuar modulu uzerine goturur")
     public void kullanici_mouse_imlecini_giyim_ve_aksesuar_modulu_uzerine_goturur() {
 
-        //BURDA WAITLER DENIYORUM
-
         try {
             actions.moveToElement(anasayfa.giyimVeAksesuar_Dropdown_AsagiAcilirListe).perform();
         } catch (ElementNotInteractableException exception) {
             try {
-                actions.moveToElement(anasayfa.alternatifArayuz_Kategoriler_Dropdown_AsagiAcilirListe).perform();
-                actions.moveToElement(anasayfa.alternatifArayuz_giyimVeAksesuar_Kategorisi).perform();
+                if (anasayfa.alternatifArayuz_Kategoriler_Dropdown_AsagiAcilirListe.isDisplayed()) {
+                    actions.moveToElement(anasayfa.alternatifArayuz_Kategoriler_Dropdown_AsagiAcilirListe).perform();
+                    actions.moveToElement(anasayfa.alternatifArayuz_giyimVeAksesuar_Kategorisi).perform();
+                }
             } catch (Exception exception_2) {
                 exception_2.printStackTrace();
             }
         }
+
+        //    try{
+        //        if (anasayfa.alternatifArayuz_Kategoriler_Dropdown_AsagiAcilirListe.isDisplayed()){
+        //            actions.moveToElement(anasayfa.alternatifArayuz_Kategoriler_Dropdown_AsagiAcilirListe).perform();
+        //            actions.moveToElement(anasayfa.alternatifArayuz_giyimVeAksesuar_Kategorisi).perform();
+        //        }
+        //    } catch (ElementNotInteractableException exception) {
+        //        exception.printStackTrace();
+        //    }
+//
+        //    actions.moveToElement(anasayfa.giyimVeAksesuar_Dropdown_AsagiAcilirListe).perform();
+
 
     }
 
@@ -84,9 +96,13 @@ public class A101_STPDFNTNS {
 
 
         try {
+
             anasayfa.kadinIcGiyim_Kategorisi.click();
-        } catch (ElementNotInteractableException exception) {
+
+        } catch (Exception exception) {
+
             anasayfa.alternatifArayuz_kadinIcGiyim_Kategorisi.click();
+
         }
 
 
@@ -97,19 +113,6 @@ public class A101_STPDFNTNS {
 
 
         kadin_ic_giyim_sayfasi.dizaltiCorap_AltKategorisi.click();
-
-        if (!dizalti_corap_sayfasi.gezintiMenusu_DizaltiCorap.isDisplayed()) {
-            try{
-                do {
-                    Driver.getDriver().navigate().refresh();
-                    kadin_ic_giyim_sayfasi.dizaltiCorap_AltKategorisi.click();
-                } while (!dizalti_corap_sayfasi.gezintiMenusu_DizaltiCorap.isDisplayed());
-
-            } catch (Exception exception){
-                exception.printStackTrace();
-            }
-
-        }
 
 
     }
@@ -287,8 +290,10 @@ public class A101_STPDFNTNS {
     public void kullanici_kargo_firmasi_secimi_yapar() {
 
         wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//span[normalize-space()='SEÇTİĞİNİZ ADRES']")));
-        odeme_ve_uye_bilgi_sayfasi.kargoFirmaButonlari_Liste.get(faker.number().numberBetween
-                (0, odeme_ve_uye_bilgi_sayfasi.kargoFirmaButonlari_Liste.size() - 1)).click();
+        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//div[@class='cargo-list']//div[@class='check']")));
+        WebElement kargoFirmaButonu = odeme_ve_uye_bilgi_sayfasi.kargoFirmaButonlari_Liste.get(faker.number().numberBetween
+                (0, odeme_ve_uye_bilgi_sayfasi.kargoFirmaButonlari_Liste.size() - 1));
+        // kargoFirmaButonu.click();
 
         // SleepMethod.sleep(3);
         //wait.until(ExpectedConditions.elementToBeSelected(kargoFirmaButonlari));
@@ -313,9 +318,9 @@ public class A101_STPDFNTNS {
         odeme_ve_uye_bilgi_sayfasi.krediKarti_AdSoyad_VeriGirisKutucugu.sendKeys(faker.name().fullName());
         odeme_ve_uye_bilgi_sayfasi.krediKartNumarasi_VeriGirisKutucugu.sendKeys("6011000990139424");
         Select select_Ay = new Select(odeme_ve_uye_bilgi_sayfasi.krediKarti_AySecimKutucugu);
-        select_Ay.selectByIndex(faker.number().numberBetween(0, odeme_ve_uye_bilgi_sayfasi.krediKarti_AySecimKutucugu_Liste.size() - 1));
+        select_Ay.selectByIndex(faker.number().numberBetween(0, odeme_ve_uye_bilgi_sayfasi.krediKarti_AySecimKutucugu_Liste.size() / 2 - 1));
         Select select_Yil = new Select(odeme_ve_uye_bilgi_sayfasi.krediKart_YilSecimKutucugu);
-        select_Yil.selectByIndex(faker.number().numberBetween(0, odeme_ve_uye_bilgi_sayfasi.krediKart_YilSecimKutucugu_Liste.size() - 1));
+        select_Yil.selectByIndex(faker.number().numberBetween(0, odeme_ve_uye_bilgi_sayfasi.krediKart_YilSecimKutucugu_Liste.size() / 2 - 1));
         String cvv_No = Integer.toString(faker.number().numberBetween(100, 999));
         odeme_ve_uye_bilgi_sayfasi.krediKart_CVV_VeriGirisKutucugu.sendKeys(faker.numerify(cvv_No));
 

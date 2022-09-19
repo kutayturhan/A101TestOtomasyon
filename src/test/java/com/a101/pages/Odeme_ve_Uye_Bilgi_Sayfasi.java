@@ -1,4 +1,4 @@
-package com.a101.pages_yeni;
+package com.a101.pages;
 
 import com.a101.utilities.Driver;
 import org.openqa.selenium.WebElement;
@@ -34,25 +34,25 @@ public class Odeme_ve_Uye_Bilgi_Sayfasi {
     @FindBy(xpath = "//button[@class='button block green js-proceed-button']")
     public WebElement adresVeKargoBilgieri_KaydetVeDevamEt_Butonu;
 
-    @FindBy(xpath = "//div[@class='form-area js-new-creditcard-area']//input[@name='name']")
+    @FindBy(xpath = "(//input[@name='name'])[2]")
     public WebElement krediKarti_AdSoyad_VeriGirisKutucugu;
 
     @FindBy(xpath = "//input[@class='js-masterpassbin-payment-card']")
     public WebElement krediKartNumarasi_VeriGirisKutucugu;
 
-    @FindBy(xpath = "//div[@class='form-area js-new-creditcard-area']//select[@name='card_month']")
+    @FindBy(xpath = "(//select[@name='card_month'])[2]")
     public WebElement krediKarti_AySecimKutucugu;
 
-    @FindBy(xpath = "//div[@class='form-area js-new-creditcard-area']//select[@name='card_month']//option")
+    @FindBy(xpath = "//select[@name='card_month']//option")
     public List<WebElement> krediKarti_AySecimKutucugu_Liste;
 
-    @FindBy(xpath = "//div[@class='form-area js-new-creditcard-area']//select[@name='card_year']")
+    @FindBy(xpath = "(//select[@name='card_year'])[2]")
     public WebElement krediKart_YilSecimKutucugu;
 
     @FindBy(xpath = "//div[@class='form-area js-new-creditcard-area']//select[@name='card_year']//option")
     public List<WebElement> krediKart_YilSecimKutucugu_Liste;
 
-    @FindBy(xpath = "//div[@class='form-area js-new-creditcard-area']//input[@name='card_cvv']")
+    @FindBy(xpath = "(//input[@name='card_cvv'])[2]")
     public WebElement krediKart_CVV_VeriGirisKutucugu;
 
     @FindBy(xpath = "//label[@for='agrement2']")

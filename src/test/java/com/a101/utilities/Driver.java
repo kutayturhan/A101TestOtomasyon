@@ -11,20 +11,21 @@ import java.util.concurrent.TimeUnit;
 public class Driver {
 
     //Private constructor olusturulur. Boylelikle bu sinifin nesnesine sinif disindan erisim kapatilir.
-    private Driver(){}
+    private Driver() {
+    }
 
     //WebDriver private tanimlanir, cunku sinif disindan erisim saglanmasini istenmez.
     private static WebDriver driver;
 
     //Yeniden kullanilabilir bir method olusturulur.
-    public static WebDriver getDriver(){
+    public static WebDriver getDriver() {
 
         /*
         Singleton design pattern
         if driver null --> yenisini olustur
         if driver doluysa --> devam et
          */
-        if (driver == null){
+        if (driver == null) {
 
             //Tarayici tipini configuration.properties dosyasindan taniyarak okur.
             //Boylelikle, kodun disindan yani configuration.properties dosyasindan tarayici tipini kontrol edebiliriz.
@@ -32,17 +33,19 @@ public class Driver {
 
             //configuration.properties dosyasindan okuncak olan tarayici tipine gore
             //switch ifadesi durumu belirleyecek ve eslesen tarayiciyi acacaktir.
-            switch(browserType){
+            switch (browserType) {
 
                 case "chrome":
 
                     //Tarayici surucusunu olusturan web driver managerin ayarlanmasi.
                     WebDriverManager.chromedriver().setup();
 
+
+                    System.setProperty("webdriver.chrome.silentOutput", "true");
+
                     //Chrome bildirimlerini devre disi birakir.
                     ChromeOptions options = new ChromeOptions();
                     options.addArguments("--disable-notifications");
-
                     //Chrome surucusunu olusturur. Bos bir tarayici acan satir budur.
                     driver = new ChromeDriver(options);
 
@@ -62,9 +65,9 @@ public class Driver {
 
     //Yeniden kullanilabilir bir method olusturulur.
     //Bu method quit() methodu kullanildiktan sonra mevcut oturumu sonlandiracaktir.
-    public static void closeDriver(){
+    public static void closeDriver() {
 
-        if (driver != null){
+        if (driver != null) {
             driver.quit(); //Oturumu sonlandiran satir bu satirdir.
             driver = null;
 
