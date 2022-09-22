@@ -1,6 +1,6 @@
-package com.a101.pages;
+package com.a101.a101_WebBrowser.pages;
 
-import com.a101.utilities.Driver;
+import com.a101.a101_WebBrowser.utilities.WebBrowserDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 public class Kadin_Ic_Giyim_Sayfasi {
 
     public Kadin_Ic_Giyim_Sayfasi() {
-        PageFactory.initElements(Driver.getDriver(), this);
+        PageFactory.initElements(WebBrowserDriver.getDriver(), this);
     }
 
     //1. arayuz

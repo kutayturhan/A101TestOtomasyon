@@ -1,24 +1,22 @@
-package com.a101.utilities;
+package com.a101.a101_WebBrowser.utilities;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
-public class Driver {
+public class WebBrowserDriver {
 
     //Private constructor olusturulur. Boylelikle bu sinifin nesnesine sinif disindan erisim kapatilir.
-    private Driver() {
+    private WebBrowserDriver() {
     }
 
     //WebDriver private tanimlanir, cunku sinif disindan erisim saglanmasini istenmez.
-    private static WebDriver driver;
+    private static org.openqa.selenium.WebDriver driver;
 
     //Yeniden kullanilabilir bir method olusturulur.
-    public static WebDriver getDriver() {
+    public static org.openqa.selenium.WebDriver getDriver() {
 
         /*
         Singleton design pattern

@@ -1,4 +1,4 @@
-package com.a101.runners;
+package com.a101.a101_Mobile.runners;
 
 //Runner sinifimiza istedigimiz ismi verebiliriz.
 //CukesRunner ismi orijinal cucumber dokumantasyonundan gelmektedir. Bu yuzden CukesRunner ismini tercih edebiliriz.
@@ -15,10 +15,10 @@ import org.junit.runner.RunWith;
                 "html:target/cucumber-report.html",
         },
         //Features dosyasinin yerini tanitir.
-        features = "src/test/resources/features",
+        features = "src/test/resources/features/a101_Modul_Fonksiyon_Test.Mobile.feature",
 
         //Step Definitions dosyasinin yerini tanitir.
-        glue = "com/a101/step_definitions",
+        glue = "com/a101/a101_Mobile/step_definitions",
 
         //True degeri verilirse, kodumuzun gercek uygulamasini calistirmayacaktir.
         //Sadece ozellik dosyasi adimlarini step definitions tanimlarina gore kontrol edecektir.

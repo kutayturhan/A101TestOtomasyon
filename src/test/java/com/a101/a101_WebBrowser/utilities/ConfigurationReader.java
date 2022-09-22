@@ -1,4 +1,4 @@
-package com.a101.utilities;
+package com.a101.a101_WebBrowser.utilities;
 
 import java.io.FileInputStream;
 import java.io.IOException;

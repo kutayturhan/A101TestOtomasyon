@@ -1,8 +1,8 @@
-package com.a101.step_definitions;
+package com.a101.a101_WebBrowser.step_definitions;
 
-import com.a101.pages.*;
-import com.a101.utilities.Driver;
-import com.a101.utilities.SleepMethod;
+import com.a101.a101_WebBrowser.pages.*;
+import com.a101.a101_WebBrowser.utilities.WebBrowserDriver;
+import com.a101.a101_WebBrowser.utilities.SleepMethod;
 import com.github.javafaker.Faker;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -15,8 +15,9 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
-public class A101_Modul_Fonksiyon_Test {
+public class A101_Modul_Fonksiyon_Test_WebBrowser {
 
     Anasayfa anasayfa = new Anasayfa();
     Kadin_Ic_Giyim_Sayfasi kadin_ic_giyim_sayfasi = new Kadin_Ic_Giyim_Sayfasi();
@@ -26,16 +27,16 @@ public class A101_Modul_Fonksiyon_Test {
     Odeme_ve_Uye_Bilgi_Sayfasi odeme_ve_uye_bilgi_sayfasi = new Odeme_ve_Uye_Bilgi_Sayfasi();
     Teslimat_Adresi_Bilgi_Formu teslimat_adresi_bilgi_formu = new Teslimat_Adresi_Bilgi_Formu();
 
-    Actions actions = new Actions(Driver.getDriver());
-    WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+    Actions actions = new Actions(WebBrowserDriver.getDriver());
+    WebDriverWait wait = new WebDriverWait(WebBrowserDriver.getDriver(), 10);
     Faker faker = new Faker(new Locale("en-US"));
-    JavascriptExecutor javascriptExecutor = (JavascriptExecutor) Driver.getDriver();
+    JavascriptExecutor javascriptExecutor = (JavascriptExecutor) WebBrowserDriver.getDriver();
 
     @Given("Kullanici {string} alan adindaki web sitesine giris yapar")
     public void kullanici_alan_adindaki_web_sitesine_giris_yapar(String domain) {
 
         //Kullanici www.a101.com.tr adresindeki web sayfasina giris yapar
-        Driver.getDriver().get(domain);
+        WebBrowserDriver.getDriver().get(domain);
     }
 
 
@@ -56,7 +57,7 @@ public class A101_Modul_Fonksiyon_Test {
     public void kullanici_basarili_bir_sekilde_anasayfaya_ulasir() {
 
 
-        String gecerliURL = Driver.getDriver().getCurrentUrl();
+        String gecerliURL = WebBrowserDriver.getDriver().getCurrentUrl();
         Assert.assertEquals(gecerliURL, "https://www.a101.com.tr/");
 
     }
@@ -64,32 +65,35 @@ public class A101_Modul_Fonksiyon_Test {
     @When("Kullanici mouse imlecini Giyim ve Aksesuar modulu uzerine goturur")
     public void kullanici_mouse_imlecini_giyim_ve_aksesuar_modulu_uzerine_goturur() {
 
+        WebBrowserDriver.getDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+
         try {
-            actions.moveToElement(anasayfa.giyimVeAksesuar_Dropdown_AsagiAcilirListe).perform();
-        } catch (ElementNotInteractableException exception) {
-            try {
-                if (anasayfa.alternatifArayuz_Kategoriler_Dropdown_AsagiAcilirListe.isDisplayed()) {
-                    actions.moveToElement(anasayfa.alternatifArayuz_Kategoriler_Dropdown_AsagiAcilirListe).perform();
-                    actions.moveToElement(anasayfa.alternatifArayuz_giyimVeAksesuar_Kategorisi).perform();
-                }
-            } catch (Exception exception_2) {
-                exception_2.printStackTrace();
+            if (anasayfa.alternatifArayuz_Kategoriler_Dropdown_AsagiAcilirListe.isDisplayed()) {
+                actions.moveToElement(anasayfa.alternatifArayuz_Kategoriler_Dropdown_AsagiAcilirListe).perform();
+                actions.moveToElement(anasayfa.alternatifArayuz_giyimVeAksesuar_Kategorisi).perform();
             }
+        } catch (Exception exception) {
+            exception.printStackTrace();
         }
+        actions.moveToElement(anasayfa.giyimVeAksesuar_Dropdown_AsagiAcilirListe).perform();
 
-        //    try{
-        //        if (anasayfa.alternatifArayuz_Kategoriler_Dropdown_AsagiAcilirListe.isDisplayed()){
-        //            actions.moveToElement(anasayfa.alternatifArayuz_Kategoriler_Dropdown_AsagiAcilirListe).perform();
-        //            actions.moveToElement(anasayfa.alternatifArayuz_giyimVeAksesuar_Kategorisi).perform();
-        //        }
-        //    } catch (ElementNotInteractableException exception) {
-        //        exception.printStackTrace();
-        //    }
-//
-        //    actions.moveToElement(anasayfa.giyimVeAksesuar_Dropdown_AsagiAcilirListe).perform();
-
+        WebBrowserDriver.getDriver().manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
 
     }
+
+    //    try{
+    //        if (anasayfa.alternatifArayuz_Kategoriler_Dropdown_AsagiAcilirListe.isDisplayed()){
+    //            actions.moveToElement(anasayfa.alternatifArayuz_Kategoriler_Dropdown_AsagiAcilirListe).perform();
+    //            actions.moveToElement(anasayfa.alternatifArayuz_giyimVeAksesuar_Kategorisi).perform();
+    //        }
+    //    } catch (ElementNotInteractableException exception) {
+    //        exception.printStackTrace();
+    //    }
+//
+    //    actions.moveToElement(anasayfa.giyimVeAksesuar_Dropdown_AsagiAcilirListe).perform();
+
+
+
 
     @When("Kullanici Kadin Ic Giyim kategorisine tiklar")
     public void kullanici_kadin_ic_giyim_kategorisine_tiklar() {
@@ -122,7 +126,7 @@ public class A101_Modul_Fonksiyon_Test {
     public void kullanici_dizalti_corap_modellerini_goruntuler() {
 
         //BASITCE URL CONTAINS YAZIP GEÇEBİLİRDİM AMA YAPMADIM ONU AÇIKLA İŞTE
-        String gecerliURL = Driver.getDriver().getCurrentUrl();
+        String gecerliURL = WebBrowserDriver.getDriver().getCurrentUrl();
 
         Assert.assertTrue(gecerliURL.contains("dizalti-corap"));
         //breadcrumb görünürlük ekle
@@ -151,7 +155,7 @@ public class A101_Modul_Fonksiyon_Test {
         try {
             Assert.assertTrue(dizalti_corap_sayfasi.siyahRenk_Checkbox_IsaretKutucugu.isSelected());
         } catch (AssertionError error) {
-            Driver.getDriver().navigate().refresh();
+            WebBrowserDriver.getDriver().navigate().refresh();
             kullanici_siyah_renk_isaret_kutucuguna_tiklar();
         }
 
@@ -203,7 +207,7 @@ public class A101_Modul_Fonksiyon_Test {
     @Then("Kullanici odeme adimina gecmek icin gerekli olan uye giris bilgisi sayfasina ulasir")
     public void kullanici_odeme_adimina_gecmek_icin_gerekli_olan_uye_giris_bilgisi_sayfasina_ulasir() {
 
-        String gecerliURL = Driver.getDriver().getCurrentUrl();
+        String gecerliURL = WebBrowserDriver.getDriver().getCurrentUrl();
         Assert.assertTrue(gecerliURL.contains("checkout"));
 
 
@@ -315,6 +319,7 @@ public class A101_Modul_Fonksiyon_Test {
     @When("Kullanici kredi karti bilgilerini girer")
     public void kullanici_kredi_karti_bilgilerini_girer() {
 
+        wait.until(ExpectedConditions.elementToBeClickable(odeme_ve_uye_bilgi_sayfasi.krediKart_CVV_VeriGirisKutucugu));
         odeme_ve_uye_bilgi_sayfasi.krediKarti_AdSoyad_VeriGirisKutucugu.sendKeys(faker.name().fullName());
         odeme_ve_uye_bilgi_sayfasi.krediKartNumarasi_VeriGirisKutucugu.sendKeys("6011000990139424");
         Select select_Ay = new Select(odeme_ve_uye_bilgi_sayfasi.krediKarti_AySecimKutucugu);
@@ -336,7 +341,12 @@ public class A101_Modul_Fonksiyon_Test {
     @When("Kullanici Siparisi Tamamla butonuna tiklar")
     public void kullanici_siparisi_tamamla_butonuna_tiklar() {
 
-        odeme_ve_uye_bilgi_sayfasi.siparisiTamamla_Butonu.click();
+        try{
+
+            odeme_ve_uye_bilgi_sayfasi.siparisiTamamla_Butonu.click();
+        }catch (Exception exception){
+            javascriptExecutor.executeScript("arguments[0].click()", odeme_ve_uye_bilgi_sayfasi.siparisiTamamla_Butonu);
+        }
     }
 
 
@@ -348,8 +358,8 @@ public class A101_Modul_Fonksiyon_Test {
                 "içinde bulunulan fonksiyonların ve modüllerin işlevselliğinin, fonksiyonelliğinin ve çalışabilirliliğinin " +
                 "Uçtan Uca Testi, test otomasyonu ile başarıyla tamamlandı. Tarayıcı birazdan kendini kapatacaktır.');");
         SleepMethod.sleep(10);
-        Driver.getDriver().switchTo().alert().accept();
-        Driver.closeDriver();
+        WebBrowserDriver.getDriver().switchTo().alert().accept();
+        WebBrowserDriver.closeDriver();
 
     }
 }
