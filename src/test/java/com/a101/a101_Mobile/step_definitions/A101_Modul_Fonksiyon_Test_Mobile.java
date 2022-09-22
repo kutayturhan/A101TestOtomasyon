@@ -2,12 +2,10 @@ package com.a101.a101_Mobile.step_definitions;
 
 import com.a101.a101_Mobile.pages.*;
 import com.a101.a101_Mobile.utilities.MobileAppDriver;
-import com.a101.a101_WebBrowser.utilities.SleepMethod;
 import io.appium.java_client.MobileBy;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Assertions;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
