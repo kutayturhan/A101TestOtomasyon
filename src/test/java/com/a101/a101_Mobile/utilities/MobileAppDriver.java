@@ -13,6 +13,8 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class MobileAppDriver {
+
+
     private static AppiumDriver<MobileElement> driver;
     private static URL url;
 

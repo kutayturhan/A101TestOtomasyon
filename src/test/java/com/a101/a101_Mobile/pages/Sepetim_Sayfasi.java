@@ -12,6 +12,8 @@ public class Sepetim_Sayfasi {
         PageFactory.initElements(new AppiumFieldDecorator(MobileAppDriver.getDriver()), this);
     }
 
-    @AndroidFindBy(xpath = "//*[@text='SEPETE GİT']")
+    @AndroidFindBy(xpath = "//*[@text='SEPETİ ONAYLA']")
     public MobileElement sepetiOnayla_Butonu;
+
+
 }

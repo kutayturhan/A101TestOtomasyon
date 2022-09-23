@@ -12,17 +12,20 @@ public class Anasayfa {
         PageFactory.initElements(new AppiumFieldDecorator(MobileAppDriver.getDriver()), this);
     }
 
-    @AndroidFindBy(xpath = "//*[@text='\ue90F']")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='\uE90F']")
     public MobileElement kategoriler_AcilirMenu;
 
-    @AndroidFindBy(xpath = "//*[@text='GİYİM & AKSESUAR']")
+    @AndroidFindBy(xpath = "//android.widget.ScrollView//android.widget.TextView[@text='GİYİM & AKSESUAR']")
     public MobileElement giyimVeAksesuar_Kategorisi;
 
-    @AndroidFindBy(xpath = "//*[@text='Kadın İç Giyim']")
+    @AndroidFindBy(xpath = "//android.widget.ScrollView//android.widget.TextView[@text='Kadın İç Giyim']")
     public MobileElement kadinIcGiyim_Kategorisi;
 
-    @AndroidFindBy(xpath = "//*[@text='Dizaltı Çorap']")
+    @AndroidFindBy(xpath = "//android.widget.ScrollView//android.widget.TextView[@text='Dizaltı Çorap']")
     public MobileElement dizaltiCorap_Kategorisi;
+
+
+
 
 
 }

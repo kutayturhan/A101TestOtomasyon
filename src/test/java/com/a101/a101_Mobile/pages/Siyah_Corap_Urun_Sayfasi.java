@@ -12,7 +12,7 @@ public class Siyah_Corap_Urun_Sayfasi {
         PageFactory.initElements(new AppiumFieldDecorator(MobileAppDriver.getDriver()), this);
     }
 
-    @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"SEPETE EKLE\"]")
+    @AndroidFindBy(xpath = "//*[@text=\"SEPETE EKLE\"]")
     public MobileElement sepeteEkle_Butonu;
 
     @AndroidFindBy(xpath = "//*[@text='1 adet Penti Kadın 50 Denye Pantolon Çorabı Siyah sepetinize eklendi.']")

@@ -12,13 +12,16 @@ public class Dizalti_Corap_Sayfasi {
         PageFactory.initElements(new AppiumFieldDecorator(MobileAppDriver.getDriver()), this);
     }
 
+    @AndroidFindBy(xpath = "//*[@text='Dizaltı Çorap']")
+    public MobileElement dizaltiCorap_Baslik;
+
     @AndroidFindBy(xpath = "//*[@text='Filtrele']")
-    public MobileElement filtrele;
+    public MobileElement filtrele_AcilirSecenekler;
 
     @AndroidFindBy(xpath = "(//*[contains(@text, \"SİYAH\")])[1]")
     public MobileElement siyahRenk_Filtrele;
 
-    @AndroidFindBy(xpath = "(//*[contains(@text, \"SEPETE EKLE\")])[1]")
+    @AndroidFindBy(xpath = "(//*[@text='SEPETE EKLE'])[1]")
     public MobileElement ilkUrun_SepeteEkleButonu;
 
 }

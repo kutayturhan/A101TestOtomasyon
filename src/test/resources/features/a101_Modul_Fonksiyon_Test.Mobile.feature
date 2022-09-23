@@ -25,17 +25,19 @@ Feature: A101 Mobil Uygulama | Modullerin Islevselligi ve Fonksiyonelligi
     And Kullanici Sepetim sayfasinda sepete eklenen urun bilgisine ulasir ve sepeti onaylamak icin Sepeti Onayla butonuna dokunur
     Then Kullanici odeme adimina gecmek icin gerekli olan uye giris bilgisi sayfasina basariyla ulasir
 
-#
-#  Scenario: Kullanici odeme adimina uye olmadan devam eder ve e mail adresini girdikten sonra gonderi teslimat adresini belirtip kargo firmasi tercihi yaparak odeme sayfasina ulasir
-#    When Kullanici UYE OLMADAN DEVAM ET butonuna tiklar
-#    And Kullanici E mail adresini girer
-#    And Kullanici DEVAM ET butonuna tiklar
-#    And Kullanici yeni adres olustur butonuna tiklar
-#    And Kullanici kisi ve teslimat adres bilgilerini adres guncelleme formuna girer
-#    And Kullanici teslimat adresi bilgi formundaki kaydet butonuna tiklar
-#    And Kullanici kargo firmasi secimi yapar
-#    And Kullanici Kaydet ve Devam Et butonuna tiklar
-#    And Kullanici kredi karti bilgilerini girer
-#    And Kullanici On Bilgilendirme Kosullari'ni ve Uzaktan Satis Sozlemesi'ni okudum ve kabul ediyorum kutucugunu isaretler
-#    And Kullanici Siparisi Tamamla butonuna tiklar
-#    Then Kullanici guvenli odeme yapmak icin dogrulama kodunu girecegi ekrana ulasir
+
+  Scenario: Kullanici mobil odeme adimina uye olmadan devam eder ve e mail adresini girdikten sonra gonderi teslimat adresini belirtip kargo firmasi tercihi yaparak odeme sayfasina ulasir
+    When Kullanici UYE OLMADAN DEVAM ET butonuna dokunur
+    And Kullanici E mail adresi verisini girer
+    And Kullanici aydinlatma metnini onaylar
+    And Kullanici GONDER butonuna dokunur
+    And Kullanici cerez kullanimini kabul et butonuna dokunur
+    And Kullanici yeni adres olustur butonuna dokunur
+    And Kullanici kisi ve teslimat adresi bilgilerini adres guncelleme formuna girer
+    And Kullanici teslimat adresi bilgi formundaki kaydet butonuna dokunur
+    And Kullanici kargo firmasi secimini yapar
+    And Kullanici Kaydet ve Devam Et butonuna dokunur
+    And Kullanici kredi karti verilerini girer
+    And Kullanici On Bilgilendirme Kosullari'ni ve Uzaktan Satis Sozlemesi'ni okudum ve kabul ediyorum kutucuguna dokunur
+    And Kullanici Siparisi Tamamla butonuna dokunur
+    Then Kullanici guvenli odeme yapmak icin dogrulama kodunu girecegi ekrana basariyla ulasir
