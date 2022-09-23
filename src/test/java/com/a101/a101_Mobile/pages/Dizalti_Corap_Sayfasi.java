@@ -1,15 +1,17 @@
 package com.a101.a101_Mobile.pages;
 
-import com.a101.a101_Mobile.utilities.MobileAppDriver;
+import com.a101.a101_Mobile.utilities.AndroidAppDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 public class Dizalti_Corap_Sayfasi {
 
     public Dizalti_Corap_Sayfasi() {
-        PageFactory.initElements(new AppiumFieldDecorator(MobileAppDriver.getDriver()), this);
+        PageFactory.initElements(new AppiumFieldDecorator(AndroidAppDriver.getDriver()), this);
     }
 
     @AndroidFindBy(xpath = "//*[@text='Dizaltı Çorap']")
@@ -23,5 +25,8 @@ public class Dizalti_Corap_Sayfasi {
 
     @AndroidFindBy(xpath = "(//*[@text='SEPETE EKLE'])[1]")
     public MobileElement ilkUrun_SepeteEkleButonu;
+
+    @AndroidFindBy(xpath = "//*[@text='SEPETE EKLE']")
+    public List<MobileElement> sepeteEkle_Butonu_Liste;
 
 }

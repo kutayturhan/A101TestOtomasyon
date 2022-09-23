@@ -1,6 +1,6 @@
 package com.a101.a101_Mobile.pages;
 
-import com.a101.a101_Mobile.utilities.MobileAppDriver;
+import com.a101.a101_Mobile.utilities.AndroidAppDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 public class Odeme_ve_Uye_Bilgi_Sayfasi {
 
     public Odeme_ve_Uye_Bilgi_Sayfasi() {
-        PageFactory.initElements(new AppiumFieldDecorator(MobileAppDriver.getDriver()), this);
+        PageFactory.initElements(new AppiumFieldDecorator(AndroidAppDriver.getDriver()), this);
 
     }
 

@@ -1,24 +1,33 @@
 package com.a101.a101_Mobile.step_definitions;
 
 import com.a101.a101_Mobile.pages.*;
-import com.a101.a101_Mobile.utilities.MobileAppDriver;
+import com.a101.a101_Mobile.utilities.AndroidAppDriver;
+import com.a101.a101_Mobile.utilities.ConfigurationReader;
+//import com.a101.a101_Mobile.utilities.MobileAppDriver;
 import com.a101.a101_WebBrowser.utilities.SleepMethod;
 import com.github.javafaker.Faker;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidElement;
+import io.appium.java_client.remote.MobileCapabilityType;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.interactions.touch.TouchActions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 
@@ -31,7 +40,7 @@ public class A101_Modul_Fonksiyon_Test_Mobile {
     Odeme_ve_Uye_Bilgi_Sayfasi odeme_ve_uye_bilgi_sayfasi = new Odeme_ve_Uye_Bilgi_Sayfasi();
     Teslimat_Adresi_Bilgi_Formu teslimat_adresi_bilgi_formu = new Teslimat_Adresi_Bilgi_Formu();
 
-    WebDriverWait wait = new WebDriverWait(MobileAppDriver.getDriver(), 10);
+    WebDriverWait wait = new WebDriverWait(AndroidAppDriver.getDriver(), 10);
     Faker faker = new Faker(new Locale("en-US"));
 
 
@@ -111,7 +120,7 @@ public class A101_Modul_Fonksiyon_Test_Mobile {
     @When("Kullanici Sepetim sayfasinda sepete eklenen urun bilgisine ulasir ve sepeti onaylamak icin Sepeti Onayla butonuna dokunur")
     public void kullanici_sepetim_sayfasinda_sepete_eklenen_urun_bilgisine_ulasir_ve_sepeti_onaylamak_icin_sepeti_onayla_butonuna_dokunur() {
 
-        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.xpath("//android.widget.ImageView")));
+        wait.until(ExpectedConditions.visibilityOf(sepetim_sayfasi.sepetiOnayla_Butonu));
         sepetim_sayfasi.sepetiOnayla_Butonu.click();
 
     }
@@ -150,6 +159,7 @@ public class A101_Modul_Fonksiyon_Test_Mobile {
         odeme_ve_uye_bilgi_sayfasi.gonder_Butonu.click();
 
 
+
     }
 
     @When("Kullanici cerez kullanimini kabul et butonuna dokunur")
@@ -182,19 +192,26 @@ public class A101_Modul_Fonksiyon_Test_Mobile {
         teslimat_adresi_bilgi_formu.soyad_VeriGirisi.sendKeys(soyad);
         teslimat_adresi_bilgi_formu.cepTelefonu_VeriGirisi.sendKeys(faker.numerify("554#######"));
 
-        TouchActions action = new TouchActions(MobileAppDriver.getDriver());
-
 
         teslimat_adresi_bilgi_formu.il_AcilirSecimKutucugu.click();
-        teslimat_adresi_bilgi_formu.il_Istanbul.click();
+        MobileElement ilSecim = AndroidAppDriver.getDriver().findElementByAndroidUIAutomator
+                ("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text(\"İSTANBUL\"))");
+        ilSecim.click();
+
         teslimat_adresi_bilgi_formu.ilce_AcilirSecimKutucugu.click();
-        action.singleTap(teslimat_adresi_bilgi_formu.ilce_Kadikoy);
-        action.perform();
-        teslimat_adresi_bilgi_formu.ilce_Kadikoy.click();
+        MobileElement ilceSecim = AndroidAppDriver.getDriver().findElementByAndroidUIAutomator
+                ("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text(\"KADIKÖY\"))");
+        ilceSecim.click();
+
         teslimat_adresi_bilgi_formu.mahalle_AcilirSecimKutucugu.click();
-        action.singleTap(teslimat_adresi_bilgi_formu.mahalle_CaddebostanMah);
-        action.perform();
-        teslimat_adresi_bilgi_formu.mahalle_CaddebostanMah.click();
+        MobileElement mahalleSecim = AndroidAppDriver.getDriver().findElementByAndroidUIAutomator
+                ("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text(\"CADDEBOSTAN MAH\"))");
+        mahalleSecim.click();
+
+        MobileElement kaydetButonu = AndroidAppDriver.getDriver().findElementByAndroidUIAutomator
+                ("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text(\"KAYDET\"))");
+        kaydetButonu.getCenter();
+
 
         teslimat_adresi_bilgi_formu.tumAdres_VeriGirisKutusu.sendKeys(
                 ad + " " + soyad + " \n" +
@@ -204,6 +221,8 @@ public class A101_Modul_Fonksiyon_Test_Mobile {
                         "Daire: " + faker.number().numberBetween(1, 101) + "\n" +
                         "Posta Kodu:" + postaKodu + " Kadıköy İSTANBUL"
         );
+
+        kaydetButonu.click();
 
 
     }

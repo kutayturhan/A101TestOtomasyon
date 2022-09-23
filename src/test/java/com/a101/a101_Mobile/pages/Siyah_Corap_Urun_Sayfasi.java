@@ -1,6 +1,6 @@
 package com.a101.a101_Mobile.pages;
 
-import com.a101.a101_Mobile.utilities.MobileAppDriver;
+import com.a101.a101_Mobile.utilities.AndroidAppDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 public class Siyah_Corap_Urun_Sayfasi {
 
     public Siyah_Corap_Urun_Sayfasi() {
-        PageFactory.initElements(new AppiumFieldDecorator(MobileAppDriver.getDriver()), this);
+        PageFactory.initElements(new AppiumFieldDecorator(AndroidAppDriver.getDriver()), this);
     }
 
     @AndroidFindBy(xpath = "//*[@text=\"SEPETE EKLE\"]")
