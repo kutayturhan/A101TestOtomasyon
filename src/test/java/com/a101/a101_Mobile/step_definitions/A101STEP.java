@@ -2,36 +2,24 @@ package com.a101.a101_Mobile.step_definitions;
 
 import com.a101.a101_Mobile.pages.*;
 import com.a101.a101_Mobile.utilities.AndroidAppDriver;
-import com.a101.a101_Mobile.utilities.ConfigurationReader;
-//import com.a101.a101_Mobile.utilities.MobileAppDriver;
-import com.a101.a101_WebBrowser.utilities.SleepMethod;
 import com.github.javafaker.Faker;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.AndroidElement;
-import io.appium.java_client.remote.MobileCapabilityType;
+import io.cucumber.java.AfterStep;
+import io.cucumber.java.Before;
+import io.cucumber.java.BeforeStep;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.interactions.touch.TouchActions;
-import org.openqa.selenium.remote.DesiredCapabilities;
+import org.junit.jupiter.api.BeforeEach;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
-
-public class A101_Modul_Fonksiyon_Test_Mobile {
+public class A101STEP {
 
     Anasayfa anasayfa = new Anasayfa();
     Dizalti_Corap_Sayfasi dizalti_corap_sayfasi = new Dizalti_Corap_Sayfasi();
@@ -44,10 +32,18 @@ public class A101_Modul_Fonksiyon_Test_Mobile {
     Faker faker = new Faker(new Locale("en-US"));
 
 
+    @When("Kullanici A101 Mobil uygulamasina giris yapar")
+    public void kullanici_a101_mobil_uygulamasina_giris_yapar() {
+
+        AndroidAppDriver.getDriver();
+
+    }
+
     @When("Kullanici kategoriler acilir menusunu secer")
     public void kullanici_kategoriler_acilir_menusunu_secer() {
 
         anasayfa.kategoriler_AcilirMenu.click();
+
     }
 
     @When("Kullanici Giyim ve Aksesuar kategorisini secer")
@@ -71,9 +67,7 @@ public class A101_Modul_Fonksiyon_Test_Mobile {
     @Then("Kullanici mobil uygulamada Dizalti Corap modellerini goruntuler")
     public void kullanici_mobil_uygulamada_dizalti_corap_modellerini_goruntuler() {
 
-        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.xpath
-                ("//hierarchy//android.widget.FrameLayout//android.widget.LinearLayout" +
-                        "//android.view.ViewGroup//android.widget.TextView[@text='Dizaltı Çorap']")));
+        wait.until(ExpectedConditions.visibilityOf(dizalti_corap_sayfasi.ilkUrun_SepeteEkleButonu));
         String gecerliSayfaBaslik = dizalti_corap_sayfasi.dizaltiCorap_Baslik.getText();
         Assertions.assertEquals("Dizaltı Çorap", gecerliSayfaBaslik);
     }
@@ -90,12 +84,13 @@ public class A101_Modul_Fonksiyon_Test_Mobile {
 
         dizalti_corap_sayfasi.siyahRenk_Filtrele.click();
 
+
     }
 
     @When("Kullanici Siyah Dizalti Corabi sepete eklemek icin sepete ekle butonuna dokunur")
     public void kullanici_siyah_dizalti_corabi_sepete_eklemek_icin_sepete_ekle_butonuna_dokunur() {
 
-        SleepMethod.sleep(3);
+        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.xpath("//*[@text='4 ürün gösteriliyor']")));
         dizalti_corap_sayfasi.ilkUrun_SepeteEkleButonu.click();
     }
 
@@ -110,17 +105,16 @@ public class A101_Modul_Fonksiyon_Test_Mobile {
     @When("Kullanici eklemis oldugu urun bilgisini acilir menude kontrol eder ve sepete git butonuna dokunur")
     public void kullanici_eklemis_oldugu_urun_bilgisini_acilir_menude_kontrol_eder_ve_sepete_git_butonuna_dokunur() {
 
-
+        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.xpath("//*[@text='SEPETE GİT']")));
         String urunBilgiYazisi = siyah_corap_urun_sayfasi.urunSepeteEklendi_UrunBilgisi.getText();
         Assertions.assertTrue(urunBilgiYazisi.contains("Siyah") && urunBilgiYazisi.contains("Çorab") && urunBilgiYazisi.contains("sepetinize eklendi"));
         siyah_corap_urun_sayfasi.urunSepetineGit_Butonu.click();
     }
 
-
     @When("Kullanici Sepetim sayfasinda sepete eklenen urun bilgisine ulasir ve sepeti onaylamak icin Sepeti Onayla butonuna dokunur")
     public void kullanici_sepetim_sayfasinda_sepete_eklenen_urun_bilgisine_ulasir_ve_sepeti_onaylamak_icin_sepeti_onayla_butonuna_dokunur() {
 
-        wait.until(ExpectedConditions.visibilityOf(sepetim_sayfasi.sepetiOnayla_Butonu));
+        wait.until(ExpectedConditions.elementToBeClickable(MobileBy.xpath("//*[@text='SEPETİ ONAYLA']")));
         sepetim_sayfasi.sepetiOnayla_Butonu.click();
 
     }
@@ -157,7 +151,6 @@ public class A101_Modul_Fonksiyon_Test_Mobile {
     public void kullanici_gonder_butonuna_dokunur() {
 
         odeme_ve_uye_bilgi_sayfasi.gonder_Butonu.click();
-
 
 
     }
@@ -198,15 +191,10 @@ public class A101_Modul_Fonksiyon_Test_Mobile {
                 ("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text(\"İSTANBUL\"))");
         ilSecim.click();
 
-        teslimat_adresi_bilgi_formu.ilce_AcilirSecimKutucugu.click();
-        MobileElement ilceSecim = AndroidAppDriver.getDriver().findElementByAndroidUIAutomator
-                ("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text(\"KADIKÖY\"))");
-        ilceSecim.click();
+        Ui_Scroll.scrollToElementAndClick("İSTANBUL");
+        Ui_Scroll.scrollToElementAndClick("KADIKÖY");
+        Ui_Scroll.scrollToElementAndClick("CADDEBOSTAN MAH");
 
-        teslimat_adresi_bilgi_formu.mahalle_AcilirSecimKutucugu.click();
-        MobileElement mahalleSecim = AndroidAppDriver.getDriver().findElementByAndroidUIAutomator
-                ("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text(\"CADDEBOSTAN MAH\"))");
-        mahalleSecim.click();
 
         MobileElement kaydetButonu = AndroidAppDriver.getDriver().findElementByAndroidUIAutomator
                 ("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text(\"KAYDET\"))");
@@ -224,61 +212,6 @@ public class A101_Modul_Fonksiyon_Test_Mobile {
 
         kaydetButonu.click();
 
-
-    }
-
-    @When("Kullanici teslimat adresi bilgi formundaki kaydet butonuna dokunur")
-    public void kullanici_teslimat_adresi_bilgi_formundaki_kaydet_butonuna_dokunur() {
-
-        teslimat_adresi_bilgi_formu.kaydet_Butonu.click();
-
-    }
-
-    @When("Kullanici kargo firmasi secimini yapar")
-    public void kullanici_kargo_firmasi_secimini_yapar() {
-
-        odeme_ve_uye_bilgi_sayfasi.kargoFirmasi_SecimKutucugu.click();
-
-    }
-
-    @When("Kullanici Kaydet ve Devam Et butonuna dokunur")
-    public void kullanici_kaydet_ve_devam_et_butonuna_dokunur() {
-
-        odeme_ve_uye_bilgi_sayfasi.kaydetVeDevamEt_Butonu.click();
-
-    }
-
-    @When("Kullanici kredi karti verilerini girer")
-    public void kullanici_kredi_karti_verilerini_girer() {
-
-        wait.until(ExpectedConditions.elementToBeClickable(odeme_ve_uye_bilgi_sayfasi.krediKarti_CVC_VeriGirisKutucugu));
-        odeme_ve_uye_bilgi_sayfasi.krediKarti_adSoyad_VeriGirisKutucugu.sendKeys(faker.name().fullName());
-        odeme_ve_uye_bilgi_sayfasi.krediKarti_kartNumarasi_VeriGirisKutucugu.sendKeys("6011000990139424");
-        odeme_ve_uye_bilgi_sayfasi.sonKullanmaTarihi_AySecimKutucugu.click();
-        odeme_ve_uye_bilgi_sayfasi.sonKullanmaTarihi_5inciAyVeyaYilSecimKutucugu.click();
-        odeme_ve_uye_bilgi_sayfasi.getSonKullanmaTarihi_YilSecimKutucugu.click();
-        odeme_ve_uye_bilgi_sayfasi.sonKullanmaTarihi_5inciAyVeyaYilSecimKutucugu.click();
-        String cvv_No = Integer.toString(faker.number().numberBetween(100, 999));
-        odeme_ve_uye_bilgi_sayfasi.krediKarti_CVC_VeriGirisKutucugu.sendKeys(faker.numerify(cvv_No));
-
-    }
-
-    @When("Kullanici On Bilgilendirme Kosullari'ni ve Uzaktan Satis Sozlemesi'ni okudum ve kabul ediyorum kutucuguna dokunur")
-    public void kullanici_on_bilgilendirme_kosullari_ni_ve_uzaktan_satis_sozlemesi_ni_okudum_ve_kabul_ediyorum_kutucuguna_dokunur() {
-
-        odeme_ve_uye_bilgi_sayfasi.kosulVeSozlesme_OnaylaKutucugu.click();
-
-    }
-
-    @When("Kullanici Siparisi Tamamla butonuna dokunur")
-    public void kullanici_siparisi_tamamla_butonuna_dokunur() {
-
-        odeme_ve_uye_bilgi_sayfasi.siparisiTamamla_Butonu.click();
-
-    }
-
-    @Then("Kullanici guvenli odeme yapmak icin dogrulama kodunu girecegi ekrana basariyla ulasir")
-    public void kullanici_guvenli_odeme_yapmak_icin_dogrulama_kodunu_girecegi_ekrana_basariyla_ulasir() {
 
     }
 

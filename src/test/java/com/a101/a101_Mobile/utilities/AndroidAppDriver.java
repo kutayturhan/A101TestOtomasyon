@@ -1,8 +1,10 @@
 package com.a101.a101_Mobile.utilities;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -17,7 +19,7 @@ public class AndroidAppDriver {
     private static AndroidDriver<MobileElement> androidDriver;
     private static URL url;
 
-    private AndroidAppDriver(){
+    private AndroidAppDriver() {
 
     }
 

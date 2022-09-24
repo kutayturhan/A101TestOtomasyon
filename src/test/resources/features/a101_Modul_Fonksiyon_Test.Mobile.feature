@@ -7,8 +7,9 @@ Feature: A101 Mobil Uygulama | Modullerin Islevselligi ve Fonksiyonelligi
 
   Background: Kullanici A101 mobil uygulamasına giris yapar
 
-  Scenario: Kullanici Kategoriler acilir menusunden Giyim ve Aksesuar kategorisini secer ve ardindan Kadin Ic Giyim kategorisinden Dizalti Corap alt kategorisini secer
-    When Kullanici kategoriler acilir menusunu secer
+  Scenario: Kullanici A101 Mobil uygulamasinda Kategoriler acilir menusunden Giyim ve Aksesuar kategorisini secer ve ardindan Kadin Ic Giyim kategorisinden Dizalti Corap alt kategorisini secer
+    When Kullanici A101 Mobil uygulamasina giris yapar
+    And Kullanici kategoriler acilir menusunu secer
     And Kullanici Giyim ve Aksesuar kategorisini secer
     And Kullanici Kadin Ic Giyim kategorisini secer
     And Kullanici Dizalti Corap kategorisini secer
@@ -26,18 +27,18 @@ Feature: A101 Mobil Uygulama | Modullerin Islevselligi ve Fonksiyonelligi
     Then Kullanici odeme adimina gecmek icin gerekli olan uye giris bilgisi sayfasina basariyla ulasir
 
 
-  Scenario: Kullanici mobil odeme adimina uye olmadan devam eder ve e mail adresini girdikten sonra gonderi teslimat adresini belirtip kargo firmasi tercihi yaparak odeme sayfasina ulasir
-    When Kullanici UYE OLMADAN DEVAM ET butonuna dokunur
-    And Kullanici E mail adresi verisini girer
-    And Kullanici aydinlatma metnini onaylar
-    And Kullanici GONDER butonuna dokunur
-    And Kullanici cerez kullanimini kabul et butonuna dokunur
-    And Kullanici yeni adres olustur butonuna dokunur
-    And Kullanici kisi ve teslimat adresi bilgilerini adres guncelleme formuna girer
-    And Kullanici teslimat adresi bilgi formundaki kaydet butonuna dokunur
-    And Kullanici kargo firmasi secimini yapar
-    And Kullanici Kaydet ve Devam Et butonuna dokunur
-    And Kullanici kredi karti verilerini girer
-    And Kullanici On Bilgilendirme Kosullari'ni ve Uzaktan Satis Sozlemesi'ni okudum ve kabul ediyorum kutucuguna dokunur
-    And Kullanici Siparisi Tamamla butonuna dokunur
-    Then Kullanici guvenli odeme yapmak icin dogrulama kodunu girecegi ekrana basariyla ulasir
+ Scenario: Kullanici mobil odeme adimina uye olmadan devam eder ve e mail adresini girdikten sonra gonderi teslimat adresini belirtip kargo firmasi tercihi yaparak odeme sayfasina ulasir
+   When Kullanici UYE OLMADAN DEVAM ET butonuna dokunur
+   And Kullanici E mail adresi verisini girer
+   And Kullanici aydinlatma metnini onaylar
+   And Kullanici GONDER butonuna dokunur
+   And Kullanici cerez kullanimini kabul et butonuna dokunur
+   And Kullanici yeni adres olustur butonuna dokunur
+   And Kullanici kisi ve teslimat adresi bilgilerini adres guncelleme formuna girer
+#   And Kullanici teslimat adresi bilgi formundaki kaydet butonuna dokunur
+#   And Kullanici kargo firmasi secimini yapar
+#   And Kullanici Kaydet ve Devam Et butonuna dokunur
+#   And Kullanici kredi karti verilerini girer
+#   And Kullanici On Bilgilendirme Kosullari'ni ve Uzaktan Satis Sozlemesi'ni okudum ve kabul ediyorum kutucuguna dokunur
+#   And Kullanici Siparisi Tamamla butonuna dokunur
+#   Then Kullanici guvenli odeme yapmak icin dogrulama kodunu girecegi ekrana basariyla ulasir

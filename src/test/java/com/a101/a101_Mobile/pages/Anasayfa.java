@@ -12,6 +12,13 @@ public class Anasayfa {
         PageFactory.initElements(new AppiumFieldDecorator(AndroidAppDriver.getDriver()), this);
     }
 
+
+    @AndroidFindBy(id = "android:id/alertTitle")
+    public MobileElement guncellemeUyarisi;
+
+    @AndroidFindBy(id = "android:id/button2")
+    public MobileElement guncellemeIptal;
+
     @AndroidFindBy(xpath = "//android.widget.TextView[@text='\uE90F']")
     public MobileElement kategoriler_AcilirMenu;
 
