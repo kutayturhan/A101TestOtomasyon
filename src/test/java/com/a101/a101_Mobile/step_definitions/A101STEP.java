@@ -2,17 +2,15 @@ package com.a101.a101_Mobile.step_definitions;
 
 import com.a101.a101_Mobile.pages.*;
 import com.a101.a101_Mobile.utilities.AndroidAppDriver;
+import com.a101.a101_WebBrowser.utilities.SleepMethod;
 import com.github.javafaker.Faker;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.cucumber.java.AfterStep;
-import io.cucumber.java.Before;
 import io.cucumber.java.BeforeStep;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -28,19 +26,38 @@ public class A101STEP {
     Odeme_ve_Uye_Bilgi_Sayfasi odeme_ve_uye_bilgi_sayfasi = new Odeme_ve_Uye_Bilgi_Sayfasi();
     Teslimat_Adresi_Bilgi_Formu teslimat_adresi_bilgi_formu = new Teslimat_Adresi_Bilgi_Formu();
 
-    WebDriverWait wait = new WebDriverWait(AndroidAppDriver.getDriver(), 10);
+    WebDriverWait wait = new WebDriverWait(AndroidAppDriver.getDriver(), 60);
     Faker faker = new Faker(new Locale("en-US"));
+
+    @BeforeStep
+    @AfterStep
+    public static void checkAlert() {
+        try {
+            WebDriverWait wait = new WebDriverWait(AndroidAppDriver.getDriver(),1);
+            wait.until(ExpectedConditions.alertIsPresent()).dismiss();
+        } catch (Exception exception) {
+            //Exception handling
+        }
+    }
 
 
     @When("Kullanici A101 Mobil uygulamasina giris yapar")
     public void kullanici_a101_mobil_uygulamasina_giris_yapar() {
 
-        AndroidAppDriver.getDriver();
+        //AndroidAppDriver.getDriver().launchApp();
 
     }
 
+    @When("Kullanici Yeni Guncelleme Mevcut uyarisini iptal eder")
+    public void kullanici_yeni_guncelleme_mevcut_uyarisini_iptal_eder() {
+
+        // wait.until(ExpectedConditions.alertIsPresent()).dismiss();
+    }
+
+
     @When("Kullanici kategoriler acilir menusunu secer")
     public void kullanici_kategoriler_acilir_menusunu_secer() {
+
 
         anasayfa.kategoriler_AcilirMenu.click();
 
@@ -90,7 +107,7 @@ public class A101STEP {
     @When("Kullanici Siyah Dizalti Corabi sepete eklemek icin sepete ekle butonuna dokunur")
     public void kullanici_siyah_dizalti_corabi_sepete_eklemek_icin_sepete_ekle_butonuna_dokunur() {
 
-        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.xpath("//*[@text='4 ürün gösteriliyor']")));
+        SleepMethod.sleep(3);
         dizalti_corap_sayfasi.ilkUrun_SepeteEkleButonu.click();
     }
 
@@ -114,7 +131,7 @@ public class A101STEP {
     @When("Kullanici Sepetim sayfasinda sepete eklenen urun bilgisine ulasir ve sepeti onaylamak icin Sepeti Onayla butonuna dokunur")
     public void kullanici_sepetim_sayfasinda_sepete_eklenen_urun_bilgisine_ulasir_ve_sepeti_onaylamak_icin_sepeti_onayla_butonuna_dokunur() {
 
-        wait.until(ExpectedConditions.elementToBeClickable(MobileBy.xpath("//*[@text='SEPETİ ONAYLA']")));
+        wait.until(ExpectedConditions.elementToBeClickable(MobileBy.xpath("//*[@text='Alışverişe devam et']")));
         sepetim_sayfasi.sepetiOnayla_Butonu.click();
 
     }
@@ -179,27 +196,19 @@ public class A101STEP {
         String ad = faker.name().firstName();
         String soyad = faker.name().lastName();
 
-
         teslimat_adresi_bilgi_formu.evAdresim_VeriGirisi.sendKeys("Ev Adresim");
         teslimat_adresi_bilgi_formu.ad_veriGirisi.sendKeys(ad);
         teslimat_adresi_bilgi_formu.soyad_VeriGirisi.sendKeys(soyad);
         teslimat_adresi_bilgi_formu.cepTelefonu_VeriGirisi.sendKeys(faker.numerify("554#######"));
 
-
         teslimat_adresi_bilgi_formu.il_AcilirSecimKutucugu.click();
-        MobileElement ilSecim = AndroidAppDriver.getDriver().findElementByAndroidUIAutomator
-                ("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text(\"İSTANBUL\"))");
-        ilSecim.click();
-
         Ui_Scroll.scrollToElementAndClick("İSTANBUL");
+
+        teslimat_adresi_bilgi_formu.ilce_AcilirSecimKutucugu.click();
         Ui_Scroll.scrollToElementAndClick("KADIKÖY");
+
+        teslimat_adresi_bilgi_formu.mahalle_AcilirSecimKutucugu.click();
         Ui_Scroll.scrollToElementAndClick("CADDEBOSTAN MAH");
-
-
-        MobileElement kaydetButonu = AndroidAppDriver.getDriver().findElementByAndroidUIAutomator
-                ("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text(\"KAYDET\"))");
-        kaydetButonu.getCenter();
-
 
         teslimat_adresi_bilgi_formu.tumAdres_VeriGirisKutusu.sendKeys(
                 ad + " " + soyad + " \n" +
@@ -210,10 +219,24 @@ public class A101STEP {
                         "Posta Kodu:" + postaKodu + " Kadıköy İSTANBUL"
         );
 
-        kaydetButonu.click();
+
+    }
+
+    @When("Kullanici teslimat adresi bilgi formundaki kaydet butonuna dokunur")
+    public void kullanici_teslimat_adresi_bilgi_formundaki_kaydet_butonuna_dokunur() {
+
+        int mahalleSecim_X = teslimat_adresi_bilgi_formu.mahalle_AcilirSecimKutucugu.getLocation().getX();
+        int mahalleSecim_Y = teslimat_adresi_bilgi_formu.mahalle_AcilirSecimKutucugu.getLocation().getY();
+
+        int kaydet_X = teslimat_adresi_bilgi_formu.kaydet_Butonu.getLocation().getX();
+        int kaydet_Y = teslimat_adresi_bilgi_formu.kaydet_Butonu.getLocation().getY();
+
+        ScrollDown.scrollDown();
 
 
     }
 
 
 }
+
+
