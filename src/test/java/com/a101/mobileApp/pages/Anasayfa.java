@@ -1,0 +1,37 @@
+package com.a101.mobileApp.pages;
+
+import com.a101.mobileApp.utilities.AndroidAppDriver;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.pagefactory.AndroidFindBy;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import org.openqa.selenium.support.PageFactory;
+
+public class Anasayfa {
+
+    public Anasayfa() {
+        PageFactory.initElements(new AppiumFieldDecorator(AndroidAppDriver.getDriver()), this);
+    }
+
+    @AndroidFindBy(id = "android:id/alertTitle")
+    public MobileElement guncellemeUyarisi;
+
+    @AndroidFindBy(id = "android:id/button2")
+    public MobileElement guncellemeIptal;
+
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='\uE90F']")
+    public MobileElement kategoriler_AcilirMenu;
+
+    @AndroidFindBy(xpath = "//android.widget.ScrollView//android.widget.TextView[@text='GİYİM & AKSESUAR']")
+    public MobileElement giyimVeAksesuar_Kategorisi;
+
+    @AndroidFindBy(xpath = "//android.widget.ScrollView//android.widget.TextView[@text='Kadın İç Giyim']")
+    public MobileElement kadinIcGiyim_Kategorisi;
+
+    @AndroidFindBy(xpath = "//android.widget.ScrollView//android.widget.TextView[@text='Dizaltı Çorap']")
+    public MobileElement dizaltiCorap_Kategorisi;
+
+
+
+
+
+}

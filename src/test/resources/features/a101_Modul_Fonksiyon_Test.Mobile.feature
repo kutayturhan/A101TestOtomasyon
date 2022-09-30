@@ -9,7 +9,6 @@ Feature: A101 Mobil Uygulama | Modullerin Islevselligi ve Fonksiyonelligi
 
   Scenario: Kullanici A101 Mobil uygulamasinda Kategoriler acilir menusunden Giyim ve Aksesuar kategorisini secer ve ardindan Kadin Ic Giyim kategorisinden Dizalti Corap alt kategorisini secer
     When Kullanici A101 Mobil uygulamasina giris yapar
-    And Kullanici Yeni Guncelleme Mevcut uyarisini iptal eder
     And Kullanici kategoriler acilir menusunu secer
     And Kullanici Giyim ve Aksesuar kategorisini secer
     And Kullanici Kadin Ic Giyim kategorisini secer
@@ -36,9 +35,9 @@ Feature: A101 Mobil Uygulama | Modullerin Islevselligi ve Fonksiyonelligi
     And Kullanici yeni adres olustur butonuna dokunur
     And Kullanici kisi ve teslimat adresi bilgilerini adres guncelleme formuna girer
     And Kullanici teslimat adresi bilgi formundaki kaydet butonuna dokunur
-#   And Kullanici kargo firmasi secimini yapar
-#   And Kullanici Kaydet ve Devam Et butonuna dokunur
-#   And Kullanici kredi karti verilerini girer
-#   And Kullanici On Bilgilendirme Kosullari'ni ve Uzaktan Satis Sozlemesi'ni okudum ve kabul ediyorum kutucuguna dokunur
-#   And Kullanici Siparisi Tamamla butonuna dokunur
-#   Then Kullanici guvenli odeme yapmak icin dogrulama kodunu girecegi ekrana basariyla ulasir
+    And Kullanici kargo firmasi secimini yapar
+    And Kullanici Kaydet ve Devam Et butonuna dokunur
+    And Kullanici kredi karti verilerini girer
+    And Kullanici On Bilgilendirme Kosullari'ni ve Uzaktan Satis Sozlemesi'ni okudum ve kabul ediyorum kutucuguna dokunur
+    And Kullanici Siparisi Tamamla butonuna dokunur
+    Then Kullanici guvenli odeme yapmak icin dogrulama kodunu girecegi ekrana basariyla ulasir
