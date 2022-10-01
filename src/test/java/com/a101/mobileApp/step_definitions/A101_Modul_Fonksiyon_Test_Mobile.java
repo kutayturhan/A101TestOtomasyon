@@ -33,7 +33,7 @@ public class A101_Modul_Fonksiyon_Test_Mobile {
     @When("Kullanici A101 Mobil uygulamasina giris yapar")
     public void kullanici_a101_mobil_uygulamasina_giris_yapar() {
 
-        AndroidAppDriver.getDriver().launchApp();
+        //AndroidAppDriver.getDriver().launchApp();
     }
 
     @When("Kullanici kategoriler acilir menusunu secer")
@@ -217,8 +217,10 @@ public class A101_Modul_Fonksiyon_Test_Mobile {
         odeme_ve_uye_bilgi_sayfasi.krediKarti_adSoyad_VeriGirisKutucugu.sendKeys(faker.name().fullName());
 
         odeme_ve_uye_bilgi_sayfasi.krediKarti_kartNumarasi_VeriGirisKutucugu.click();
-        int[] krno = {6, 0, 1, 1, 0, 0, 0, 9, 9, 0, 1, 3, 9, 4, 2, 4};
-        for (int each : krno) {
+
+        int[] krediKartNo = {6, 0, 1, 1, 0, 0, 0, 9, 9, 0, 1, 3, 9, 4, 2, 4};
+
+        for (int each : krediKartNo) {
             AndroidAppDriver.getDriver().pressKey(new KeyEvent(AndroidKey.valueOf("DIGIT_" + each)));
             SleepMethod.sleep(1);
         }
@@ -231,7 +233,6 @@ public class A101_Modul_Fonksiyon_Test_Mobile {
 
         String cvc_No = Integer.toString(faker.number().numberBetween(100, 999));
         odeme_ve_uye_bilgi_sayfasi.krediKarti_CVC_VeriGirisKutucugu.sendKeys(cvc_No);
-
     }
 
     @When("Kullanici On Bilgilendirme Kosullari'ni ve Uzaktan Satis Sozlemesi'ni okudum ve kabul ediyorum kutucuguna dokunur")
@@ -243,7 +244,6 @@ public class A101_Modul_Fonksiyon_Test_Mobile {
 
         wait.until(ExpectedConditions.visibilityOf(odeme_ve_uye_bilgi_sayfasi.kosulVeSozlesme_OnaylaKutucugu));
         odeme_ve_uye_bilgi_sayfasi.kosulVeSozlesme_OnaylaKutucugu.click();
-
     }
 
     @When("Kullanici Siparisi Tamamla butonuna dokunur")
