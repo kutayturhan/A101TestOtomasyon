@@ -109,7 +109,7 @@ public class A101_Modul_Fonksiyon_Test_Mobile {
     @When("Kullanici Sepetim sayfasinda sepete eklenen urun bilgisine ulasir ve sepeti onaylamak icin Sepeti Onayla butonuna dokunur")
     public void kullanici_sepetim_sayfasinda_sepete_eklenen_urun_bilgisine_ulasir_ve_sepeti_onaylamak_icin_sepeti_onayla_butonuna_dokunur() {
 
-        SleepMethod.sleep(4);
+        SleepMethod.sleep(5);
         sepetim_sayfasi.sepetiOnayla_Butonu.click();
     }
 
@@ -199,15 +199,14 @@ public class A101_Modul_Fonksiyon_Test_Mobile {
 
     @When("Kullanici kargo firmasi secimini yapar")
     public void kullanici_kargo_firmasi_secimini_yapar() {
-        odeme_ve_uye_bilgi_sayfasi.kargoFirmasi_SecimKutucugu.click();
 
+        odeme_ve_uye_bilgi_sayfasi.kargoFirmasi_SecimKutucugu.click();
     }
 
     @When("Kullanici Kaydet ve Devam Et butonuna dokunur")
     public void kullanici_kaydet_ve_devam_et_butonuna_dokunur() {
 
         odeme_ve_uye_bilgi_sayfasi.kaydetVeDevamEt_Butonu.click();
-
     }
 
     @When("Kullanici kredi karti verilerini girer")
@@ -262,7 +261,7 @@ public class A101_Modul_Fonksiyon_Test_Mobile {
                         "Uçtan Uca Testi, test otomasyonu ile başarıyla tamamlandı. Uygulama birazdan kendini kapatacaktır");
 
         wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.xpath("//*[@text='3D Secure Processing']")));
-        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.xpath("//*[@text='GÜVENLİ ÖDEME']")));
+        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.xpath("(//android.widget.EditText)[1]")));
 
         AndroidAppDriver.closeDriver();
     }

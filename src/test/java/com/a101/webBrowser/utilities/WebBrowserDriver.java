@@ -39,7 +39,7 @@ public class WebBrowserDriver {
                     WebDriverManager.chromedriver().setup();
 
 
-                    System.setProperty("webdriver.chrome.silentOutput", "true");
+                    System.setProperty("webdriver.chrome.driver", "chromedriver/chromedriver.exe");
 
                     //Chrome bildirimlerini devre disi birakir.
                     ChromeOptions options = new ChromeOptions();

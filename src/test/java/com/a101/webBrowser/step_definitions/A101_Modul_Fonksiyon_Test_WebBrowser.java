@@ -116,6 +116,7 @@ public class A101_Modul_Fonksiyon_Test_WebBrowser {
     public void kullanici_dizalti_corap_kategorisine_tiklar() {
 
 
+       // wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='categories']//a[@title='Dizaltı Çorap']")));
         kadin_ic_giyim_sayfasi.dizaltiCorap_AltKategorisi.click();
 
 
@@ -328,21 +329,18 @@ public class A101_Modul_Fonksiyon_Test_WebBrowser {
         select_Yil.selectByIndex(faker.number().numberBetween(0, odeme_ve_uye_bilgi_sayfasi.krediKart_YilSecimKutucugu_Liste.size() / 2 - 1));
         String cvv_No = Integer.toString(faker.number().numberBetween(100, 999));
         odeme_ve_uye_bilgi_sayfasi.krediKart_CVV_VeriGirisKutucugu.sendKeys(faker.numerify(cvv_No));
-
     }
 
     @When("Kullanici On Bilgilendirme Kosullari'ni ve Uzaktan Satis Sozlemesi'ni okudum ve kabul ediyorum kutucugunu isaretler")
     public void kullanici_on_bilgilendirme_kosullari_ni_ve_uzaktan_satis_sozlemesi_ni_okudum_ve_kabul_ediyorum_kutucugunu_isaretler() {
 
         javascriptExecutor.executeScript("arguments[0].click();", odeme_ve_uye_bilgi_sayfasi.kosulVeSozlesme_KabulEtKutucugu);
-
     }
 
     @When("Kullanici Siparisi Tamamla butonuna tiklar")
     public void kullanici_siparisi_tamamla_butonuna_tiklar() {
 
         try{
-
             odeme_ve_uye_bilgi_sayfasi.siparisiTamamla_Butonu.click();
         }catch (Exception exception){
             javascriptExecutor.executeScript("arguments[0].click()", odeme_ve_uye_bilgi_sayfasi.siparisiTamamla_Butonu);

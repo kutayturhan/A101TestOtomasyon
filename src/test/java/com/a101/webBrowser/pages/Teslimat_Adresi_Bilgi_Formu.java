@@ -38,6 +38,6 @@ public class Teslimat_Adresi_Bilgi_Formu {
     @FindBy(xpath = "//input[@name='postcode']")
     public WebElement postaKodu_VeriGirisKutucugu;
 
-    @FindBy(xpath = "//button[@class='button green js-set-country js-prevent-emoji']")
+    @FindBy(xpath = "//button[@class='button green address-modal-submit-button js-set-country js-prevent-emoji js-address-form-submit-button']")
     public WebElement formuKaydet_Butonu;
 }
