@@ -3,20 +3,22 @@ package com.a101.mobileApp.step_definitions;
 import com.a101.mobileApp.pages.*;
 import com.a101.mobileApp.utilities.AndroidAppDriver;
 import com.a101.mobileApp.utilities.AppiumUtilities;
+import com.a101.webBrowser.utilities.SleepMethod;
 import com.github.javafaker.Faker;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
-import io.cucumber.java.AfterStep;
-import io.cucumber.java.BeforeStep;
+import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.android.nativekey.KeyEvent;
+import io.appium.java_client.touch.offset.PointOption;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Assertions;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.util.Locale;
 
-public class A101STEP {
+public class A101_Modul_Fonksiyon_Test_Mobile {
 
     Anasayfa anasayfa = new Anasayfa();
     Dizalti_Corap_Sayfasi dizalti_corap_sayfasi = new Dizalti_Corap_Sayfasi();
@@ -28,28 +30,16 @@ public class A101STEP {
     WebDriverWait wait = new WebDriverWait(AndroidAppDriver.getDriver(), 60);
     Faker faker = new Faker(new Locale("en-US"));
 
-    @BeforeStep
-    @AfterStep
-    public static void checkAlert() {
-        try {
-            WebDriverWait wait = new WebDriverWait(AndroidAppDriver.getDriver(), 1);
-            wait.until(ExpectedConditions.alertIsPresent());
-            AndroidAppDriver.getDriver().switchTo().alert().dismiss();
-        } catch (Exception exception) {
-            //Exception handling
-        }
-    }
-
-
     @When("Kullanici A101 Mobil uygulamasina giris yapar")
     public void kullanici_a101_mobil_uygulamasina_giris_yapar() {
 
-        //AndroidAppDriver.getDriver().launchApp();
+        AndroidAppDriver.getDriver().launchApp();
     }
 
     @When("Kullanici kategoriler acilir menusunu secer")
     public void kullanici_kategoriler_acilir_menusunu_secer() {
 
+        AppiumUtilities.checkAlert();
         anasayfa.kategoriler_AcilirMenu.click();
     }
 
@@ -75,6 +65,7 @@ public class A101STEP {
     public void kullanici_mobil_uygulamada_dizalti_corap_modellerini_goruntuler() {
 
         wait.until(ExpectedConditions.visibilityOf(dizalti_corap_sayfasi.ilkUrun_SepeteEkleButonu));
+
         String gecerliSayfaBaslik = dizalti_corap_sayfasi.dizaltiCorap_Baslik.getText();
         Assertions.assertEquals("Dizaltı Çorap", gecerliSayfaBaslik);
     }
@@ -94,6 +85,7 @@ public class A101STEP {
     @When("Kullanici Siyah Dizalti Corabi sepete eklemek icin sepete ekle butonuna dokunur")
     public void kullanici_siyah_dizalti_corabi_sepete_eklemek_icin_sepete_ekle_butonuna_dokunur() {
 
+        SleepMethod.sleep(4);
         dizalti_corap_sayfasi.ilkUrun_SepeteEkleButonu.click();
     }
 
@@ -111,12 +103,13 @@ public class A101STEP {
         String urunBilgiYazisi = siyah_corap_urun_sayfasi.urunSepeteEklendi_UrunBilgisi.getText();
         Assertions.assertTrue(urunBilgiYazisi.contains("Siyah") && urunBilgiYazisi.contains("Çorab") && urunBilgiYazisi.contains("sepetinize eklendi"));
         siyah_corap_urun_sayfasi.urunSepetineGit_Butonu.click();
+
     }
 
     @When("Kullanici Sepetim sayfasinda sepete eklenen urun bilgisine ulasir ve sepeti onaylamak icin Sepeti Onayla butonuna dokunur")
     public void kullanici_sepetim_sayfasinda_sepete_eklenen_urun_bilgisine_ulasir_ve_sepeti_onaylamak_icin_sepeti_onayla_butonuna_dokunur() {
 
-        wait.until(ExpectedConditions.elementToBeClickable(MobileBy.xpath("//*[@text='Alışverişe devam et']")));
+        SleepMethod.sleep(4);
         sepetim_sayfasi.sepetiOnayla_Butonu.click();
     }
 
@@ -209,41 +202,68 @@ public class A101STEP {
         odeme_ve_uye_bilgi_sayfasi.kargoFirmasi_SecimKutucugu.click();
 
     }
+
     @When("Kullanici Kaydet ve Devam Et butonuna dokunur")
     public void kullanici_kaydet_ve_devam_et_butonuna_dokunur() {
 
         odeme_ve_uye_bilgi_sayfasi.kaydetVeDevamEt_Butonu.click();
 
     }
+
     @When("Kullanici kredi karti verilerini girer")
     public void kullanici_kredi_karti_verilerini_girer() {
 
         wait.until(ExpectedConditions.elementToBeClickable(odeme_ve_uye_bilgi_sayfasi.krediKarti_CVC_VeriGirisKutucugu));
         odeme_ve_uye_bilgi_sayfasi.krediKarti_adSoyad_VeriGirisKutucugu.sendKeys(faker.name().fullName());
-        odeme_ve_uye_bilgi_sayfasi.krediKarti_kartNumarasi_VeriGirisKutucugu.sendKeys("6011000990139424");
+
+        odeme_ve_uye_bilgi_sayfasi.krediKarti_kartNumarasi_VeriGirisKutucugu.click();
+        int[] krno = {6, 0, 1, 1, 0, 0, 0, 9, 9, 0, 1, 3, 9, 4, 2, 4};
+        for (int each : krno) {
+            AndroidAppDriver.getDriver().pressKey(new KeyEvent(AndroidKey.valueOf("DIGIT_" + each)));
+            SleepMethod.sleep(1);
+        }
+
         odeme_ve_uye_bilgi_sayfasi.sonKullanmaTarihi_AySecimKutucugu.click();
         odeme_ve_uye_bilgi_sayfasi.sonKullanmaTarihi_5inciAyVeyaYilSecimKutucugu.click();
+
         odeme_ve_uye_bilgi_sayfasi.getSonKullanmaTarihi_YilSecimKutucugu.click();
         odeme_ve_uye_bilgi_sayfasi.sonKullanmaTarihi_5inciAyVeyaYilSecimKutucugu.click();
-        String cvv_No = Integer.toString(faker.number().numberBetween(100, 999));
+
+        String cvc_No = Integer.toString(faker.number().numberBetween(100, 999));
+        odeme_ve_uye_bilgi_sayfasi.krediKarti_CVC_VeriGirisKutucugu.sendKeys(cvc_No);
+
     }
+
     @When("Kullanici On Bilgilendirme Kosullari'ni ve Uzaktan Satis Sozlemesi'ni okudum ve kabul ediyorum kutucuguna dokunur")
     public void kullanici_on_bilgilendirme_kosullari_ni_ve_uzaktan_satis_sozlemesi_ni_okudum_ve_kabul_ediyorum_kutucuguna_dokunur() {
 
-        AppiumUtilities.scrollDown();
-        AppiumUtilities.scrollDown();
+        for (int i = 0; i < 2; i++) {
+            AppiumUtilities.scrollDown();
+        }
+
         wait.until(ExpectedConditions.visibilityOf(odeme_ve_uye_bilgi_sayfasi.kosulVeSozlesme_OnaylaKutucugu));
         odeme_ve_uye_bilgi_sayfasi.kosulVeSozlesme_OnaylaKutucugu.click();
 
     }
+
     @When("Kullanici Siparisi Tamamla butonuna dokunur")
     public void kullanici_siparisi_tamamla_butonuna_dokunur() {
 
-        odeme_ve_uye_bilgi_sayfasi.siparisiTamamla_Butonu.click();
+        TouchAction action = new TouchAction<>(AndroidAppDriver.getDriver());
+        action.tap(PointOption.point(525,1975)).perform();
+
     }
+
     @Then("Kullanici guvenli odeme yapmak icin dogrulama kodunu girecegi ekrana basariyla ulasir")
     public void kullanici_guvenli_odeme_yapmak_icin_dogrulama_kodunu_girecegi_ekrana_basariyla_ulasir() {
 
+        System.out.println("Ürün seçiminden ödeme adımına kadar kullanılan ve etkileşim " +
+                "içinde bulunulan fonksiyonların ve modüllerin işlevselliğinin, fonksiyonelliğinin ve çalışabilirliliğinin " +
+                        "Uçtan Uca Testi, test otomasyonu ile başarıyla tamamlandı. Uygulama birazdan kendini kapatacaktır");
 
+        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.xpath("//*[@text='3D Secure Processing']")));
+        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.xpath("//*[@text='GÜVENLİ ÖDEME']")));
+
+        AndroidAppDriver.closeDriver();
     }
 }
