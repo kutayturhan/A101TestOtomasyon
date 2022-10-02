@@ -9,10 +9,11 @@ Feature: A101 Mobil Uygulama | Modullerin Islevselligi ve Fonksiyonelligi
 
   Scenario: Kullanici A101 Mobil uygulamasinda Kategoriler acilir menusunden Giyim ve Aksesuar kategorisini secer ve ardindan Kadin Ic Giyim kategorisinden Dizalti Corap alt kategorisini secer
     When Kullanici A101 Mobil uygulamasina giris yapar
-    And Kullanici kategoriler acilir menusunu secer
-    And Kullanici Giyim ve Aksesuar kategorisini secer
-    And Kullanici Kadin Ic Giyim kategorisini secer
-    And Kullanici Dizalti Corap kategorisini secer
+    And Kullanici islemine yeni guncelleme mevcut uyarisini iptal ederek devam eder
+    And Kullanici kategoriler acilir menusune dokunur
+    And Kullanici Giyim ve Aksesuar kategorisine dokunur
+    And Kullanici Kadin Ic Giyim kategorisine dokunur
+    And Kullanici Dizalti Corap kategorisine dokunur
     Then Kullanici mobil uygulamada Dizalti Corap modellerini goruntuler
 
   Scenario: Kullanici filtreleme bolumunden siyah renk isaret kutucugunu secer ve acilan urunun siyah oldugu dogrulanir

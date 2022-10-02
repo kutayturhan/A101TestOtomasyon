@@ -8,67 +8,42 @@ import java.util.concurrent.TimeUnit;
 
 public class WebBrowserDriver {
 
-    //Private constructor olusturulur. Boylelikle bu sinifin nesnesine sinif disindan erisim kapatilir.
     private WebBrowserDriver() {
     }
 
-    //WebDriver private tanimlanir, cunku sinif disindan erisim saglanmasini istenmez.
     private static org.openqa.selenium.WebDriver driver;
 
-    //Yeniden kullanilabilir bir method olusturulur.
     public static org.openqa.selenium.WebDriver getDriver() {
 
-        /*
-        Singleton design pattern
-        if driver null --> yenisini olustur
-        if driver doluysa --> devam et
-         */
         if (driver == null) {
 
-            //Tarayici tipini configuration.properties dosyasindan taniyarak okur.
-            //Boylelikle, kodun disindan yani configuration.properties dosyasindan tarayici tipini kontrol edebiliriz.
             String browserType = ConfigurationReader.getProperty("browser");
 
-            //configuration.properties dosyasindan okuncak olan tarayici tipine gore
-            //switch ifadesi durumu belirleyecek ve eslesen tarayiciyi acacaktir.
             switch (browserType) {
 
                 case "chrome":
 
-                    //Tarayici surucusunu olusturan web driver managerin ayarlanmasi.
-                    WebDriverManager.chromedriver().setup();
-
-
+                    //Version 106.0.5249.91
                     System.setProperty("webdriver.chrome.driver", "chromedriver/chromedriver.exe");
 
-                    //Chrome bildirimlerini devre disi birakir.
+                    WebDriverManager.chromedriver().setup();
+
                     ChromeOptions options = new ChromeOptions();
                     options.addArguments("--disable-notifications");
-                    //Chrome surucusunu olusturur. Bos bir tarayici acan satir budur.
+
                     driver = new ChromeDriver(options);
-
-                    //Bu satir tarayici boyutunu maksimize eder.
                     driver.manage().window().maximize();
-
-                    //Implicit wait, bir web elementini bulurken belirlenen surede bekleyen bir bekleme komutudur.
                     driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
                     break;
-
             }
         }
-
         return driver;
-
     }
 
-    //Yeniden kullanilabilir bir method olusturulur.
-    //Bu method quit() methodu kullanildiktan sonra mevcut oturumu sonlandiracaktir.
     public static void closeDriver() {
-
         if (driver != null) {
-            driver.quit(); //Oturumu sonlandiran satir bu satirdir.
+            driver.quit();
             driver = null;
-
         }
     }
 }

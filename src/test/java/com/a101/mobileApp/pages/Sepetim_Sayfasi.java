@@ -14,6 +14,4 @@ public class Sepetim_Sayfasi {
 
     @AndroidFindBy(xpath = "//*[@text='SEPETİ ONAYLA']")
     public MobileElement sepetiOnayla_Butonu;
-
-
 }

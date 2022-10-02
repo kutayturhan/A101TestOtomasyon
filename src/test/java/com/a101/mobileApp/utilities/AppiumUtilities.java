@@ -6,9 +6,6 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
 
 public class AppiumUtilities {
@@ -55,15 +52,5 @@ public class AppiumUtilities {
                 ("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView" +
                         "(new UiSelector().text(\"" + elementText + "\"))");
         element.click();
-    }
-
-    public static void checkAlert() {
-        try {
-            WebDriverWait wait = new WebDriverWait(AndroidAppDriver.getDriver(), 120);
-            wait.until(ExpectedConditions.alertIsPresent());
-            AndroidAppDriver.getDriver().switchTo().alert().dismiss();
-        } catch (Exception exception) {
-            //Exception handling
-        }
     }
 }

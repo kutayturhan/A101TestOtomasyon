@@ -59,7 +59,4 @@ public class Odeme_ve_Uye_Bilgi_Sayfasi {
 
     @AndroidFindBy(xpath = "//android.widget.CheckBox")
     public MobileElement kosulVeSozlesme_OnaylaKutucugu;
-
-    @AndroidFindBy(xpath = "//android.widget.Button[@text='Siparişi Tamamla']")
-    public MobileElement siparisiTamamla_Butonu;
 }

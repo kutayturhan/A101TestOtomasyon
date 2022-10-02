@@ -16,6 +16,4 @@ public class Sepetim_Sayfasi {
 
     @FindBy(xpath = "(//a[@class='title'])[1]")
     public WebElement eklenenUrunBilgisi;
-
-
 }

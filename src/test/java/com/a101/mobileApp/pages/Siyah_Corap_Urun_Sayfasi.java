@@ -20,5 +20,4 @@ public class Siyah_Corap_Urun_Sayfasi {
 
     @AndroidFindBy(xpath = "//*[@text='SEPETE GİT']")
     public MobileElement urunSepetineGit_Butonu;
-
 }

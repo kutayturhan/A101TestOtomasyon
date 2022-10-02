@@ -15,7 +15,6 @@ import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.util.Locale;
 
 public class A101_Modul_Fonksiyon_Test_Mobile {
@@ -36,27 +35,38 @@ public class A101_Modul_Fonksiyon_Test_Mobile {
         //AndroidAppDriver.getDriver().launchApp();
     }
 
-    @When("Kullanici kategoriler acilir menusunu secer")
-    public void kullanici_kategoriler_acilir_menusunu_secer() {
+    @When("Kullanici islemine yeni guncelleme mevcut uyarisini iptal ederek devam eder")
+    public void kullanici_islemine_yeni_guncelleme_mevcut_uyarisini_iptal_ederek_devam_eder() {
 
-        AppiumUtilities.checkAlert();
+        try {
+            WebDriverWait wait = new WebDriverWait(AndroidAppDriver.getDriver(), 120);
+            wait.until(ExpectedConditions.alertIsPresent());
+            AndroidAppDriver.getDriver().switchTo().alert().dismiss();
+        } catch (Exception exception) {
+            //Exception handling
+        }
+    }
+
+    @When("Kullanici kategoriler acilir menusune dokunur")
+    public void kullanici_kategoriler_acilir_menusune_dokunur() {
+
         anasayfa.kategoriler_AcilirMenu.click();
     }
 
-    @When("Kullanici Giyim ve Aksesuar kategorisini secer")
-    public void kullanici_giyim_ve_aksesuar_kategorisini_secer() {
+    @When("Kullanici Giyim ve Aksesuar kategorisine dokunur")
+    public void kullanici_giyim_ve_aksesuar_kategorisine_dokunur() {
 
         anasayfa.giyimVeAksesuar_Kategorisi.click();
     }
 
-    @When("Kullanici Kadin Ic Giyim kategorisini secer")
-    public void kullanici_kadin_ic_giyim_kategorisini_secer() {
+    @When("Kullanici Kadin Ic Giyim kategorisine dokunur")
+    public void kullanici_kadin_ic_giyim_kategorisine_dokunur() {
 
         anasayfa.kadinIcGiyim_Kategorisi.click();
     }
 
-    @When("Kullanici Dizalti Corap kategorisini secer")
-    public void kullanici_dizalti_corap_kategorisini_secer() {
+    @When("Kullanici Dizalti Corap kategorisine dokunur")
+    public void kullanici_dizalti_corap_kategorisine_dokunur() {
 
         anasayfa.dizaltiCorap_Kategorisi.click();
     }
@@ -103,7 +113,6 @@ public class A101_Modul_Fonksiyon_Test_Mobile {
         String urunBilgiYazisi = siyah_corap_urun_sayfasi.urunSepeteEklendi_UrunBilgisi.getText();
         Assertions.assertTrue(urunBilgiYazisi.contains("Siyah") && urunBilgiYazisi.contains("Çorab") && urunBilgiYazisi.contains("sepetinize eklendi"));
         siyah_corap_urun_sayfasi.urunSepetineGit_Butonu.click();
-
     }
 
     @When("Kullanici Sepetim sayfasinda sepete eklenen urun bilgisine ulasir ve sepeti onaylamak icin Sepeti Onayla butonuna dokunur")
@@ -221,7 +230,7 @@ public class A101_Modul_Fonksiyon_Test_Mobile {
 
         for (int each : krediKartNo) {
             AndroidAppDriver.getDriver().pressKey(new KeyEvent(AndroidKey.valueOf("DIGIT_" + each)));
-            SleepMethod.sleep(1);
+            SleepMethod.milliSleep(250);
         }
 
         odeme_ve_uye_bilgi_sayfasi.sonKullanmaTarihi_AySecimKutucugu.click();
@@ -240,7 +249,6 @@ public class A101_Modul_Fonksiyon_Test_Mobile {
         for (int i = 0; i < 2; i++) {
             AppiumUtilities.scrollDown();
         }
-
         wait.until(ExpectedConditions.visibilityOf(odeme_ve_uye_bilgi_sayfasi.kosulVeSozlesme_OnaylaKutucugu));
         odeme_ve_uye_bilgi_sayfasi.kosulVeSozlesme_OnaylaKutucugu.click();
     }
@@ -249,8 +257,7 @@ public class A101_Modul_Fonksiyon_Test_Mobile {
     public void kullanici_siparisi_tamamla_butonuna_dokunur() {
 
         TouchAction action = new TouchAction<>(AndroidAppDriver.getDriver());
-        action.tap(PointOption.point(525,1975)).perform();
-
+        action.tap(PointOption.point(525, 1975)).perform();
     }
 
     @Then("Kullanici guvenli odeme yapmak icin dogrulama kodunu girecegi ekrana basariyla ulasir")
@@ -258,11 +265,9 @@ public class A101_Modul_Fonksiyon_Test_Mobile {
 
         System.out.println("Ürün seçiminden ödeme adımına kadar kullanılan ve etkileşim " +
                 "içinde bulunulan fonksiyonların ve modüllerin işlevselliğinin, fonksiyonelliğinin ve çalışabilirliliğinin " +
-                        "Uçtan Uca Testi, test otomasyonu ile başarıyla tamamlandı. Uygulama birazdan kendini kapatacaktır");
+                "Uçtan Uca Testi, test otomasyonu ile başarıyla tamamlandı. Uygulama birazdan kendini kapatacaktır");
 
-        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.xpath("//*[@text='3D Secure Processing']")));
-        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.xpath("(//android.widget.EditText)[1]")));
-
+        SleepMethod.milliSleep(7500);
         AndroidAppDriver.closeDriver();
     }
 }

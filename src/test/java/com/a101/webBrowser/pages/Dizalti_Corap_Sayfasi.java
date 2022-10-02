@@ -11,7 +11,6 @@ public class Dizalti_Corap_Sayfasi {
         PageFactory.initElements(WebBrowserDriver.getDriver(), this);
     }
 
-
     @FindBy(xpath = "//ol[@class='breadcrumb']//a[@title='Dizaltı Çorap']")
     public WebElement gezintiMenusu_DizaltiCorap;
 

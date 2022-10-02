@@ -4,7 +4,6 @@ import com.a101.webBrowser.utilities.WebBrowserDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
 import java.util.List;
 
 public class Odeme_ve_Uye_Bilgi_Sayfasi {
@@ -60,5 +59,4 @@ public class Odeme_ve_Uye_Bilgi_Sayfasi {
 
     @FindBy(xpath = "//span[@class='order-complete']")
     public WebElement siparisiTamamla_Butonu;
-
 }

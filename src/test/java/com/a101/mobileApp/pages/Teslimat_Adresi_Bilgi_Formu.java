@@ -10,7 +10,6 @@ public class Teslimat_Adresi_Bilgi_Formu {
 
     public Teslimat_Adresi_Bilgi_Formu() {
         PageFactory.initElements(new AppiumFieldDecorator(AndroidAppDriver.getDriver()), this);
-
     }
 
     @AndroidFindBy(xpath = "(//android.widget.EditText)[1]")
@@ -28,26 +27,15 @@ public class Teslimat_Adresi_Bilgi_Formu {
     @AndroidFindBy(xpath = "(//android.widget.Spinner)[1]")
     public MobileElement il_AcilirSecimKutucugu;
 
-    @AndroidFindBy(xpath = "//*[@text='İSTANBUL']")
-    public MobileElement il_Istanbul;
-
     @AndroidFindBy(xpath = "(//android.widget.Spinner)[2]")
     public MobileElement ilce_AcilirSecimKutucugu;
 
-    @AndroidFindBy(xpath = "//*[@text='KADIKOY']")
-    public MobileElement ilce_Kadikoy;
-
     @AndroidFindBy(xpath = "(//android.widget.Spinner)[3]")
     public MobileElement mahalle_AcilirSecimKutucugu;
-
-    @AndroidFindBy(xpath = "//*[@text='CADDEBOSTAN MAH']")
-    public MobileElement mahalle_CaddebostanMah;
 
     @AndroidFindBy(xpath = "(//android.widget.EditText)[5]")
     public MobileElement tumAdres_VeriGirisKutusu;
 
     @AndroidFindBy(xpath = "//*[@text='KAYDET']")
     public MobileElement kaydet_Butonu;
-
-
 }

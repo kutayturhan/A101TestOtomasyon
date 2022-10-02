@@ -45,23 +45,16 @@ public class AndroidAppDriver {
 
                     androidDriver = new AndroidDriver<>(url, capabilities);
                     androidDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-
                     break;
-
-
             }
-
         }
         return androidDriver;
     }
 
-
     public static void closeDriver() {
         if (Objects.nonNull(androidDriver)) {
-
             androidDriver.closeApp();
             androidDriver = null;
         }
     }
-
 }

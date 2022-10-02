@@ -11,8 +11,6 @@ public class Anasayfa {
         PageFactory.initElements(WebBrowserDriver.getDriver(), this);
     }
 
-    //3üncü ilkine benzeyen le orjinalde calısan locatorlar ya
-    //ANASAYFADA CALISAN LOCATORLAR BUNLAR
     @FindBy(xpath = "//button[@id='CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll']")
     public WebElement cerezKullanimi_KabulEtButonu;
 
@@ -22,22 +20,12 @@ public class Anasayfa {
     @FindBy(xpath = "//div[@class='submenu-dropdown']//a[@title='Kadın İç Giyim']")
     public WebElement kadinIcGiyim_Kategorisi;
 
-    @FindBy(xpath = "//div[@class='submenu-dropdown']//a[@title='Kadın İç Giyim']")
-    public WebElement kadinIcGiyim_Kategorisi_GezintiMenusu;
-
-
-
-    //ALTERNATIF ARAYUZ
     @FindBy(xpath = "//section[@class='container-fluid p-0']//div[@class='hype-link hype-dropdown hype-categories-link']")
     public WebElement alternatifArayuz_Kategoriler_Dropdown_AsagiAcilirListe;
-
 
     @FindBy(xpath = "//div[@class='col-md-12 hype-header']//a[@title='GİYİM & AKSESUAR']")
     public WebElement alternatifArayuz_giyimVeAksesuar_Kategorisi;
 
-
     @FindBy(xpath = "//div[@class='col-md-12 hype-header']//a[@title='Kadın İç Giyim']")
     public WebElement alternatifArayuz_kadinIcGiyim_Kategorisi;
-
-
 }

@@ -11,4 +11,12 @@ public class SleepMethod {
         }
     }
 
+    public static void milliSleep(int millisecond) {
+        millisecond *= 1;
+        try {
+            Thread.sleep(millisecond);
+        } catch (InterruptedException exception) {
+            exception.printStackTrace();
+        }
+    }
 }
